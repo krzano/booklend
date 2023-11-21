@@ -4,6 +4,7 @@ import {
   ButtonProps as MuiButtonProps,
 } from "@mui/material"
 import { useState } from "react"
+
 // Fake async function
 // await new Promise((resolve) => setTimeout(resolve, 2000))
 
@@ -39,14 +40,7 @@ const Button = ({
   }
 
   return (
-    <MuiButton
-      disabled={isLoading}
-      onClick={handleClick}
-      sx={{
-        fontFamily: "inherit",
-      }}
-      {...restProps}
-    >
+    <MuiButton disabled={isLoading} onClick={handleClick} {...restProps}>
       {children}
       {isLoading && (
         <CircularProgress

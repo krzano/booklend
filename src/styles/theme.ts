@@ -1,18 +1,18 @@
 import { ThemeOptions, createTheme } from "@mui/material/styles"
 
-// declare module "@mui/material/styles" {
-//   interface Theme {
-//     typography: {
-//       fontFamilySerif: string
-//     }
-//   }
-//   // allow configuration using `createTheme`
-//   interface ThemeOptions {
-//     typography: {
-//       fontFamilySerif: string
-//     }
-//   }
-// }
+declare module "@mui/material/styles" {
+  interface Theme {
+    otherFonts: {
+      serif: string
+    }
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    otherFonts: {
+      serif: string
+    }
+  }
+}
 
 export const theme: ThemeOptions = createTheme({
   palette: {
@@ -34,11 +34,13 @@ export const theme: ThemeOptions = createTheme({
       fontFamily: "'Source Sans 3', sans-serif",
     },
     body1: { fontFamily: "'Source Sans 3', sans-serif" },
-    // fontFamilySerif: "'Neuton', serif",
     button: {
       fontWeight: 500,
       // textTransform: "capitalize",
     },
+  },
+  otherFonts: {
+    serif: "'Neuton', serif",
   },
   shape: {
     borderRadius: 12,

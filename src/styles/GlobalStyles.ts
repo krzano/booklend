@@ -11,16 +11,16 @@ export const GlobalStyles = createGlobalStyle`
 
 html {
   scroll-behavior: smooth;
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
   font-family: sans-serif;
 }
 
 body{
-  font-size: 1.6rem;
-  font-family: 'Source Sans 3', sans-serif;
-  line-height: 1.5;
-  background-color: #3e373d;
-  color: #eee5ec;
+  /* font-size: 1.6rem; */
+  /* font-family: 'Source Sans 3', sans-serif; */
+  /* line-height: 1.5; */
+  /* background-color: #3e373d; */
+  /* color: #eee5ec; */
 }
 
 /* img, picture, video, canvas, svg { */

@@ -9,13 +9,12 @@ import ListItemText from "@mui/material/ListItemText"
 import styled from "styled-components"
 import { KeyboardArrowDown } from "@mui/icons-material"
 import { SvgIcon } from "@mui/material"
-import TranslateIcon from "@mui/icons-material/Translate"
 
-type Props = {
+type LanguageSwitcherProps = {
   variant?: "contained" | "outlined"
 }
 
-const LanguageSwitcher = ({ variant = "contained" }: Props) => {
+const LanguageSwitcher = ({ variant = "contained" }: LanguageSwitcherProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -42,7 +41,6 @@ const LanguageSwitcher = ({ variant = "contained" }: Props) => {
         endIcon={<KeyboardArrowDown />}
         startIcon={
           <StyledFlagSvgIcon>{currentLanguageData?.flagSvg}</StyledFlagSvgIcon>
-          // <TranslateIcon />
         }
       >
         {i18n.resolvedLanguage}
@@ -82,12 +80,5 @@ const StyledFlagSvgIcon = styled(SvgIcon)`
   border-radius: 50%;
   border: 1px solid;
 `
-
-// const StyledLanguageSwitcher = styled.div`
-//   position: fixed;
-//   top: 10px;
-//   right: 10px;
-//   background-color: secondary;
-// `
 
 export default LanguageSwitcher

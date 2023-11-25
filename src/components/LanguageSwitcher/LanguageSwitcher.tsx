@@ -11,7 +11,7 @@ import { KeyboardArrowDown } from "@mui/icons-material"
 import { SvgIcon } from "@mui/material"
 
 type LanguageSwitcherProps = {
-  variant?: "contained" | "outlined"
+  variant?: "contained" | "outlined" | "text"
 }
 
 const LanguageSwitcher = ({ variant = "contained" }: LanguageSwitcherProps) => {
@@ -34,6 +34,9 @@ const LanguageSwitcher = ({ variant = "contained" }: LanguageSwitcherProps) => {
       <Button
         id="basic-button"
         variant={variant}
+        sx={{
+          px: 2,
+        }}
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}

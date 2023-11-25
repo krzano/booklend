@@ -1,0 +1,11 @@
+{
+  "dashboard": "dashboard",
+  "overview": "overview",
+  "readers": "readers",
+  "add-reader": "add reader",
+  "edit-reader": "edit reader",
+  "books": "books",
+  "add-book": "add book",
+  "edit-book": "edit book",
+  "settings": "settings"
+}

@@ -1,13 +1,27 @@
 {
+  "topbar": {
+    "settings": "$t(common:settings)",
+    "logout": "logout"
+  },
+  "sidebar": {
+    "overview": "$t(common:overview)",
+    "readers": "$t(common:readers)",
+    "readersList": "readers list",
+    "addReader": "$t(common:addReader)",
+    "library": "library",
+    "booksList": "books list",
+    "addBook": "$t(common:addBook)",
+    "settings": "$t(common:settings)"
+  },
   "breadcrumbs": {
     "dashboard": "dashboard",
-    "overview": "overview",
-    "readers": "readers",
-    "add-reader": "add reader",
-    "edit-reader": "edit reader",
-    "books": "books",
-    "add-book": "add book",
-    "edit-book": "edit book",
-    "settings": "settings"
+    "overview": "$t(common:overview)",
+    "readers": "$t(common:readers)",
+    "add-reader": "$t(common:addReader)",
+    "edit-reader": "$t(common:editReader)",
+    "books": "$t(common:books)",
+    "add-book": "$t(common:addBook)",
+    "edit-book": "$t(common:editBook)",
+    "settings": "$t(common:settings)"
   }
 }

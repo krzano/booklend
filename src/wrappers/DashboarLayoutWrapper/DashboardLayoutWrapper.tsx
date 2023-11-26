@@ -11,7 +11,7 @@ import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded"
 import { useMediaQuery } from "@mui/material"
 import { useState } from "react"
 import { useTheme } from "styled-components"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export interface BasicSidebarListItemType {
   id: number
@@ -33,66 +33,67 @@ export type SidebarListItemsType = (
   | DropdownSidebarListItemType
 )[]
 
-const sidebarListItems: SidebarListItemsType = [
-  {
-    id: 1,
-    path: "/dashboard",
-    text: "Overview",
-    icon: <AssessmentRoundedIcon />,
-    variant: "basic",
-  },
-  {
-    id: 2,
-    text: "Readers",
-    icon: <PeopleAltRoundedIcon />,
-    variant: "dropdown",
-    dropdownItems: [
-      {
-        id: 21,
-        path: "/dashboard/readers",
-        text: "Readers list",
-        icon: <RecentActorsIcon />,
-      },
-      {
-        id: 22,
-        path: "/dashboard/readers/add-reader",
-        text: "Add reader",
-        icon: <PersonAddRoundedIcon />,
-      },
-    ],
-  },
-  {
-    id: 3,
-    text: "Library",
-    icon: <MenuBookRoundedIcon />,
-    variant: "dropdown",
-    dropdownItems: [
-      {
-        id: 31,
-        path: "/dashboard/books",
-        text: "Books list",
-        icon: <LibraryBooksRoundedIcon />,
-      },
-      {
-        id: 32,
-        path: "/dashboard/books/add-book",
-        text: "Add book",
-        icon: <LibraryAddRoundedIcon />,
-      },
-    ],
-  },
-  {
-    id: 4,
-    path: "",
-    text: "Settings",
-    icon: <SettingsRoundedIcon />,
-    variant: "basic",
-  },
-]
-
 const sidebarWidth = 240
 
 const DashboardLayoutWrapper = () => {
+  const { t } = useTranslation(["dashboard", "common"])
+  const sidebarListItems: SidebarListItemsType = [
+    {
+      id: 1,
+      path: "/dashboard",
+      text: t("sidebar.overview"),
+      icon: <AssessmentRoundedIcon />,
+      variant: "basic",
+    },
+    {
+      id: 2,
+      text: t("sidebar.readers"),
+      icon: <PeopleAltRoundedIcon />,
+      variant: "dropdown",
+      dropdownItems: [
+        {
+          id: 21,
+          path: "/dashboard/readers",
+          text: t("sidebar.readersList"),
+          icon: <RecentActorsIcon />,
+        },
+        {
+          id: 22,
+          path: "/dashboard/readers/add-reader",
+          text: t("sidebar.addReader"),
+          icon: <PersonAddRoundedIcon />,
+        },
+      ],
+    },
+    {
+      id: 3,
+      text: t("sidebar.library"),
+      icon: <MenuBookRoundedIcon />,
+      variant: "dropdown",
+      dropdownItems: [
+        {
+          id: 31,
+          path: "/dashboard/books",
+          text: t("sidebar.booksList"),
+          icon: <LibraryBooksRoundedIcon />,
+        },
+        {
+          id: 32,
+          path: "/dashboard/books/add-book",
+          text: t("sidebar.addBook"),
+          icon: <LibraryAddRoundedIcon />,
+        },
+      ],
+    },
+    {
+      id: 4,
+      path: "",
+      text: t("sidebar.settings"),
+      icon: <SettingsRoundedIcon />,
+      variant: "basic",
+    },
+  ]
+
   const theme = useTheme()
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
 

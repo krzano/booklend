@@ -126,6 +126,12 @@ const StyledSidebar = styled(Drawer)<{ sidebarWidth: number }>`
       width: ${sidebarWidth}px;
     }
   `}
+  .MuiListItemButton-root {
+    /* ::first-letter {
+      text-transform: uppercase;
+    } */
+    text-transform: capitalize;
+  }
 `
 
 const StyledSidebarHeader = styled.header`

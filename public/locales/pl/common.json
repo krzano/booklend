@@ -1,0 +1,12 @@
+{
+  "settings": "ustawienia",
+  "reader": "czytelnik",
+  "readers": "czytelnicy",
+  "addReader": "dodaj czytelnika",
+  "editReader": "edytuj czytelnika",
+  "book": "książka",
+  "books": "książki",
+  "addBook": "dodaj książkę",
+  "editBook": "edytuj książkę",
+  "overview": "przegląd"
+}

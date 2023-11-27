@@ -1,0 +1,12 @@
+{
+  "settings": "settings",
+  "reader": "reader",
+  "readers": "readers",
+  "addReader": "add reader",
+  "editReader": "edit reader",
+  "book": "book",
+  "books": "books",
+  "addBook": "add book",
+  "editBook": "edit book",
+  "overview": "overview"
+}

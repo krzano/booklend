@@ -56,6 +56,7 @@ const Sidebar = ({
 
   return (
     <StyledSidebar
+      component={"aside"}
       anchor="left"
       open={isSidebarOpen}
       onClose={toggleSidebar}

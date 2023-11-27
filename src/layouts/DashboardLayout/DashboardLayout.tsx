@@ -1,4 +1,4 @@
-import { Box} from "@mui/material"
+import { Box } from "@mui/material"
 import Sidebar from "./components/Sidebar/Sidebar"
 import Topbar from "./components/Topbar/Topbar"
 import { Outlet } from "react-router-dom"
@@ -44,7 +44,9 @@ const DashboardLayout = ({
           <Box pb={4}>
             <Breadcrumbs />
           </Box>
-          <Outlet />
+          <main>
+            <Outlet />
+          </main>
         </Box>
       </StyledContent>
     </>

@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom"
 import Home from "@/core/Home/Home"
 import BasePageLayout from "@/layouts/BasePageLayout/BasePageLayout"
-import DashboardLayout from "@/layouts/DashboardLayout/DashboardLayout"
 import { Typography } from "@mui/material"
 import DashboardLayoutWrapper from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
+import Overview from "@/features/views/Overview"
 
 const router = createBrowserRouter([
   {
@@ -33,11 +33,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <Typography variant="h3" fontWeight="500">
-            Dashboard start page
-          </Typography>
-        ),
+        element: <Overview />,
       },
       {
         path: "readers",

@@ -8,14 +8,12 @@ i18n
   .use(LanguageDetector)
   .use(HttpBackend)
   .init({
+    ns: "common",
     fallbackLng: "en",
     detection: {
       order: ["localStorage", "cookie", "htmlTag", "navigator", "path"],
       caches: ["localStorage", "cookie"],
     },
-    // backend: {
-    //   loadPath: "/locales/{{lng}}/{{ns}}.json",
-    // },
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

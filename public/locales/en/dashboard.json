@@ -1,7 +1,7 @@
 {
   "topbar": {
     "settings": "$t(common:settings)",
-    "logout": "logout"
+    "logout": "$t(common:logout)"
   },
   "sidebar": {
     "overview": "$t(common:overview)",

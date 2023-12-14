@@ -1,8 +1,8 @@
 import { Box, Container } from "@mui/material"
 import { Outlet } from "react-router-dom"
-import logo from "@/assets/images/logo.svg"
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
 import styled from "styled-components"
+import AppLogo from "@/components/AppLogo/AppLogo"
 
 const BasePageLayout = () => {
   return (
@@ -11,15 +11,8 @@ const BasePageLayout = () => {
         <Box position={"absolute"} right={0} p={2}>
           <LanguageSwitcher variant="outlined" />
         </Box>
-        <Box py={{ xs: 10, sm: 6 }}>
-          <Box
-            component={"img"}
-            src={logo}
-            alt="Booklend logo"
-            margin={"0 auto"}
-            maxWidth={8 / 10}
-            height={50}
-          />
+        <Box pt={{ xs: 11, sm: 6 }} pb={{ xs: 6, sm: 6 }}>
+          <AppLogo margin={"0 auto"} maxWidth={8 / 10} height={50} />
         </Box>
       </Box>
       <Container
@@ -27,6 +20,7 @@ const BasePageLayout = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          paddingBottom: 3,
         }}
       >
         <Outlet />

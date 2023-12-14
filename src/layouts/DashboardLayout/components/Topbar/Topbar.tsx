@@ -18,6 +18,10 @@ import {
   Typography,
 } from "@mui/material"
 import { useState } from "react"
+import { useAppDispatch } from "@/app/hooks"
+import { logoutUser } from "@/features/auth/authSlice"
+import { useTranslation } from "react-i18next"
+import styled from "styled-components"
 
 export interface TopbarProps {
   toggleSidebar: () => void
@@ -25,6 +29,7 @@ export interface TopbarProps {
 }
 
 const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
+  const { t } = useTranslation(["dashboard", "common"])
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -33,7 +38,9 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+  const dispatch = useAppDispatch()
 
+  const fakeName = "Nicola Tesla"
   return (
     <AppBar position="static" color="primary">
       <Toolbar sx={{ py: 1 }}>
@@ -49,7 +56,7 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
             fontFamily={(theme) => theme.otherFonts.serif}
             variant="h5"
           >
-            Library Name
+            {fakeName}
           </Typography>
         </Box>
         <div>
@@ -62,10 +69,10 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
               onClick={handleClick}
               variant="text"
             >
-              <Avatar alt="John Doe" src="" />
+              <Avatar alt={fakeName} src="brokenSrc" />
             </Button>
           </Tooltip>
-          <Menu
+          <StyledMenu
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -78,13 +85,19 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
               <ListItemIcon>
                 <Settings />
               </ListItemIcon>
-              <ListItemText>Settings</ListItemText>
+              <ListItemText>{t("dashboard:topbar.settings")}</ListItemText>
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem
+              // component="button"
+              onClick={() => {
+                handleClose()
+                dispatch(logoutUser({ reason: "userLogout" }))
+              }}
+            >
               <ListItemIcon>
                 <Logout />
               </ListItemIcon>
-              <ListItemText>Logout</ListItemText>
+              <ListItemText>{t("dashboard:topbar.logout")}</ListItemText>
             </MenuItem>
             <Divider />
             <Box
@@ -93,11 +106,19 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
             >
               <LanguageSwitcher variant="text" />
             </Box>
-          </Menu>
+          </StyledMenu>
         </div>
       </Toolbar>
     </AppBar>
   )
 }
+
+const StyledMenu = styled(Menu)`
+  .MuiTypography-root {
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+`
 
 export default Topbar

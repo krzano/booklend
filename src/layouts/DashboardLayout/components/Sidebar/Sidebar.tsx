@@ -9,9 +9,9 @@ import {
 } from "@mui/material"
 import Drawer from "@mui/material/Drawer"
 import styled, { css } from "styled-components"
-import logo from "@/assets/images/logo.svg"
 import { ExpandLess, ExpandMore } from "@mui/icons-material"
 import { SidebarListItemsType } from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
+import AppLogo from "@/components/AppLogo/AppLogo"
 
 export interface SidebarProps {
   sidebarWidth: number
@@ -64,7 +64,7 @@ const Sidebar = ({
       sidebarWidth={sidebarWidth}
     >
       <StyledSidebarHeader>
-        <img src={logo} alt="Booklend logo" />
+        <AppLogo />
       </StyledSidebarHeader>
       <List component="nav">
         {sidebarListItems.map((sidebarItem) => {

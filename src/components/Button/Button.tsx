@@ -11,11 +11,13 @@ import { useState } from "react"
 interface ButtonProps extends MuiButtonProps {
   onClick?: () => void
   onAsyncClick?: () => Promise<void>
+  isSubmitting?: boolean
 }
 
 const Button = ({
   onClick,
   onAsyncClick,
+  isSubmitting,
   children,
   ...restProps
 }: ButtonProps) => {
@@ -40,9 +42,13 @@ const Button = ({
   }
 
   return (
-    <MuiButton disabled={isLoading} onClick={handleClick} {...restProps}>
+    <MuiButton
+      disabled={isLoading || isSubmitting}
+      onClick={handleClick}
+      {...restProps}
+    >
       {children}
-      {isLoading && (
+      {(isLoading || isSubmitting) && (
         <CircularProgress
           size={16}
           thickness={6}

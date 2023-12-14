@@ -30,9 +30,6 @@ const Breadcrumbs = () => {
         }
         return <StyledChip key={id} component={Link} to={to} label={label} />
       })}
-      {location.pathname === "/dashboard" && (
-        <StyledChip label={t("breadcrumbs.overview")} />
-      )}
     </StyledBreadcrumps>
   )
 }

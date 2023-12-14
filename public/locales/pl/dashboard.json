@@ -1,14 +1,14 @@
 {
   "topbar": {
     "settings": "$t(common:settings)",
-    "logout": "wyloguj"
+    "logout": "$t(common:logout)"
   },
   "sidebar": {
     "overview": "$t(common:overview)",
     "readers": "$t(common:readers)",
     "readersList": "lista czytelników",
     "addReader": "$t(common:addReader)",
-    "library": "library",
+    "library": "biblioteka",
     "booksList": "lista książek",
     "addBook": "$t(common:addBook)",
     "settings": "$t(common:settings)"

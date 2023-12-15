@@ -3,11 +3,13 @@ import { DASHBOARD_PATH } from "@/constants/paths"
 import { ReactElement } from "react"
 import { Navigate, useLocation } from "react-router-dom"
 
-interface RedirectUserLoginRouteProps {
+interface RedirectFromLoginWrapperProps {
   children: ReactElement
 }
 
-const RedirectUserLoginRoute = ({ children }: RedirectUserLoginRouteProps) => {
+const RedirectFromLoginWrapper = ({
+  children,
+}: RedirectFromLoginWrapperProps) => {
   const { isAuthenticated } = useAppSelector((store) => store.auth)
   const location = useLocation()
   const from = location?.state?.from
@@ -18,4 +20,4 @@ const RedirectUserLoginRoute = ({ children }: RedirectUserLoginRouteProps) => {
     children
   )
 }
-export default RedirectUserLoginRoute
+export default RedirectFromLoginWrapper

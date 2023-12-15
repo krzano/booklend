@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 
 const Breadcrumbs = () => {
   const location = useLocation()
-  const { t } = useTranslation("dashboard")
+  const { t } = useTranslation(["dashboard"])
 
   let currentLink = ""
   const breadcrumbsList = location.pathname
@@ -17,7 +17,7 @@ const Breadcrumbs = () => {
       const breadcrumb = {
         id: index,
         to: currentLink,
-        label: t(`breadcrumbs.${crumb}`),
+        label: t(`dashboard:breadcrumbs.${crumb}`),
       }
       return breadcrumb
     })
@@ -30,9 +30,6 @@ const Breadcrumbs = () => {
         }
         return <StyledChip key={id} component={Link} to={to} label={label} />
       })}
-      {location.pathname === "/dashboard" && (
-        <StyledChip label={t("breadcrumbs.overview")} />
-      )}
     </StyledBreadcrumps>
   )
 }

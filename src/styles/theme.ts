@@ -34,6 +34,7 @@ export const theme: ThemeOptions = createTheme({
       fontFamily: "'Source Sans 3', sans-serif",
     },
     body1: { fontFamily: "'Source Sans 3', sans-serif" },
+    body2: { fontFamily: "'Neuton', serif" },
     button: {
       fontWeight: 500,
       // textTransform: "capitalize",

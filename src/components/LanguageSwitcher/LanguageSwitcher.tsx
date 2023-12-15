@@ -26,7 +26,7 @@ const LanguageSwitcher = ({ variant = "contained" }: LanguageSwitcherProps) => {
 
   const { i18n } = useTranslation()
   const currentLanguageData = languagesList.find(
-    (item) => item.language === i18n.resolvedLanguage,
+    (item) => item.language === i18n.language,
   )
 
   return (
@@ -46,7 +46,7 @@ const LanguageSwitcher = ({ variant = "contained" }: LanguageSwitcherProps) => {
           <StyledFlagSvgIcon>{currentLanguageData?.flagSvg}</StyledFlagSvgIcon>
         }
       >
-        {i18n.resolvedLanguage}
+        {i18n.language}
       </Button>
       <Menu
         id="basic-menu"

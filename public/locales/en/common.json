@@ -8,5 +8,13 @@
   "books": "books",
   "addBook": "add book",
   "editBook": "edit book",
-  "overview": "overview"
+  "overview": "overview",
+  "eg": "e.g.",
+  "example": "example",
+  "logout": "log out",
+  "login": "Log In",
+  "signup": "Sign Up",
+  "welcome": "welcome",
+  "sessionExpiredError": "Your session has expired, log in again",
+  "userLogoutSuccess": "Successfully logged out"
 }

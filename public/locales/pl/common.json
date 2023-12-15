@@ -8,5 +8,13 @@
   "books": "książki",
   "addBook": "dodaj książkę",
   "editBook": "edytuj książkę",
-  "overview": "przegląd"
+  "overview": "przegląd",
+  "eg": "n.p.",
+  "example": "przykład",
+  "logout": "wyloguj się",
+  "login": "Zaloguj się",
+  "signup": "Utwórz konto",
+  "welcome": "witaj",
+  "sessionExpiredError": "Twoja sesja wygasła, zaloguj się ponownie",
+  "userLogoutSuccess": "Zostałeś pomyślnie wylogowany"
 }

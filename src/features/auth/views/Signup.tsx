@@ -1,18 +1,17 @@
-import { Box, Grid, Link, Typography } from "@mui/material"
+import { Box, Link, Typography } from "@mui/material"
 import styled, { css } from "styled-components"
-import { Form, Formik } from "formik"
-import Button from "@/components/Button/Button"
-import FormikTextField from "@/components/FormikTextField/FormikTextField"
-import registerSchema, {
-  RegisterFormValues,
-} from "@/libs/yup/schemas/registerSchema"
+import { Formik } from "formik"
+import registerSchema, { RegisterFormValues } from "@/libs/yup/schemas/register"
 import { Link as RouterLink, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import { registerUser, setIsRegistrationCompleted } from "../authSlice"
+import { setIsRegistrationCompleted } from "../authSlice"
+import { registerUser } from "../authThunk"
 import { useTranslation } from "react-i18next"
+import { LOGIN_PATH } from "@/constants/paths"
+import SignupForm from "../components/SignupForm/SignupForm"
 
 const Signup = () => {
-  const { t } = useTranslation(["forms", "common"])
+  const { t } = useTranslation(["forms"])
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { isRegistrationCompleted } = useAppSelector((store) => store.auth)
@@ -25,7 +24,7 @@ const Signup = () => {
   }
 
   if (isRegistrationCompleted) {
-    navigate("/login")
+    navigate(LOGIN_PATH)
     dispatch(setIsRegistrationCompleted(false))
   }
 
@@ -51,76 +50,7 @@ const Signup = () => {
           }}
           validationSchema={registerSchema}
         >
-          {({ isSubmitting }) => (
-            <Form>
-              <Grid
-                container
-                rowSpacing={{ xs: 2, sm: 3 }}
-                columnSpacing={2}
-                paddingY={2}
-              >
-                <Grid item xs={12} sm={6}>
-                  <FormikTextField
-                    type="text"
-                    name="firstName"
-                    label={t("forms:labels.firstName")}
-                    disabled={isSubmitting}
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormikTextField
-                    type="text"
-                    name="lastName"
-                    label={t("forms:labels.lastName")}
-                    disabled={isSubmitting}
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormikTextField
-                    type="email"
-                    name="email"
-                    label={t("forms:labels.email")}
-                    disabled={isSubmitting}
-                    required
-                    helperText={`${t("common:example")}: email@example.com`}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormikTextField
-                    type="password"
-                    name="password"
-                    label={t("forms:labels.password")}
-                    disabled={isSubmitting}
-                    required
-                    helperText={t("forms:helperTexts.password")}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormikTextField
-                    type="password"
-                    name="confirmPassword"
-                    label={t("forms:labels.confirmPassword")}
-                    disabled={isSubmitting}
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    type="submit"
-                    isSubmitting={isSubmitting}
-                    fullWidth
-                    size="large"
-                  >
-                    {t("common:signup")}
-                  </Button>
-                </Grid>
-              </Grid>
-            </Form>
-          )}
+          {({ isSubmitting }) => <SignupForm isSubmitting={isSubmitting} />}
         </Formik>
         <Box>
           <Typography my={2} textAlign="center">
@@ -129,7 +59,7 @@ const Signup = () => {
               color="secondary"
               underline="always"
               component={RouterLink}
-              to="/login"
+              to={LOGIN_PATH}
             >
               {t("forms:loginHere")}
             </Link>

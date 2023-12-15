@@ -1,6 +1,8 @@
+import { AUTH_LOGIN__ENDPOINT, AUTH_REGISTER_ENDPOINT } from "@/constants/api"
 import axiosAuthInstance from "@/libs/axios/axiosAuthInstance"
-import { LoginFormValues } from "@/libs/yup/schemas/loginSchema"
-import { RegisterFormValues } from "@/libs/yup/schemas/registerSchema"
+import { LoginFormValues } from "@/libs/yup/schemas/login"
+import { RegisterFormValues } from "@/libs/yup/schemas/register"
+import { ApiErrorResponse } from "@/types/api"
 import {
   saveAccessTokenInLocalStorage,
   saveRefreshTokenInLocalStorage,
@@ -9,17 +11,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { isAxiosError } from "axios"
 import { toast } from "react-toastify"
 
-export interface ApiErrorResponse {
-  errors: string[]
-  message: string
-  statusCode: number
-}
-
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }: LoginFormValues, thunkAPI) => {
     try {
-      const { data } = await axiosAuthInstance.post("/login", {
+      const { data } = await axiosAuthInstance.post(AUTH_LOGIN__ENDPOINT, {
         email,
         password,
       })
@@ -49,7 +45,7 @@ export const registerUser = createAsyncThunk(
     thunkAPI,
   ) => {
     try {
-      const { data } = await axiosAuthInstance.post("/register", {
+      const { data } = await axiosAuthInstance.post(AUTH_REGISTER_ENDPOINT, {
         firstName,
         lastName,
         email,

@@ -4,17 +4,29 @@ import { Typography } from "@mui/material"
 import DashboardLayoutWrapper from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
 import Overview from "@/features/views/Overview"
 import Login from "@/features/auth/views/Login"
-import Register from "@/features/auth/views/Signup"
-import ProtectedBasePageRoute from "./ProtectedBasePageRoute/ProtectedBasePageRoute"
-import ProtectedDashboardRoute from "./ProtectedDashboardRoute/ProtectedDashboardRoute"
+import Signup from "@/features/auth/views/Signup"
+import RedirectFromLoginWrapper from "@/wrappers/RedirectFromLoginWrapper/RedirectFromLoginWrapper"
+import ProtectedDashboardRoute from "./ProtectedRoute/ProtectedRoute"
+import {
+  ADD_BOOK_PATH,
+  ADD_READER_PATH,
+  BASE_PAGE_PATH,
+  BOOKS_PATH,
+  DASHBOARD_PATH,
+  LOGIN_PATH,
+  OVERVIEW_PATH,
+  READERS_PATH,
+  SETTINGS_PATH,
+  SIGNUP_PATH,
+} from "@/constants/paths"
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: BASE_PAGE_PATH,
     element: (
-      <ProtectedBasePageRoute>
+      <RedirectFromLoginWrapper>
         <BasePageLayout />
-      </ProtectedBasePageRoute>
+      </RedirectFromLoginWrapper>
     ),
     errorElement: (
       <div>
@@ -22,16 +34,16 @@ const router = createBrowserRouter([
       </div>
     ),
     children: [
-      { index: true, element: <Navigate to="login" /> },
-      { path: "login", element: <Login /> },
+      { index: true, element: <Navigate to={LOGIN_PATH} /> },
+      { path: LOGIN_PATH, element: <Login /> },
       {
-        path: "signup",
-        element: <Register />,
+        path: SIGNUP_PATH,
+        element: <Signup />,
       },
     ],
   },
   {
-    path: "/dashboard",
+    path: DASHBOARD_PATH,
     element: (
       <ProtectedDashboardRoute>
         <DashboardLayoutWrapper />
@@ -40,14 +52,22 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="overview" />,
+        element: <Navigate to={OVERVIEW_PATH} />,
       },
       {
-        path: "overview",
+        path: OVERVIEW_PATH,
         element: <Overview />,
       },
       {
-        path: "readers",
+        path: SETTINGS_PATH,
+        element: (
+          <Typography variant="h3" fontWeight="500">
+            Account settings
+          </Typography>
+        ),
+      },
+      {
+        path: READERS_PATH,
         element: (
           <Typography variant="h3" fontWeight="500">
             Readers page
@@ -55,7 +75,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "readers/add-reader",
+        path: ADD_READER_PATH,
         element: (
           <Typography variant="h3" fontWeight="500">
             Add reader page
@@ -63,11 +83,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "books",
+        path: BOOKS_PATH,
         element: <Typography variant="h3">Books list page</Typography>,
       },
       {
-        path: "books/add-book",
+        path: ADD_BOOK_PATH,
         element: <Typography variant="h3">Add book page</Typography>,
       },
     ],

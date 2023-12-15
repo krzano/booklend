@@ -25,7 +25,7 @@ const FormikTextField = ({
   name,
   ...restTextFieldProps
 }: FormikTextFieldProps) => {
-  const { t } = useTranslation(["forms", "common"])
+  const { t } = useTranslation(["forms"])
   const [showPassword, setShowPassword] = useState(false)
   const [field, meta] = useField(name)
 

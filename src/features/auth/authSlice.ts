@@ -1,28 +1,24 @@
-import axiosAuthInstance from "@/libs/axios/axiosAuthInstance"
-import { LoginFormValues } from "@/libs/yup/schemas/loginSchema"
-import { RegisterFormValues } from "@/libs/yup/schemas/registerSchema"
 import {
   getAccessTokenFromLocalStorage,
   getRefreshTokenFromLocalStorage,
   removeTokensFromLocalStorage,
-  saveAccessTokenInLocalStorage,
-  saveRefreshTokenInLocalStorage,
 } from "@/utils/localStorage"
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { isAxiosError } from "axios"
+import { createSlice } from "@reduxjs/toolkit"
 import i18next from "i18next"
 import { toast } from "react-toastify"
+import { loginUser, registerUser } from "./authThunk"
+
+export enum LogoutUserReason {
+  SESSION_EXPIRED,
+  USER_LOGOUT,
+}
 
 export interface AuthState {
   isAuthenticated: boolean
   isRegistrationCompleted: boolean
 }
 
-export interface ApiErrorResponse {
-  errors: string[]
-  message: string
-  statusCode: number
-}
+const sessionExpiredAutoClose = 1000 * 20
 
 const initialState: AuthState = {
   isAuthenticated: Boolean(
@@ -30,58 +26,6 @@ const initialState: AuthState = {
   ),
   isRegistrationCompleted: false,
 }
-
-export const loginUser = createAsyncThunk(
-  "auth/loginUser",
-  async ({ email, password }: LoginFormValues, thunkAPI) => {
-    try {
-      const { data } = await axiosAuthInstance.post("/login", {
-        email,
-        password,
-      })
-      saveAccessTokenInLocalStorage(data.accessToken)
-      saveRefreshTokenInLocalStorage(data.refreshToken)
-      toast.success(data.message)
-    } catch (error) {
-      if (isAxiosError<ApiErrorResponse>(error) && error.response) {
-        toast.error(error.response.data.errors[0])
-        return thunkAPI.rejectWithValue(error.response.data.errors[0])
-      } else {
-        return thunkAPI.rejectWithValue(error)
-      }
-    }
-  },
-)
-
-export const registerUser = createAsyncThunk(
-  "auth/registerUser",
-  async (
-    {
-      firstName,
-      lastName,
-      email,
-      password,
-    }: Omit<RegisterFormValues, "confirmPassword">,
-    thunkAPI,
-  ) => {
-    try {
-      const { data } = await axiosAuthInstance.post("/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-      })
-      toast.success(data.message)
-    } catch (error) {
-      if (isAxiosError<ApiErrorResponse>(error) && error.response) {
-        toast.error(error.response.data.errors[0])
-        return thunkAPI.rejectWithValue(error.response.data.errors[0])
-      } else {
-        return thunkAPI.rejectWithValue(error)
-      }
-    }
-  },
-)
 
 export const authSlice = createSlice({
   name: "auth",
@@ -96,21 +40,19 @@ export const authSlice = createSlice({
     logoutUser: (
       state,
       {
-        payload: { reason },
+        payload,
       }: {
-        payload: {
-          reason: "sessionExpired" | "userLogout"
-        }
+        payload: LogoutUserReason
       },
     ) => {
       state.isAuthenticated = false
       removeTokensFromLocalStorage()
-      if (reason === "sessionExpired") {
+      if (payload === LogoutUserReason.SESSION_EXPIRED) {
         toast.error(i18next.t("common:sessionExpiredError"), {
-          autoClose: 1000 * 60,
+          autoClose: sessionExpiredAutoClose,
         })
       }
-      if (reason === "userLogout") {
+      if (payload === LogoutUserReason.USER_LOGOUT) {
         toast.success(i18next.t("common:userLogoutSuccess"))
       }
     },

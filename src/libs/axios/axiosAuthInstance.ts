@@ -1,13 +1,9 @@
+import { BASE_URL } from "@/constants/api"
 import axios from "axios"
 import i18next from "i18next"
 
-const url = import.meta.env.VITE_API_URL
-
 const axiosAuthInstance = axios.create({
-  baseURL: "https://booklend-backend-nest.onrender.com/auth",
-  headers: {
-    // "Content-Type": "application/json",
-  },
+  baseURL: BASE_URL,
 })
 
 axiosAuthInstance.interceptors.request.use((req) => {

@@ -19,9 +19,11 @@ import {
 } from "@mui/material"
 import { useState } from "react"
 import { useAppDispatch } from "@/app/hooks"
-import { logoutUser } from "@/features/auth/authSlice"
+import { LogoutUserReason, logoutUser } from "@/features/auth/authSlice"
 import { useTranslation } from "react-i18next"
 import styled from "styled-components"
+import { Link as RouterLink } from "react-router-dom"
+import { SETTINGS_PATH } from "@/constants/paths"
 
 export interface TopbarProps {
   toggleSidebar: () => void
@@ -29,7 +31,7 @@ export interface TopbarProps {
 }
 
 const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
-  const { t } = useTranslation(["dashboard", "common"])
+  const { t } = useTranslation(["dashboard"])
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -81,17 +83,21 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={handleClose}>
+            <MenuItem
+              component={RouterLink}
+              to={SETTINGS_PATH}
+              onClick={handleClose}
+            >
               <ListItemIcon>
                 <Settings />
               </ListItemIcon>
               <ListItemText>{t("dashboard:topbar.settings")}</ListItemText>
             </MenuItem>
             <MenuItem
-              // component="button"
+              component="button"
               onClick={() => {
                 handleClose()
-                dispatch(logoutUser({ reason: "userLogout" }))
+                dispatch(logoutUser(LogoutUserReason.USER_LOGOUT))
               }}
             >
               <ListItemIcon>

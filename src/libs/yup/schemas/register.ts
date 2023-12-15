@@ -3,7 +3,7 @@ import yup from "../config"
 const registerSchema = yup.object().shape({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
-  email: yup.string().email("forms:errors.notValidEmail").required(),
+  email: yup.string().email().required(),
   password: yup
     .string()
     .min(8, "forms:errors.passwordMinLength")

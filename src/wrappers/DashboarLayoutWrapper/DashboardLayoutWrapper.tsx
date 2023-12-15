@@ -1,5 +1,4 @@
 import DashboardLayout from "@/layouts/DashboardLayout/DashboardLayout"
-
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded"
 import PersonAddRoundedIcon from "@mui/icons-material/PersonAddRounded"
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
@@ -9,38 +8,47 @@ import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded"
 import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded"
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded"
 import { useMediaQuery } from "@mui/material"
-import { useState } from "react"
+import { useState, ReactElement } from "react"
 import { useTheme } from "styled-components"
 import { useTranslation } from "react-i18next"
+import {
+  ADD_BOOK_PATH,
+  ADD_READER_PATH,
+  BOOKS_PATH,
+  OVERVIEW_PATH,
+  READERS_PATH,
+  SETTINGS_PATH,
+} from "@/constants/paths"
 
-export interface BasicSidebarListItemType {
+interface SidebarBasicListItemType {
   id: number
   variant: "basic"
   path: string
   text: string
-  icon: React.ReactElement
+  icon: ReactElement
 }
-export interface DropdownSidebarListItemType {
+
+export interface SidebarDropdownListItemType {
   id: number
   variant: "dropdown"
   text: string
-  icon: React.ReactElement
-  dropdownItems: Omit<BasicSidebarListItemType, "variant">[]
+  icon: ReactElement
+  dropdownItems: Omit<SidebarBasicListItemType, "variant">[]
 }
 
 export type SidebarListItemsType = (
-  | BasicSidebarListItemType
-  | DropdownSidebarListItemType
+  | SidebarBasicListItemType
+  | SidebarDropdownListItemType
 )[]
 
 const sidebarWidth = 240
 
 const DashboardLayoutWrapper = () => {
-  const { t } = useTranslation(["dashboard", "common"])
+  const { t } = useTranslation(["dashboard"])
   const sidebarListItems: SidebarListItemsType = [
     {
       id: 1,
-      path: "/dashboard",
+      path: OVERVIEW_PATH,
       text: t("sidebar.overview"),
       icon: <AssessmentRoundedIcon />,
       variant: "basic",
@@ -53,13 +61,13 @@ const DashboardLayoutWrapper = () => {
       dropdownItems: [
         {
           id: 21,
-          path: "/dashboard/readers",
+          path: READERS_PATH,
           text: t("sidebar.readersList"),
           icon: <RecentActorsIcon />,
         },
         {
           id: 22,
-          path: "/dashboard/readers/add-reader",
+          path: ADD_READER_PATH,
           text: t("sidebar.addReader"),
           icon: <PersonAddRoundedIcon />,
         },
@@ -73,13 +81,13 @@ const DashboardLayoutWrapper = () => {
       dropdownItems: [
         {
           id: 31,
-          path: "/dashboard/books",
+          path: BOOKS_PATH,
           text: t("sidebar.booksList"),
           icon: <LibraryBooksRoundedIcon />,
         },
         {
           id: 32,
-          path: "/dashboard/books/add-book",
+          path: ADD_BOOK_PATH,
           text: t("sidebar.addBook"),
           icon: <LibraryAddRoundedIcon />,
         },
@@ -87,7 +95,7 @@ const DashboardLayoutWrapper = () => {
     },
     {
       id: 4,
-      path: "",
+      path: SETTINGS_PATH,
       text: t("sidebar.settings"),
       icon: <SettingsRoundedIcon />,
       variant: "basic",

@@ -2,12 +2,10 @@ import { getAccessTokenFromLocalStorage } from "@/utils/localStorage"
 import axios, { AxiosInstance, isAxiosError } from "axios"
 import i18next from "i18next"
 import getNewAccessToken from "./getNewAccessToken"
+import { BASE_URL } from "@/constants/api"
 
 const axiosProtectedInstance: AxiosInstance = axios.create({
-  baseURL: "https://booklend-backend-nest.onrender.com",
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: BASE_URL,
 })
 
 axiosProtectedInstance.interceptors.request.use(async (config) => {

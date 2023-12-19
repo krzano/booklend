@@ -120,9 +120,11 @@ const DashboardLayoutWrapper = () => {
     dispatch(getUserData())
   }, [dispatch])
 
-  return isUserDataError ? (
+  if (isUserDataError) {
     dispatch(logoutUser(LogoutUserReason.SERVER_ERROR))
-  ) : (
+  }
+
+  return (
     <DashboardLayout
       sidebarWidth={sidebarWidth}
       sidebarListItems={sidebarListItems}

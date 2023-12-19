@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import {
   Collapse,
@@ -37,7 +37,7 @@ const Sidebar = ({
   }
   const location = useLocation()
 
-  const checkForOpenDropdown = () => {
+  const checkForOpenDropdown = useCallback(() => {
     const openDropdownItem = sidebarListItems.find(
       (item) =>
         item.variant === "dropdown" &&
@@ -48,11 +48,11 @@ const Sidebar = ({
     if (openDropdownItem) {
       return setOpenItems((prev) => [...prev, openDropdownItem.id])
     }
-  }
+  }, [location.pathname, sidebarListItems])
 
   useEffect(() => {
     checkForOpenDropdown()
-  }, [])
+  }, [checkForOpenDropdown])
 
   return (
     <StyledSidebar
@@ -114,6 +114,7 @@ const Sidebar = ({
               </>
             )
           }
+          return null
         })}
       </List>
     </StyledSidebar>
@@ -128,10 +129,11 @@ const StyledSidebar = styled(Drawer)<{ sidebarWidth: number }>`
     }
   `}
   .MuiListItemButton-root {
-    /* ::first-letter {
-      text-transform: uppercase;
-    } */
     text-transform: capitalize;
+    ${({ theme }) => css`
+      padding-top: ${theme.spacing(2)};
+      padding-bottom: ${theme.spacing(2)};
+    `}
   }
 `
 

@@ -1,11 +1,8 @@
 import { Box, Link, Typography } from "@mui/material"
 import styled, { css } from "styled-components"
-import { Formik } from "formik"
-import registerSchema, { RegisterFormValues } from "@/libs/yup/schemas/register"
 import { Link as RouterLink, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { setIsRegistrationCompleted } from "../authSlice"
-import { registerUser } from "../authThunk"
 import { useTranslation } from "react-i18next"
 import { LOGIN_PATH } from "@/constants/paths"
 import SignupForm from "../components/SignupForm/SignupForm"
@@ -15,13 +12,6 @@ const Signup = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { isRegistrationCompleted } = useAppSelector((store) => store.auth)
-  const initialValues: RegisterFormValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  }
 
   if (isRegistrationCompleted) {
     navigate(LOGIN_PATH)
@@ -41,17 +31,7 @@ const Signup = () => {
           <Typography variant="h4">{t("common:signup")}</Typography>
           <Typography>{t("forms:quickEasy")}</Typography>
         </Box>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={async ({ firstName, lastName, email, password }) => {
-            await dispatch(
-              registerUser({ firstName, lastName, email, password }),
-            )
-          }}
-          validationSchema={registerSchema}
-        >
-          {({ isSubmitting }) => <SignupForm isSubmitting={isSubmitting} />}
-        </Formik>
+        <SignupForm />
         <Box>
           <Typography my={2} textAlign="center">
             {t("forms:alreadyRegistered")}{" "}

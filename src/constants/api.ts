@@ -1,13 +1,16 @@
 export const BASE_URL = import.meta.env.VITE_API_URL
+export const UPLOADS_BASE_URL = `${BASE_URL}/uploads`
 
-const AUTH_BASE__ENDPOINT = "/auth"
+const AUTH_BASE_ENDPOINT = "/auth"
 
-export const AUTH_LOGIN__ENDPOINT = `${AUTH_BASE__ENDPOINT}/login`
-export const AUTH_REGISTER_ENDPOINT = `${AUTH_BASE__ENDPOINT}/register`
-export const AUTH_REFRESH_TOKEN_ENDPOINT = `${AUTH_BASE__ENDPOINT}/refreshToken`
-export const AUTH_ME_ENDPOINT = `${AUTH_BASE__ENDPOINT}/me`
+export const AUTH_LOGIN__ENDPOINT = `${AUTH_BASE_ENDPOINT}/login`
+export const AUTH_REGISTER_ENDPOINT = `${AUTH_BASE_ENDPOINT}/register`
+export const AUTH_REFRESH_TOKEN_ENDPOINT = `${AUTH_BASE_ENDPOINT}/refreshToken`
+export const AUTH_ME_ENDPOINT = `${AUTH_BASE_ENDPOINT}/me`
+export const AUTH_REMOVE_ACCOUNT_ENDPOINT = `${AUTH_ME_ENDPOINT}/removeAccount`
 export const AUTH_UPDATE_PASSWORD_ENDPOINT = `${AUTH_ME_ENDPOINT}/updatePassword`
 export const AUTH_UPLOAD_PHOTO_ENDPOINT = `${AUTH_ME_ENDPOINT}/uploadPhoto`
+export const AUTH_REMOVE_PHOTO_ENDPOINT = `${AUTH_ME_ENDPOINT}/removePhoto`
 export const BOOKS_ENDPOINT = "/books"
 export const BOOKS_UPLOAD_PHOTO_ENDPOINT = `${BOOKS_ENDPOINT}/uploadPhoto`
 export const GENRES_ENDPOINT = "/genres"

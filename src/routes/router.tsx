@@ -19,6 +19,7 @@ import {
   SETTINGS_PATH,
   SIGNUP_PATH,
 } from "@/constants/paths"
+import Settings from "@/features/user/views/Settings"
 
 const router = createBrowserRouter([
   {
@@ -60,35 +61,23 @@ const router = createBrowserRouter([
       },
       {
         path: SETTINGS_PATH,
-        element: (
-          <Typography variant="h3" fontWeight="500">
-            Account settings
-          </Typography>
-        ),
+        element: <Settings />,
       },
       {
         path: READERS_PATH,
-        element: (
-          <Typography variant="h3" fontWeight="500">
-            Readers page
-          </Typography>
-        ),
+        element: <Typography variant="h2">Readers page</Typography>,
       },
       {
         path: ADD_READER_PATH,
-        element: (
-          <Typography variant="h3" fontWeight="500">
-            Add reader page
-          </Typography>
-        ),
+        element: <Typography variant="h2">Add reader page</Typography>,
       },
       {
         path: BOOKS_PATH,
-        element: <Typography variant="h3">Books list page</Typography>,
+        element: <Typography variant="h2">Books list page</Typography>,
       },
       {
         path: ADD_BOOK_PATH,
-        element: <Typography variant="h3">Add book page</Typography>,
+        element: <Typography variant="h2">Add book page</Typography>,
       },
     ],
   },

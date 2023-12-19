@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { LOGIN_PATH } from "@/constants/paths"
 import { LogoutUserReason, logoutUser } from "@/features/auth/authSlice"
-import getNewAccessToken from "@/libs/axios/getNewAccessToken"
+import getNewAccessToken from "@/utils/getNewAccessToken"
 import {
   getAccessTokenFromLocalStorage,
   getRefreshTokenFromLocalStorage,
@@ -35,7 +35,7 @@ const ProtectedDashboardRoute = ({
         return dispatch(logoutUser(LogoutUserReason.SESSION_EXPIRED))
       }
       if (decodedAccessToken.exp && decodedAccessToken.exp < currentUnixTime) {
-        return getNewAccessToken()
+        return getNewAccessToken(refreshToken)
       }
     } else {
       return dispatch(logoutUser(LogoutUserReason.SESSION_EXPIRED))

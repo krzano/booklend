@@ -16,5 +16,17 @@
   "signup": "Sign Up",
   "welcome": "welcome",
   "sessionExpiredError": "Your session has expired, log in again",
-  "userLogoutSuccess": "Successfully logged out"
+  "userLogoutSuccess": "Successfully logged out",
+  "accountRemoveSuccess": "Your account has been removed successfully",
+  "serverErrorLogout": "You've been logged out because there was a problem connecting the server... please try again later",
+  "submit": "submit",
+  "reset": "reset",
+  "change": "change",
+  "delete": "delete",
+  "chooseFile": "choose file",
+  "orDropFiles": "or drop files here",
+  "save": "save",
+  "close": "close",
+  "cancel": "cancel",
+  "edit": "edit"
 }

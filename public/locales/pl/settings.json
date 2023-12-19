@@ -1,0 +1,9 @@
+{
+  "accountSettings": "Ustawienia konta",
+  "changeAvatar": "zmień awatar",
+  "personalInfo": "twoje dane",
+  "changePassword": "zmień hasło",
+  "deleteAccount": "usuń konto",
+  "areYouSure": "Jesteś pewien?",
+  "deleteAccountWarningMessage": "Gdy usuniesz swoje konto, stracisz dostęp do konta i do wszystkich zapisanych danych. Po usunięciu nie będziesz mógł odwrócić tego procesu."
+}

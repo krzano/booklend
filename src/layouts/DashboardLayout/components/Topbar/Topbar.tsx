@@ -13,15 +13,16 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Skeleton,
   Toolbar,
   Tooltip,
   Typography,
 } from "@mui/material"
 import { useState } from "react"
-import { useAppDispatch } from "@/app/hooks"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { LogoutUserReason, logoutUser } from "@/features/auth/authSlice"
 import { useTranslation } from "react-i18next"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Link as RouterLink } from "react-router-dom"
 import { SETTINGS_PATH } from "@/constants/paths"
 
@@ -41,8 +42,12 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
     setAnchorEl(null)
   }
   const dispatch = useAppDispatch()
+  const {
+    isUserDataLoading,
+    userData: { firstName, photo },
+  } = useAppSelector((store) => store.user)
+  const userName = `${firstName}`
 
-  const fakeName = "Nicola Tesla"
   return (
     <AppBar position="static" color="primary">
       <Toolbar sx={{ py: 1 }}>
@@ -58,7 +63,11 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
             fontFamily={(theme) => theme.otherFonts.serif}
             variant="h5"
           >
-            {fakeName}
+            {isUserDataLoading ? (
+              <Skeleton sx={{ bgcolor: "grey.600" }} width={"6rem"} />
+            ) : (
+              userName
+            )}
           </Typography>
         </Box>
         <div>
@@ -71,7 +80,7 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
               onClick={handleClick}
               variant="text"
             >
-              <Avatar alt={fakeName} src="brokenSrc" />
+              <StyledAvatar src={photo} />
             </Button>
           </Tooltip>
           <StyledMenu
@@ -118,6 +127,16 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
     </AppBar>
   )
 }
+
+const StyledAvatar = styled(Avatar)`
+  ${({ theme }) => css`
+    background-color: ${theme.palette.grey[600]};
+    /* font-family: ${theme.otherFonts.serif}; */
+    /* font-weight: bold; */
+    /* font-size: 18px; */
+  `};
+  /* font-family: "inherit"; */
+`
 
 const StyledMenu = styled(Menu)`
   .MuiTypography-root {

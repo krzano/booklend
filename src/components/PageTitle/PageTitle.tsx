@@ -8,7 +8,7 @@ interface PageTitleProps
 
 const PageTitle = ({
   children,
-  marginBottom = 4,
+  marginBottom = { xs: 4, sm: 6 },
   ...restTypographyProps
 }: PageTitleProps) => {
   return (

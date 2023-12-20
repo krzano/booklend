@@ -10,21 +10,24 @@ import { useState } from "react"
 
 interface ButtonProps extends MuiButtonProps {
   onClick?: () => void
-  onAsyncClick?: () => Promise<any>
+  onAsyncClick?: () => Promise<void>
   isSubmitting?: boolean
 }
-
+/**
+ * @todo Finish the JSDoc comment here.
+ * @author https://github.com/krzano
+ */
 const Button = ({
   onClick,
   onAsyncClick,
   isSubmitting,
   children,
+  disabled,
   color = "primary",
   variant = "contained",
   ...restProps
 }: ButtonProps) => {
   const [isLoading, setIsLoading] = useState(false)
-
   const handleClick = () => {
     if (onClick) {
       return onClick()
@@ -42,12 +45,11 @@ const Button = ({
       return handleAsyncClick()
     }
   }
-
   return (
     <MuiButton
       color={color}
       variant={variant}
-      disabled={isLoading || isSubmitting}
+      disabled={disabled || isLoading || isSubmitting}
       onClick={handleClick}
       {...restProps}
     >

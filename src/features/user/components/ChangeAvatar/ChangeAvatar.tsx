@@ -32,10 +32,13 @@ const ChangeAvatar = () => {
   const handleCloseMenu = () => {
     setAnchorEl(null)
   }
-
+  const handleDeleteAvatar = async () => {
+    await dispatch(removeUserPhoto())
+    handleCloseMenu()
+  }
   return (
     <>
-      <Box display="flex" justifyContent={{ xs: "center", sm: "center" }}>
+      <Box display="flex" justifyContent={{ xs: "center", sm: "start" }}>
         <Box position="relative" display="inline-block">
           <StyledAvatar $size="20rem" src={photo} />
           <Tooltip
@@ -75,7 +78,7 @@ const ChangeAvatar = () => {
               </Button>
             </li>
             <Divider />
-            <li onClick={handleCloseMenu}>
+            <li>
               <Button
                 disabled={!photo}
                 variant="text"
@@ -83,7 +86,7 @@ const ChangeAvatar = () => {
                 color="error"
                 fullWidth
                 startIcon={<DeleteForeverRoundedIcon />}
-                onAsyncClick={() => dispatch(removeUserPhoto())}
+                onAsyncClick={handleDeleteAvatar}
               >
                 {t("common:delete")}
               </Button>

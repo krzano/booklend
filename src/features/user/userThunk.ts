@@ -35,9 +35,13 @@ export const changeUserData = createAsyncThunk(
     thunkAPI,
   ) => {
     try {
-      const requestData = photo
-        ? { firstName, lastName, email, photo }
-        : { firstName, lastName, email }
+      const requestData = {
+        firstName,
+        lastName,
+        email,
+        ...(photo && { photo }),
+      }
+
       const { data } = await axiosProtectedInstance.put(
         AUTH_ME_ENDPOINT,
         requestData,

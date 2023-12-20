@@ -10,15 +10,17 @@ interface SectionProps extends Omit<BoxProps, "component"> {
 const Section = ({ title, children, ...restBoxProps }: SectionProps) => {
   return (
     <Box component="section" {...restBoxProps}>
-      <StyledTypography variant="h3" marginBottom={1}>
-        {title}
-      </StyledTypography>
+      {title && (
+        <StyledSectionTitle variant="h3" marginBottom={1}>
+          {title}
+        </StyledSectionTitle>
+      )}
       <Box>{children}</Box>
     </Box>
   )
 }
 
-const StyledTypography = styled(Typography)`
+const StyledSectionTitle = styled(Typography)`
   &::first-letter {
     text-transform: uppercase;
   }

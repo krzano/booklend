@@ -6,9 +6,8 @@ import changeUserInfoSchema, {
 import Grid from "@mui/material/Grid/Grid"
 import { Form, Formik } from "formik"
 import { changeUserData } from "../../userThunk"
-import SubmitFormButton from "../../../../components/SubmitFormButton/SubmitFormButton"
-import ResetFormButton from "../../../../components/ResetFormButton/ResetFormButton"
 import { useTranslation } from "react-i18next"
+import Button from "@/components/Button/Button"
 
 const ChangeInfoForm = () => {
   const dispatch = useAppDispatch()
@@ -28,16 +27,9 @@ const ChangeInfoForm = () => {
       }}
       initialValues={initialValues}
       validationSchema={changeUserInfoSchema}
+      enableReinitialize
     >
-      {({ isSubmitting, values, setValues }) => {
-        // in this case I had to create my own 'dirty' and 'resetForm' because after user submitted new values, formik's: 'dirty' and 'resetForm' were still using the old values
-        const dirty =
-          values.firstName !== firstName ||
-          values.lastName !== lastName ||
-          values.email !== email
-        const resetForm = () => {
-          setValues({ firstName, lastName, email })
-        }
+      {({ isSubmitting, dirty, resetForm }) => {
         return (
           <Form>
             <Grid container spacing={2} paddingY={2}>
@@ -64,18 +56,27 @@ const ChangeInfoForm = () => {
                 />
               </Grid>
               <Grid item xs={6} sm={6}>
-                <SubmitFormButton dirty={dirty} isSubmitting={isSubmitting}>
+                <Button
+                  type="submit"
+                  disabled={!dirty || isSubmitting}
+                  isSubmitting={isSubmitting}
+                  fullWidth
+                  size="large"
+                >
                   {t("common:submit")}
-                </SubmitFormButton>
+                </Button>
               </Grid>
               <Grid item xs={6} sm={6}>
-                <ResetFormButton
-                  dirty={dirty}
-                  isSubmitting={isSubmitting}
-                  resetForm={resetForm}
+                <Button
+                  color="error"
+                  variant="outlined"
+                  disabled={!dirty || isSubmitting}
+                  onClick={resetForm}
+                  fullWidth
+                  size="large"
                 >
                   {t("common:reset")}
-                </ResetFormButton>
+                </Button>
               </Grid>
             </Grid>
           </Form>

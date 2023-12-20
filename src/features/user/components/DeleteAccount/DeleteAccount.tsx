@@ -33,6 +33,11 @@ const DeleteAccount = () => {
     }
   }, [isModalOpen, timeLeft])
 
+  const handleDeleteAccount = async () => {
+    await dispatch(deleteUserAccount())
+    handleCloseModal()
+  }
+
   return (
     <>
       <StyledDeleteAccount>
@@ -59,10 +64,7 @@ const DeleteAccount = () => {
           <Button
             color="error"
             disabled={timeLeft !== null && timeLeft > 0}
-            onAsyncClick={() => {
-              handleCloseModal()
-              return dispatch(deleteUserAccount())
-            }}
+            onAsyncClick={handleDeleteAccount}
           >
             {timeLeft
               ? `${t("common:delete")} (${timeLeft})`

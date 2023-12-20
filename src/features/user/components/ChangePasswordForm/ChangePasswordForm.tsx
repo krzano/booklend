@@ -6,9 +6,8 @@ import changePasswordSchema, {
 import Grid from "@mui/material/Grid/Grid"
 import { Form, Formik } from "formik"
 import { changeUserPassword } from "../../userThunk"
-import SubmitFormButton from "../../../../components/SubmitFormButton/SubmitFormButton"
-import ResetFormButton from "../../../../components/ResetFormButton/ResetFormButton"
 import { useTranslation } from "react-i18next"
+import Button from "@/components/Button/Button"
 
 const ChangePasswordForm = () => {
   const dispatch = useAppDispatch()
@@ -25,11 +24,12 @@ const ChangePasswordForm = () => {
       }}
       initialValues={changePasswordInitialValues}
       validationSchema={changePasswordSchema}
+      enableReinitialize
     >
       {({ isSubmitting, dirty, resetForm }) => (
         <Form>
           <Grid container spacing={2} paddingY={2}>
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12}>
               <FormikTextField
                 type="password"
                 name="newPassword"
@@ -38,7 +38,7 @@ const ChangePasswordForm = () => {
                 disabled={isSubmitting}
               />
             </Grid>
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12}>
               <FormikTextField
                 type="password"
                 name="confirmNewPassword"
@@ -46,19 +46,28 @@ const ChangePasswordForm = () => {
                 disabled={isSubmitting}
               />
             </Grid>
-            <Grid item xs={6} sm={6}>
-              <SubmitFormButton dirty={dirty} isSubmitting={isSubmitting}>
-                {t("common:submit")}
-              </SubmitFormButton>
-            </Grid>
-            <Grid item xs={6} sm={6}>
-              <ResetFormButton
-                dirty={dirty}
+            <Grid item xs={6}>
+              <Button
+                type="submit"
+                disabled={!dirty || isSubmitting}
                 isSubmitting={isSubmitting}
-                resetForm={resetForm}
+                fullWidth
+                size="large"
+              >
+                {t("common:submit")}
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                color="error"
+                variant="outlined"
+                disabled={!dirty || isSubmitting}
+                onClick={resetForm}
+                fullWidth
+                size="large"
               >
                 {t("common:reset")}
-              </ResetFormButton>
+              </Button>
             </Grid>
           </Grid>
         </Form>

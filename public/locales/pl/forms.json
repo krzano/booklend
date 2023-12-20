@@ -9,14 +9,19 @@
     "lastName": "nazwisko",
     "email": "e-mail",
     "password": "hasło",
-    "confirmPassword": "powtórz hasło"
+    "confirmPassword": "powtórz hasło",
+    "newPassword": "nowe hasło",
+    "confirmNewPassword": "powtórz nowe hasło"
   },
   "errors": {
     "requiredField": "to pole jest wymagane",
     "notValidEmail": "proszę wprowadzić poprawny adres e-mail",
     "confirmPasswordMatch": "hasła się nie zgadzają",
     "passwordMinLength": "twoje hasło musi się składać z minimum 8 znaków",
-    "passwordRegExp": "twoje hasło musi się składać z przynajmniej jednej małej i wielkiej litery, cyfry oraz symbolu (!@#$%^& itd.)"
+    "passwordRegExp": "twoje hasło musi się składać z przynajmniej jednej małej i wielkiej litery, cyfry oraz symbolu (!@#$%^& itd.)",
+    "notValidImage": "Niepoprawny typ pliku",
+    "maximumImageSize": "Plik nie może być większy niż 2MB",
+    "requiredImage": "Proszę wybrać zdjęcie"
   },
   "helperTexts": {
     "password": "Minimum 8 znaków, przynajmniej jedna mała i wielka litera, cyfra oraz symbol (!@#$%^& itd.)"

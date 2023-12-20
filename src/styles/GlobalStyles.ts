@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
 
 html {
   scroll-behavior: smooth;
-  /* font-size: 62.5%; */
+  font-size: 62.5%;
   font-family: sans-serif;
 }
 

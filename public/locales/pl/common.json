@@ -16,5 +16,17 @@
   "signup": "Utwórz konto",
   "welcome": "witaj",
   "sessionExpiredError": "Twoja sesja wygasła, zaloguj się ponownie",
-  "userLogoutSuccess": "Zostałeś pomyślnie wylogowany"
+  "accountRemoveSuccess": "Twoje konto zostało usunięte",
+  "serverErrorLogout": "Zostałeś wylogowany z powodu problemu z połączeniem z serwerem... Spróbuj ponownie później",
+  "userLogoutSuccess": "Zostałeś pomyślnie wylogowany",
+  "submit": "wyślij",
+  "reset": "zresetuj",
+  "change": "zmień",
+  "delete": "usuń",
+  "chooseFile": "wybierz plik",
+  "orDropFiles": "lub upuść pliki tutaj",
+  "save": "zapisz",
+  "close": "zamknij",
+  "cancel": "anuluj",
+  "edit": "edytuj"
 }

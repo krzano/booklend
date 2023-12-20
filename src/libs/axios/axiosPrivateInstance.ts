@@ -1,7 +1,10 @@
-import { getAccessTokenFromLocalStorage } from "@/utils/localStorage"
+import {
+  getAccessTokenFromLocalStorage,
+  getRefreshTokenFromLocalStorage,
+} from "@/utils/localStorage"
 import axios, { AxiosInstance, isAxiosError } from "axios"
 import i18next from "i18next"
-import getNewAccessToken from "./getNewAccessToken"
+import getNewAccessToken from "../../utils/getNewAccessToken"
 import { BASE_URL } from "@/constants/api"
 
 const axiosProtectedInstance: AxiosInstance = axios.create({
@@ -22,12 +25,14 @@ axiosProtectedInstance.interceptors.response.use(
   async (error) => {
     if (isAxiosError(error) && error.config && error.response) {
       const prevConfig = error.config
-      if (error.response.status === 401) {
+      if (error.response.data.statusCode === 401) {
         try {
-          const newAccessToken = await getNewAccessToken()
+          const refreshToken = getRefreshTokenFromLocalStorage()
+          if (refreshToken === null) return Promise.reject(error)
+          const newAccessToken = await getNewAccessToken(refreshToken)
           prevConfig.headers.Authorization = `Bearer ${newAccessToken}`
         } catch (refreshError) {
-          return Promise.reject(refreshError)
+          return Promise.reject(error)
         }
       }
       try {

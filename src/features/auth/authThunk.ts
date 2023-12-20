@@ -2,13 +2,12 @@ import { AUTH_LOGIN__ENDPOINT, AUTH_REGISTER_ENDPOINT } from "@/constants/api"
 import axiosAuthInstance from "@/libs/axios/axiosAuthInstance"
 import { LoginFormValues } from "@/libs/yup/schemas/login"
 import { RegisterFormValues } from "@/libs/yup/schemas/register"
-import { ApiErrorResponse } from "@/types/api"
 import {
   saveAccessTokenInLocalStorage,
   saveRefreshTokenInLocalStorage,
 } from "@/utils/localStorage"
+import thunkErrorHandler from "@/utils/thunkErrorHandler"
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { isAxiosError } from "axios"
 import { toast } from "react-toastify"
 
 export const loginUser = createAsyncThunk(
@@ -23,12 +22,7 @@ export const loginUser = createAsyncThunk(
       saveRefreshTokenInLocalStorage(data.refreshToken)
       toast.success(data.message)
     } catch (error) {
-      if (isAxiosError<ApiErrorResponse>(error) && error.response) {
-        toast.error(error.response.data.errors[0])
-        return thunkAPI.rejectWithValue(error.response.data.errors[0])
-      } else {
-        return thunkAPI.rejectWithValue(error)
-      }
+      return thunkErrorHandler({ error, thunkAPI })
     }
   },
 )
@@ -53,12 +47,7 @@ export const registerUser = createAsyncThunk(
       })
       toast.success(data.message)
     } catch (error) {
-      if (isAxiosError<ApiErrorResponse>(error) && error.response) {
-        toast.error(error.response.data.errors[0])
-        return thunkAPI.rejectWithValue(error.response.data.errors[0])
-      } else {
-        return thunkAPI.rejectWithValue(error)
-      }
+      return thunkErrorHandler({ error, thunkAPI })
     }
   },
 )

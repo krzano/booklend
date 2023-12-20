@@ -13,16 +13,21 @@ interface ButtonProps extends MuiButtonProps {
   onAsyncClick?: () => Promise<void>
   isSubmitting?: boolean
 }
-
+/**
+ * @todo Finish the JSDoc comment here.
+ * @author https://github.com/krzano
+ */
 const Button = ({
   onClick,
   onAsyncClick,
   isSubmitting,
   children,
+  disabled,
+  color = "primary",
+  variant = "contained",
   ...restProps
 }: ButtonProps) => {
   const [isLoading, setIsLoading] = useState(false)
-
   const handleClick = () => {
     if (onClick) {
       return onClick()
@@ -40,21 +45,22 @@ const Button = ({
       return handleAsyncClick()
     }
   }
-
   return (
     <MuiButton
-      disabled={isLoading || isSubmitting}
+      color={color}
+      variant={variant}
+      disabled={disabled || isLoading || isSubmitting}
       onClick={handleClick}
       {...restProps}
     >
       {children}
       {(isLoading || isSubmitting) && (
         <CircularProgress
+          color={color}
           size={16}
-          thickness={6}
+          thickness={8}
           sx={{
             position: "absolute",
-            // color: "inherit",
           }}
         />
       )}

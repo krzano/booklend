@@ -8,7 +8,7 @@ import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded"
 import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded"
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded"
 import { useMediaQuery } from "@mui/material"
-import { useState, ReactElement } from "react"
+import { useState, ReactElement, useEffect } from "react"
 import { useTheme } from "styled-components"
 import { useTranslation } from "react-i18next"
 import {
@@ -19,6 +19,9 @@ import {
   READERS_PATH,
   SETTINGS_PATH,
 } from "@/constants/paths"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import { getUserData } from "@/features/user/userThunk"
+import { LogoutUserReason, logoutUser } from "@/features/auth/authSlice"
 
 interface SidebarBasicListItemType {
   id: number
@@ -104,13 +107,23 @@ const DashboardLayoutWrapper = () => {
 
   const theme = useTheme()
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
-
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(!isMobileScreen)
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev)
   }
-
+  const dispatch = useAppDispatch()
   const isDesktopSidebarOpen = !isMobileScreen && isSidebarOpen
+
+  const { isUserDataError } = useAppSelector((store) => store.user)
+
+  useEffect(() => {
+    dispatch(getUserData())
+  }, [dispatch])
+
+  if (isUserDataError) {
+    dispatch(logoutUser(LogoutUserReason.SERVER_ERROR))
+  }
+
   return (
     <DashboardLayout
       sidebarWidth={sidebarWidth}

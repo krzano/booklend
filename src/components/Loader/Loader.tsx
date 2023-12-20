@@ -19,7 +19,7 @@ const Loader = ({ showLogo }: LoaderProps) => {
         <>
           <Typography
             component="h1"
-            fontSize="50px"
+            fontSize="5rem"
             fontWeight="500"
             fontFamily={theme.otherFonts.serif}
             color="primary"
@@ -27,11 +27,11 @@ const Loader = ({ showLogo }: LoaderProps) => {
             BookLend
           </Typography>
           <LinearProgress
-            sx={{ width: "7rem", height: 10, borderRadius: 10 }}
+            sx={{ width: "10rem", height: 10, borderRadius: 10 }}
           />
         </>
       ) : (
-        <CircularProgress size="4rem" thickness={5} sx={{ opacity: 0.5 }} />
+        <CircularProgress size="6rem" thickness={5} sx={{ opacity: 0.5 }} />
       )}
     </StyledLoader>
   )

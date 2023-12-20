@@ -9,14 +9,19 @@
     "lastName": "last name",
     "email": "e-mail",
     "password": "password",
-    "confirmPassword": "confirm password"
+    "confirmPassword": "confirm password",
+    "newPassword": "new password",
+    "confirmNewPassword": "confirm new password"
   },
   "errors": {
     "requiredField": "this field is required",
     "notValidEmail": "please enter a valid e-mail address",
     "confirmPasswordMatch": "passwords do not match",
     "passwordMinLength": "your password must contain at least 8 characters",
-    "passwordRegExp": "your password must contain at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)"
+    "passwordRegExp": "your password must contain at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)",
+    "notValidImage": "Not a valid image format",
+    "maximumImageSize": "Maximum accepted image size is 2MB",
+    "requiredImage": "Please choose an image"
   },
   "helperTexts": {
     "password": "Minimum 8 characters and at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)"

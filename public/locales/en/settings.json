@@ -1,0 +1,9 @@
+{
+  "accountSettings": "Account settings",
+  "changeAvatar": "change avatar",
+  "personalInfo": "personal info",
+  "changePassword": "change password",
+  "deleteAccount": "delete account",
+  "areYouSure": "Are you sure?",
+  "deleteAccountWarningMessage": "Once you delete your account, you will lose access to your account and to all related data. Once you've deleted your account, you can't stop or reverse the process."
+}

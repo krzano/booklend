@@ -11,6 +11,8 @@ import { loginUser, registerUser } from "./authThunk"
 export enum LogoutUserReason {
   SESSION_EXPIRED,
   USER_LOGOUT,
+  ACCOUNT_REMOVED,
+  SERVER_ERROR,
 }
 
 export interface AuthState {
@@ -18,7 +20,7 @@ export interface AuthState {
   isRegistrationCompleted: boolean
 }
 
-const sessionExpiredAutoClose = 1000 * 20
+const sessionExpiredAutoClose = 1000 * 10
 
 const initialState: AuthState = {
   isAuthenticated: Boolean(
@@ -50,10 +52,20 @@ export const authSlice = createSlice({
       if (payload === LogoutUserReason.SESSION_EXPIRED) {
         toast.error(i18next.t("common:sessionExpiredError"), {
           autoClose: sessionExpiredAutoClose,
+          closeButton: true,
         })
       }
       if (payload === LogoutUserReason.USER_LOGOUT) {
         toast.success(i18next.t("common:userLogoutSuccess"))
+      }
+      if (payload === LogoutUserReason.ACCOUNT_REMOVED) {
+        toast.success(i18next.t("common:accountRemoveSuccess"))
+      }
+      if (payload === LogoutUserReason.SERVER_ERROR) {
+        toast.error(i18next.t("common:serverErrorLogout"), {
+          autoClose: sessionExpiredAutoClose,
+          closeButton: true,
+        })
       }
     },
   },

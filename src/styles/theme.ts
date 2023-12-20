@@ -14,7 +14,7 @@ declare module "@mui/material/styles" {
   }
 }
 
-export const theme: ThemeOptions = createTheme({
+const theme: ThemeOptions = createTheme({
   palette: {
     mode: "light",
     primary: {
@@ -29,21 +29,35 @@ export const theme: ThemeOptions = createTheme({
     },
   },
   typography: {
+    htmlFontSize: 10,
     fontFamily: "'Source Sans 3', sans-serif",
     allVariants: {
       fontFamily: "'Source Sans 3', sans-serif",
     },
+    h1: {
+      fontWeight: 300,
+    },
+    h2: {
+      fontWeight: 300,
+    },
+    h3: {
+      fontWeight: 300,
+    },
+    h4: {
+      fontWeight: 300,
+    },
     body1: { fontFamily: "'Source Sans 3', sans-serif" },
-    body2: { fontFamily: "'Neuton', serif" },
+    body2: { fontFamily: "'Vollkorn', serif" },
     button: {
       fontWeight: 500,
-      // textTransform: "capitalize",
     },
   },
   otherFonts: {
-    serif: "'Neuton', serif",
+    serif: "'Vollkorn', serif",
   },
   shape: {
     borderRadius: 12,
   },
 })
+
+export default theme

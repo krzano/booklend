@@ -1,10 +1,12 @@
-import { Box } from "@mui/material"
+import { Box, Container } from "@mui/material"
 import Sidebar from "./components/Sidebar/Sidebar"
 import Topbar from "./components/Topbar/Topbar"
 import { Outlet } from "react-router-dom"
 import styled, { css } from "styled-components"
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs"
 import { SidebarListItemsType } from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
+import { useAppSelector } from "@/app/hooks"
+import Loader from "@/components/Loader/Loader"
 
 export interface DashboardLayoutProps {
   sidebarWidth: number
@@ -23,6 +25,7 @@ const DashboardLayout = ({
   isDesktopSidebarOpen,
   isMobileScreen,
 }: DashboardLayoutProps) => {
+  const { isUserDataLoading } = useAppSelector((store) => store.user)
   return (
     <>
       <Sidebar
@@ -40,13 +43,13 @@ const DashboardLayout = ({
           toggleSidebar={toggleSidebar}
           isDesktopSidebarOpen={isDesktopSidebarOpen}
         />
-        <Box px={{ xs: 2, sm: 4 }} py={{ xs: 3, sm: 4 }}>
-          <Box pb={4}>
+        <Box py={{ xs: 3, sm: 4 }}>
+          <Container sx={{ pb: 4 }}>
             <Breadcrumbs />
-          </Box>
-          <main>
-            <Outlet />
-          </main>
+          </Container>
+          <Container component="main">
+            {isUserDataLoading ? <Loader /> : <Outlet />}
+          </Container>
         </Box>
       </StyledContent>
     </>

@@ -22,6 +22,7 @@ const StyledToastContainer = styled(ToastContainer)`
     padding: 0.5em 3em;
     margin-bottom: 1rem;
     max-width: 80vw;
+    font-size: 1.6rem;
     font-family: "Source Sans 3", sans-serif;
     text-align: center;
     ${({ theme }) => css`

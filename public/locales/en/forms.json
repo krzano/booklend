@@ -11,7 +11,13 @@
     "password": "password",
     "confirmPassword": "confirm password",
     "newPassword": "new password",
-    "confirmNewPassword": "confirm new password"
+    "confirmNewPassword": "confirm new password",
+    "title": "$t(common:title)",
+    "author": "$t(common:author)",
+    "description": "$t(common:description)",
+    "rating": "$t(common:rating)",
+    "numberOfPages": "$t(common:numberOfPages)",
+    "genre": "$t(common:genre)"
   },
   "errors": {
     "requiredField": "this field is required",
@@ -21,7 +27,10 @@
     "passwordRegExp": "your password must contain at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)",
     "notValidImage": "Not a valid image format",
     "maximumImageSize": "Maximum accepted image size is 2MB",
-    "requiredImage": "Please choose an image"
+    "requiredImage": "Please choose an image",
+    "minGenre": "you have to choose at least 1 genre",
+    "positivePagesNumber": "number of pages has to be greater than 0",
+    "minRating": "the lowest possible rating is 0.5"
   },
   "helperTexts": {
     "password": "Minimum 8 characters and at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)"

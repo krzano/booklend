@@ -37,7 +37,9 @@ const Breadcrumbs = () => {
 const StyledChip = styled(Chip)`
   font-weight: 500;
   opacity: 0.8;
-  text-transform: capitalize;
+  .MuiChip-label::first-letter {
+    text-transform: capitalize;
+  }
 `
 const StyledBreadcrumps = styled(MuiBreadcrumbs)`
   a {

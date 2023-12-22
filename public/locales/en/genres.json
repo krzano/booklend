@@ -1,0 +1,15 @@
+{
+  "sci-fi": "sci-fi",
+  "novel": "novel",
+  "thriller": "thriller",
+  "drama": "drama",
+  "fantasy": "fantasy",
+  "history": "history",
+  "psychology": "psychology",
+  "philosophy": "philosophy",
+  "sociology": "sociology",
+  "economics": "economics",
+  "horror": "horror",
+  "crime": "crime",
+  "adventure": "adventure"
+}

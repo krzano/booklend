@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material"
+import { Box, Container, useMediaQuery, useTheme } from "@mui/material"
 import Sidebar from "./components/Sidebar/Sidebar"
 import Topbar from "./components/Topbar/Topbar"
 import { Outlet } from "react-router-dom"
@@ -7,25 +7,26 @@ import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs"
 import { SidebarListItemsType } from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
 import { useAppSelector } from "@/app/hooks"
 import Loader from "@/components/Loader/Loader"
+import { Suspense, useState } from "react"
 
 export interface DashboardLayoutProps {
   sidebarWidth: number
   sidebarListItems: SidebarListItemsType
-  isSidebarOpen: boolean
-  toggleSidebar: () => void
-  isDesktopSidebarOpen: boolean
-  isMobileScreen: boolean
 }
 
 const DashboardLayout = ({
   sidebarWidth,
   sidebarListItems,
-  isSidebarOpen,
-  toggleSidebar,
-  isDesktopSidebarOpen,
-  isMobileScreen,
 }: DashboardLayoutProps) => {
   const { isUserDataLoading } = useAppSelector((store) => store.user)
+  const theme = useTheme()
+  const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(!isMobileScreen)
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev)
+  }
+  const isDesktopSidebarOpen = !isMobileScreen && isSidebarOpen
+
   return (
     <>
       <Sidebar
@@ -48,7 +49,9 @@ const DashboardLayout = ({
             <Breadcrumbs />
           </Container>
           <Container component="main">
-            {isUserDataLoading ? <Loader /> : <Outlet />}
+            <Suspense fallback={<Loader />}>
+              {isUserDataLoading ? <Loader /> : <Outlet />}
+            </Suspense>
           </Container>
         </Box>
       </StyledContent>

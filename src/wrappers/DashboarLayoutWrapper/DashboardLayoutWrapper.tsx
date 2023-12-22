@@ -105,15 +105,7 @@ const DashboardLayoutWrapper = () => {
     },
   ]
 
-  const theme = useTheme()
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(!isMobileScreen)
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev)
-  }
   const dispatch = useAppDispatch()
-  const isDesktopSidebarOpen = !isMobileScreen && isSidebarOpen
-
   const { isUserDataError } = useAppSelector((store) => store.user)
 
   useEffect(() => {
@@ -128,10 +120,6 @@ const DashboardLayoutWrapper = () => {
     <DashboardLayout
       sidebarWidth={sidebarWidth}
       sidebarListItems={sidebarListItems}
-      isSidebarOpen={isSidebarOpen}
-      toggleSidebar={toggleSidebar}
-      isDesktopSidebarOpen={isDesktopSidebarOpen}
-      isMobileScreen={isMobileScreen}
     />
   )
 }

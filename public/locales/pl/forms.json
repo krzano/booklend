@@ -11,7 +11,13 @@
     "password": "hasło",
     "confirmPassword": "powtórz hasło",
     "newPassword": "nowe hasło",
-    "confirmNewPassword": "powtórz nowe hasło"
+    "confirmNewPassword": "powtórz nowe hasło",
+    "title": "$t(common:title)",
+    "author": "$t(common:author)",
+    "description": "$t(common:description)",
+    "rating": "$t(common:rating)",
+    "numberOfPages": "$t(common:numberOfPages)",
+    "genre": "$t(common:genre)"
   },
   "errors": {
     "requiredField": "to pole jest wymagane",
@@ -21,7 +27,10 @@
     "passwordRegExp": "twoje hasło musi się składać z przynajmniej jednej małej i wielkiej litery, cyfry oraz symbolu (!@#$%^& itd.)",
     "notValidImage": "Niepoprawny typ pliku",
     "maximumImageSize": "Plik nie może być większy niż 2MB",
-    "requiredImage": "Proszę wybrać zdjęcie"
+    "requiredImage": "Proszę wybrać zdjęcie",
+    "minGenre": "musisz wybrać przynajmniej 1 gatunek",
+    "positivePagesNumber": "ilość stron musi być większa od 0",
+    "minRating": "Najmniejsza możliwa ocena to 0.5"
   },
   "helperTexts": {
     "password": "Minimum 8 znaków, przynajmniej jedna mała i wielka litera, cyfra oraz symbol (!@#$%^& itd.)"

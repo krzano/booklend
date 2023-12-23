@@ -22,7 +22,7 @@ const AvatarUploadBox = ({ avatarImage }: AvatarUploadBoxProps) => {
       <Box display="grid" gridTemplateColumns="1fr" gap={0.5} pt={2} pb={1}>
         <StyledAvatar
           $size="20rem"
-          src={avatarImage ? URL.createObjectURL(avatarImage) : photo}
+          src={avatarImage ? URL.createObjectURL(avatarImage) : photo || ""}
         />
         <Box
           display="flex"

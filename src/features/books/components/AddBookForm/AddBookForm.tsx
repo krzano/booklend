@@ -42,6 +42,7 @@ const AddBookForm = () => {
   }, [dispatch, genres])
 
   if (isGenresLoading || !genres)
+    // TODO TO DO: Better error handling, change Navigate to error message and toast, create component to display svg error image and message
     return isGenresError ? <Navigate to={DASHBOARD_PATH} /> : <Loader />
 
   const genresSelectOptions = genres.map((item) => ({

@@ -47,7 +47,6 @@ export const addBook = createAsyncThunk(
         genre,
         numberOfPages,
       })
-      console.log(data)
       if (bookCoverImage) {
         const formData = new FormData()
         formData.append("file", bookCoverImage)

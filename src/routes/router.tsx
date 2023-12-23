@@ -20,6 +20,7 @@ import {
   SIGNUP_PATH,
 } from "@/constants/paths"
 import Settings from "@/features/user/views/Settings"
+import AddBook from "@/features/books/views/AddBook"
 
 const router = createBrowserRouter([
   {
@@ -77,7 +78,7 @@ const router = createBrowserRouter([
       },
       {
         path: ADD_BOOK_PATH,
-        element: <Typography variant="h2">Add book page</Typography>,
+        element: <AddBook />,
       },
     ],
   },

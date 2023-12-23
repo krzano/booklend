@@ -4,12 +4,11 @@ import avatarSchema from "@/libs/yup/schemas/avatar"
 import Grid from "@mui/material/Grid/Grid"
 import { FormikProvider, useFormik } from "formik"
 import { Dispatch, SetStateAction } from "react"
-import Chip from "@mui/material/Chip/Chip"
 import Button from "@/components/Button/Button"
 import PublishIcon from "@mui/icons-material/Publish"
 import { useAppDispatch } from "@/app/hooks"
 import { uploadUserPhoto } from "../../userThunk"
-import AvatarChooseFileButton from "../AvatarChooseFileButton/AvatarChooseFileButton"
+import AvatarUploadBox from "../AvatarUploadBox/AvatarUploadBox"
 import { useTranslation } from "react-i18next"
 
 interface ChangeAvatarModalProps {
@@ -43,8 +42,7 @@ const ChangeAvatarModal = ({
     validationSchema: avatarSchema,
   })
 
-  const { isSubmitting, dirty, values, resetForm, handleSubmit, errors } =
-    formik
+  const { isSubmitting, dirty, values, handleSubmit } = formik
   const handleCloseModal = () => {
     if (!isSubmitting) {
       setIsModalOpen(false)
@@ -60,24 +58,14 @@ const ChangeAvatarModal = ({
         <form onSubmit={handleSubmit}>
           <Grid container spacing={{ xs: 2, sm: 3 }} px={{ sm: 2 }}>
             <Grid item xs={12}>
-              <FormikFileInput name="avatarImage" accept="image/*">
-                <AvatarChooseFileButton
-                  avatarImage={values.avatarImage}
-                  isSubmitting={isSubmitting}
-                />
+              <FormikFileInput
+                name="avatarImage"
+                accept="image/*"
+                disabled={isSubmitting}
+              >
+                <AvatarUploadBox avatarImage={values.avatarImage} />
               </FormikFileInput>
             </Grid>
-            {values.avatarImage && (
-              <Grid item xs={12}>
-                <Chip
-                  label={values.avatarImage.name}
-                  disabled={isSubmitting}
-                  onDelete={resetForm}
-                  color={errors.avatarImage ? "error" : "default"}
-                  sx={{ width: 1 }}
-                />
-              </Grid>
-            )}
             <Grid item xs={6}>
               <Button
                 type="submit"

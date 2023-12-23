@@ -1,0 +1,15 @@
+{
+  "sci-fi": "fantastyka naukowa",
+  "novel": "powieść",
+  "thriller": "dreszczowiec",
+  "drama": "dramat",
+  "fantasy": "fantastyka",
+  "history": "historia",
+  "psychology": "psychologia",
+  "philosophy": "filozofia",
+  "sociology": "socjologia",
+  "economics": "ekonomia",
+  "horror": "horror",
+  "crime": "kryminał",
+  "adventure": "przygoda"
+}

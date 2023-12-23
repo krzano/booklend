@@ -1,5 +1,6 @@
 {
   "settings": "ustawienia",
+  "accountSettings": "ustawienia konta",
   "reader": "czytelnik",
   "readers": "czytelnicy",
   "addReader": "dodaj czytelnika",
@@ -7,6 +8,7 @@
   "book": "książka",
   "books": "książki",
   "addBook": "dodaj książkę",
+  "addNewBook": "dodaj nową książkę",
   "editBook": "edytuj książkę",
   "overview": "przegląd",
   "eg": "n.p.",
@@ -28,5 +30,11 @@
   "save": "zapisz",
   "close": "zamknij",
   "cancel": "anuluj",
-  "edit": "edytuj"
+  "edit": "edytuj",
+  "title": "tytuł",
+  "author": "autor",
+  "description": "opis",
+  "rating": "ocena",
+  "numberOfPages": "ilość stron",
+  "genre": "gatunek"
 }

@@ -40,7 +40,7 @@ const ChangeAvatar = () => {
     <>
       <Box display="flex" justifyContent={{ xs: "center", sm: "start" }}>
         <Box position="relative" display="inline-block">
-          <StyledAvatar $size="20rem" src={photo} />
+          <StyledAvatar $size="20rem" src={photo || ""} />
           <Tooltip
             title={firstLetterToUppercase(t("common:edit"))}
             arrow

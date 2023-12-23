@@ -5,24 +5,26 @@ import {
   removeUserPhoto,
   uploadUserPhoto,
 } from "./userThunk"
-
-export interface UserData {
-  firstName: string
-  lastName: string
-  email: string
-  photo: string
-}
+import { GetUserDataResponse } from "@/types/api"
 
 export interface UserState {
   isUserDataLoading: boolean
   isUserDataError: boolean
-  userData: UserData
+  userData: GetUserDataResponse
 }
 
 const initialState: UserState = {
   isUserDataLoading: false,
   isUserDataError: false,
-  userData: { firstName: "", lastName: "", email: "", photo: "" },
+  userData: {
+    _id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    photo: "",
+    createdAt: "",
+    updatedAt: "",
+  },
 }
 
 export const userSlice = createSlice({

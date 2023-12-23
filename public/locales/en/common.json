@@ -1,5 +1,6 @@
 {
   "settings": "settings",
+  "accountSettings": "account settings",
   "reader": "reader",
   "readers": "readers",
   "addReader": "add reader",
@@ -7,6 +8,7 @@
   "book": "book",
   "books": "books",
   "addBook": "add book",
+  "addNewBook": "add a new book",
   "editBook": "edit book",
   "overview": "overview",
   "eg": "e.g.",
@@ -28,5 +30,11 @@
   "save": "save",
   "close": "close",
   "cancel": "cancel",
-  "edit": "edit"
+  "edit": "edit",
+  "title": "title",
+  "author": "author",
+  "description": "description",
+  "rating": "rating",
+  "numberOfPages": "number of pages",
+  "genre": "genre"
 }

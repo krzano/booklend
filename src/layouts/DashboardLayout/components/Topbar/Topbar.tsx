@@ -25,6 +25,7 @@ import { useTranslation } from "react-i18next"
 import styled, { css } from "styled-components"
 import { Link as RouterLink } from "react-router-dom"
 import { SETTINGS_PATH } from "@/constants/paths"
+import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
 
 export interface TopbarProps {
   toggleSidebar: () => void
@@ -71,7 +72,13 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
           </Typography>
         </Box>
         <div>
-          <Tooltip arrow={false} followCursor={true} title={"Account settings"}>
+          <Tooltip
+            arrow={false}
+            followCursor={true}
+            title={firstLetterToUppercase(
+              t("dashboard:topbar.accountSettings"),
+            )}
+          >
             <Button
               id="basic-button"
               aria-controls={open ? "basic-menu" : undefined}
@@ -80,7 +87,7 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
               onClick={handleClick}
               variant="text"
             >
-              <StyledAvatar src={photo} />
+              <StyledAvatar src={photo || ""} />
             </Button>
           </Tooltip>
           <StyledMenu
@@ -131,11 +138,7 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
 const StyledAvatar = styled(Avatar)`
   ${({ theme }) => css`
     background-color: ${theme.palette.grey[600]};
-    /* font-family: ${theme.otherFonts.serif}; */
-    /* font-weight: bold; */
-    /* font-size: 18px; */
   `};
-  /* font-family: "inherit"; */
 `
 
 const StyledMenu = styled(Menu)`

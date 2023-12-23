@@ -7,9 +7,7 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded"
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded"
 import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded"
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded"
-import { useMediaQuery } from "@mui/material"
-import { useState, ReactElement, useEffect } from "react"
-import { useTheme } from "styled-components"
+import { ReactElement, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import {
   ADD_BOOK_PATH,
@@ -43,8 +41,6 @@ export type SidebarListItemsType = (
   | SidebarBasicListItemType
   | SidebarDropdownListItemType
 )[]
-
-const sidebarWidth = 240
 
 const DashboardLayoutWrapper = () => {
   const { t } = useTranslation(["dashboard"])
@@ -105,15 +101,7 @@ const DashboardLayoutWrapper = () => {
     },
   ]
 
-  const theme = useTheme()
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(!isMobileScreen)
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev)
-  }
   const dispatch = useAppDispatch()
-  const isDesktopSidebarOpen = !isMobileScreen && isSidebarOpen
-
   const { isUserDataError } = useAppSelector((store) => store.user)
 
   useEffect(() => {
@@ -124,15 +112,6 @@ const DashboardLayoutWrapper = () => {
     dispatch(logoutUser(LogoutUserReason.SERVER_ERROR))
   }
 
-  return (
-    <DashboardLayout
-      sidebarWidth={sidebarWidth}
-      sidebarListItems={sidebarListItems}
-      isSidebarOpen={isSidebarOpen}
-      toggleSidebar={toggleSidebar}
-      isDesktopSidebarOpen={isDesktopSidebarOpen}
-      isMobileScreen={isMobileScreen}
-    />
-  )
+  return <DashboardLayout sidebarListItems={sidebarListItems} />
 }
 export default DashboardLayoutWrapper

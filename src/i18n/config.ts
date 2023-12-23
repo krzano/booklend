@@ -8,8 +8,7 @@ i18n
   .use(LanguageDetector)
   .use(HttpBackend)
   .init({
-    // TO ASK TO CHECK: loading all namespaces
-    ns: ["common", "forms", "dashboard", "settings"],
+    ns: ["common", "forms", "dashboard"],
     fallbackLng: "en",
     detection: {
       order: ["localStorage", "cookie", "htmlTag", "navigator", "path"],

@@ -14,13 +14,15 @@ import { toast } from "react-toastify"
 import { LogoutUserReason, logoutUser } from "../auth/authSlice"
 import { AvatarFormValues } from "@/libs/yup/schemas/avatar"
 import { RootState } from "@/app/store"
-import { ChangeUserDataBody } from "@/types/api"
+import { ChangeUserDataBody, GetUserDataResponse } from "@/types/api"
 
 export const getUserData = createAsyncThunk(
   "user/getUserData",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axiosProtectedInstance.get(AUTH_ME_ENDPOINT)
+      const { data } = await axiosProtectedInstance.get<GetUserDataResponse>(
+        AUTH_ME_ENDPOINT,
+      )
       return data
     } catch (error) {
       return thunkErrorHandler({ error, thunkAPI })

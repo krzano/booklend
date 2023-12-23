@@ -1,5 +1,5 @@
 {
-  "accountSettings": "Ustawienia konta",
+  "accountSettings": "$t(common:accountSettings)",
   "changeAvatar": "zmień awatar",
   "personalInfo": "twoje dane",
   "changePassword": "zmień hasło",

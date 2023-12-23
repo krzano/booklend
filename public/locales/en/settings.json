@@ -1,5 +1,5 @@
 {
-  "accountSettings": "Account settings",
+  "accountSettings": "$t(common:accountSettings)",
   "changeAvatar": "change avatar",
   "personalInfo": "personal info",
   "changePassword": "change password",

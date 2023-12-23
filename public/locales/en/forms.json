@@ -30,7 +30,8 @@
     "requiredImage": "Please choose an image",
     "minGenre": "you have to choose at least 1 genre",
     "positivePagesNumber": "number of pages has to be greater than 0",
-    "minRating": "the lowest possible rating is 0.5"
+    "minRating": "the lowest possible rating is 1",
+    "minDescription": "Description must be at least 10 characters"
   },
   "helperTexts": {
     "password": "Minimum 8 characters and at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)"

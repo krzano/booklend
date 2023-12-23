@@ -10,14 +10,12 @@ import Loader from "@/components/Loader/Loader"
 import { Suspense, useState } from "react"
 
 export interface DashboardLayoutProps {
-  sidebarWidth: number
   sidebarListItems: SidebarListItemsType
 }
 
-const DashboardLayout = ({
-  sidebarWidth,
-  sidebarListItems,
-}: DashboardLayoutProps) => {
+const sidebarWidth = 240
+
+const DashboardLayout = ({ sidebarListItems }: DashboardLayoutProps) => {
   const { isUserDataLoading } = useAppSelector((store) => store.user)
   const theme = useTheme()
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))

@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Divider, Typography } from "@mui/material"
 import defaultBookImg from "@/assets/images/default-book.png"
 import styled from "styled-components"
 import { useTranslation } from "react-i18next"
@@ -7,7 +7,7 @@ interface BookCoverUploadBoxProps {
   bookCoverImage: File | undefined
 }
 const BookCoverUploadBox = ({ bookCoverImage }: BookCoverUploadBoxProps) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(["books"])
   return (
     <StyledBookCoverUploadBox>
       <Box
@@ -21,13 +21,27 @@ const BookCoverUploadBox = ({ bookCoverImage }: BookCoverUploadBoxProps) => {
           objectFit: "cover",
         }}
       />
-      <StyledTypography
-        fontFamily={(theme) => theme.otherFonts.serif}
-        fontSize={18}
-        color="primary"
-      >
-        {t("books:bookCover")}
-      </StyledTypography>
+      {!bookCoverImage && (
+        <StyledTextBox>
+          <Typography
+            fontFamily={(theme) => theme.otherFonts.serif}
+            fontSize={20}
+            fontWeight={500}
+            textTransform={"capitalize"}
+          >
+            {t("books:cover")}
+          </Typography>
+          <Divider />
+          <Typography
+            textTransform={"uppercase"}
+            fontWeight={500}
+            fontSize={12}
+          >
+            {t("common:chooseFile")}
+          </Typography>
+          <Typography fontSize={12}>({t("common:orDropFiles")})</Typography>
+        </StyledTextBox>
+      )}
     </StyledBookCoverUploadBox>
   )
 }
@@ -37,13 +51,19 @@ const StyledBookCoverUploadBox = styled.div`
   width: 200px;
   height: 300px;
   text-align: center;
+  color: ${({ theme }) => theme.palette.primary.main};
 `
 
-const StyledTypography = styled(Typography)`
+const StyledTextBox = styled.div`
   position: absolute;
-  left: 50%;
-  top: 10%;
-  translate: -50% -50%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.8rem;
+  padding: 2rem;
 `
 
 export default BookCoverUploadBox

@@ -7,9 +7,7 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded"
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded"
 import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded"
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded"
-import { useMediaQuery } from "@mui/material"
-import { useState, ReactElement, useEffect } from "react"
-import { useTheme } from "styled-components"
+import { ReactElement, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import {
   ADD_BOOK_PATH,
@@ -43,8 +41,6 @@ export type SidebarListItemsType = (
   | SidebarBasicListItemType
   | SidebarDropdownListItemType
 )[]
-
-const sidebarWidth = 240
 
 const DashboardLayoutWrapper = () => {
   const { t } = useTranslation(["dashboard"])
@@ -116,11 +112,6 @@ const DashboardLayoutWrapper = () => {
     dispatch(logoutUser(LogoutUserReason.SERVER_ERROR))
   }
 
-  return (
-    <DashboardLayout
-      sidebarWidth={sidebarWidth}
-      sidebarListItems={sidebarListItems}
-    />
-  )
+  return <DashboardLayout sidebarListItems={sidebarListItems} />
 }
 export default DashboardLayoutWrapper

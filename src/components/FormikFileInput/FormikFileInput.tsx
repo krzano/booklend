@@ -1,5 +1,5 @@
 import { pulseAnimation } from "@/styles/animations"
-import { Grid, GridProps } from "@mui/material"
+import { Grid, SxProps, Theme } from "@mui/material"
 import Chip from "@mui/material/Chip/Chip"
 import Typography from "@mui/material/Typography/Typography"
 import { useField } from "formik"
@@ -7,13 +7,16 @@ import { ReactElement, useState } from "react"
 import { useTranslation } from "react-i18next"
 import styled, { css } from "styled-components"
 
-interface FormikFileInputProps extends Pick<GridProps, "sx"> {
+interface FormikFileInputProps {
   children: ReactElement
   name: string
   accept?: string
   disabled?: boolean
+  sx?: SxProps<Theme>
 }
-
+const testT = { key: "key", values: { val1: "123" } }
+console.log(typeof testT === "object")
+console.log(typeof testT === "object" ? "" : "")
 const FormikFileInput = ({
   children,
   name,
@@ -68,13 +71,11 @@ const FormikFileInput = ({
           </label>
         </StyledFileInputBox>
       </Grid>
-      {true && (
-        <Grid item xs={12}>
-          <Typography color="error" fontSize={12} textAlign="center">
-            {meta.error && t(meta.error)}
-          </Typography>
-        </Grid>
-      )}
+      <Grid item xs={12}>
+        <Typography color="error" fontSize={12} textAlign="center">
+          {meta.error && t(meta.error)}
+        </Typography>
+      </Grid>
       {meta.value && (
         <Grid item xs={12}>
           <Chip
@@ -129,17 +130,6 @@ const StyledSpan = styled.span<{ $isError: boolean }>`
     border: 1px solid
       ${$isError ? theme.palette.error.main : theme.palette.grey[400]};
   `}
-`
-const StyledTypography = styled(Typography)`
-  position: absolute;
-  left: 0;
-  right: 0;
-`
-const StyledChip = styled(Chip)`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5.2rem;
 `
 
 export default FormikFileInput

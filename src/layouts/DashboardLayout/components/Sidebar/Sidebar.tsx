@@ -14,7 +14,7 @@ import { SidebarListItemsType } from "@/wrappers/DashboarLayoutWrapper/Dashboard
 import AppLogo from "@/components/AppLogo/AppLogo"
 
 export interface SidebarProps {
-  sidebarWidth: number
+  $sidebarWidth: number
   sidebarListItems: SidebarListItemsType
   isMobileScreen: boolean
   isSidebarOpen: boolean
@@ -22,7 +22,7 @@ export interface SidebarProps {
 }
 
 const Sidebar = ({
-  sidebarWidth,
+  $sidebarWidth,
   sidebarListItems,
   isSidebarOpen,
   toggleSidebar,
@@ -49,7 +49,6 @@ const Sidebar = ({
       return setOpenItems((prev) => [...prev, openDropdownItem.id])
     }
   }, [location.pathname, sidebarListItems])
-
   useEffect(() => {
     checkForOpenDropdown()
   }, [checkForOpenDropdown])
@@ -61,7 +60,7 @@ const Sidebar = ({
       open={isSidebarOpen}
       onClose={toggleSidebar}
       variant={isMobileScreen ? "temporary" : "persistent"}
-      sidebarWidth={sidebarWidth}
+      $sidebarWidth={$sidebarWidth}
     >
       <StyledSidebarHeader>
         <AppLogo />
@@ -85,9 +84,9 @@ const Sidebar = ({
           if (sidebarItem.variant === "dropdown") {
             const isOpen = openItems.includes(sidebarItem.id)
             return (
-              <>
+              <div key={sidebarItem.id}>
                 <ListItemButton
-                  key={sidebarItem.id}
+                  // key={sidebarItem.id}
                   onClick={() => handleToggleItem(sidebarItem.id)}
                 >
                   <ListItemIcon>{sidebarItem.icon}</ListItemIcon>
@@ -111,7 +110,7 @@ const Sidebar = ({
                     ))}
                   </List>
                 </Collapse>
-              </>
+              </div>
             )
           }
           return null
@@ -121,11 +120,11 @@ const Sidebar = ({
   )
 }
 
-const StyledSidebar = styled(Drawer)<{ sidebarWidth: number }>`
-  ${({ sidebarWidth }) => css`
-    width: ${sidebarWidth}px;
+const StyledSidebar = styled(Drawer)<{ $sidebarWidth: number }>`
+  ${({ $sidebarWidth }) => css`
+    width: ${$sidebarWidth}px;
     & .MuiDrawer-paper {
-      width: ${sidebarWidth}px;
+      width: ${$sidebarWidth}px;
     }
   `}
   .MuiListItemButton-root {

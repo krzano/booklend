@@ -21,8 +21,9 @@ export const loginUser = createAsyncThunk(
       saveAccessTokenInLocalStorage(data.accessToken)
       saveRefreshTokenInLocalStorage(data.refreshToken)
       toast.success(data.message)
+      return
     } catch (error) {
-      return thunkErrorHandler({ error, thunkAPI })
+      thunkErrorHandler({ error, thunkAPI })
     }
   },
 )
@@ -46,8 +47,9 @@ export const registerUser = createAsyncThunk(
         password,
       })
       toast.success(data.message)
+      return
     } catch (error) {
-      return thunkErrorHandler({ error, thunkAPI })
+      thunkErrorHandler({ error, thunkAPI })
     }
   },
 )

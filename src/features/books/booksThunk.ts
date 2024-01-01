@@ -1,3 +1,4 @@
+import { RootState } from "@/app/store"
 import { BOOKS_ENDPOINT, BOOKS_UPLOAD_PHOTO_ENDPOINT } from "@/constants/api"
 import axiosProtectedInstance from "@/libs/axios/axiosPrivateInstance"
 import { AddBookFormValues } from "@/libs/yup/schemas/addBook"
@@ -6,8 +7,8 @@ import thunkErrorHandler from "@/utils/thunkErrorHandler"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 
-export const getAllBooks = createAsyncThunk(
-  "books/getAllBooks",
+export const getBooks = createAsyncThunk(
+  "books/getBooks",
   async (getRequestQueryParams: GetRequestQueryParamsValues, thunkAPI) => {
     try {
       const { data } = await axiosProtectedInstance.get<GetBooksResponse>(
@@ -61,6 +62,23 @@ export const addBook = createAsyncThunk(
       }
       toast.success(data.message)
       return data
+    } catch (error) {
+      thunkErrorHandler({ error, thunkAPI })
+    }
+  },
+)
+
+export const deleteBook = createAsyncThunk(
+  "books/deleteBook",
+  async (bookId: string, thunkAPI) => {
+    try {
+      const { data } = await axiosProtectedInstance.delete(
+        `${BOOKS_ENDPOINT}/${bookId}`,
+      )
+      toast.success(data.message)
+      const state = thunkAPI.getState() as RootState
+      thunkAPI.dispatch(getBooks(state.books.queryParams))
+      return bookId
     } catch (error) {
       thunkErrorHandler({ error, thunkAPI })
     }

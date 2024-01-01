@@ -39,7 +39,6 @@ const BookCoverUploadBox = ({ bookCoverImage }: BookCoverUploadBoxProps) => {
           >
             {t("common:chooseFile")}
           </Typography>
-          <Typography fontSize={12}>({t("common:orDropFiles")})</Typography>
         </StyledTextBox>
       )}
     </StyledBookCoverUploadBox>
@@ -51,7 +50,7 @@ const StyledBookCoverUploadBox = styled.div`
   width: 200px;
   height: 300px;
   text-align: center;
-  color: ${({ theme }) => theme.palette.primary.main};
+  color: ${({ theme }) => theme.palette.grey[800]};
 `
 
 const StyledTextBox = styled.div`

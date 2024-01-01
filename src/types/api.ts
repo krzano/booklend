@@ -1,14 +1,12 @@
 import { ChangeUserInfoFormValues } from "@/libs/yup/schemas/changeUserInfo"
 
-// TODO TO DO ADD ALL API TYPES HERE, AND REFACTOR THE CODE
-
 export interface ApiErrorResponse {
   errors: string[]
   message: string
   statusCode: number
 }
 export interface GetListResponse<T> {
-  data: T[]
+  data: T[] | []
   totalItems: number
   numOfPages: number
 }
@@ -30,21 +28,26 @@ export interface Genre {
   createdAt: string
   updatedAt: string
 }
-interface GetRequestQueryParams {
+export interface GetRequestQueryParams {
   currentPage?: number
   pageSize?: number
   sortDirection?: "asc" | "desc"
-  sortBy?: string
+  sortBy?: "title" | "author" | "rating" | "numberOfPages" | "createdAt"
   search?: string
+  genre?: string | string[]
 }
 export interface Book {
+  _id: string
+  adminId: string
   title: string
   author: string
   description: string
   rating: number
-  genre: string
+  genre: string[]
   numberOfPages: number
-  photo: string | undefined
+  photo: string | null
+  createdAt: string
+  updatedAt: string
 }
 
 export type GetGenresResponse = Genre[]

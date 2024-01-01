@@ -13,6 +13,7 @@ import {
   BASE_PAGE_PATH,
   BOOKS_PATH,
   DASHBOARD_PATH,
+  EDIT_BOOK_PATH,
   LOGIN_PATH,
   OVERVIEW_PATH,
   READERS_PATH,
@@ -21,6 +22,9 @@ import {
 } from "@/constants/paths"
 import Settings from "@/features/user/views/Settings"
 import AddBook from "@/features/books/views/AddBook"
+import BooksList from "@/features/books/views/BooksList"
+import EditBook from "@/features/books/views/EditBook"
+import SingleBook from "@/features/books/views/SingleBook"
 
 const router = createBrowserRouter([
   {
@@ -74,11 +78,23 @@ const router = createBrowserRouter([
       },
       {
         path: BOOKS_PATH,
-        element: <Typography variant="h2">Books list page</Typography>,
+        element: <BooksList />,
       },
       {
         path: ADD_BOOK_PATH,
         element: <AddBook />,
+      },
+      {
+        path: EDIT_BOOK_PATH,
+        element: <Navigate to={BOOKS_PATH} />,
+      },
+      {
+        path: `${EDIT_BOOK_PATH}/:bookId`,
+        element: <EditBook />,
+      },
+      {
+        path: `${BOOKS_PATH}/:bookId`,
+        element: <SingleBook />,
       },
     ],
   },

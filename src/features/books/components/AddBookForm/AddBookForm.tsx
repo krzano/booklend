@@ -5,34 +5,22 @@ import Box from "@mui/material/Box/Box"
 import Grid from "@mui/material/Grid/Grid"
 import BookCoverUploadBox from "../BookCoverUploadBox/BookCoverUploadBox"
 import { Form, Formik } from "formik"
-import Loader from "@/components/Loader/Loader"
 import addBookSchema, { AddBookFormValues } from "@/libs/yup/schemas/addBook"
-import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import { useAppDispatch } from "@/app/hooks"
 import { useTranslation } from "react-i18next"
 import { addBook } from "../../booksThunk"
 import MenuItem from "@mui/material/MenuItem/MenuItem"
 import Button from "@/components/Button/Button"
-import { useEffect } from "react"
-import { getAllGenres } from "@/features/genres/genresThunk"
 import styled from "styled-components"
-import DataFetchingError from "@/components/DataFetchingError/DataFetchingError"
+import { GetGenresResponse } from "@/types/api"
 
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-    },
-  },
+interface AddBookFormProps {
+  genres: GetGenresResponse
 }
 
-const AddBookForm = () => {
+const AddBookForm = ({ genres }: AddBookFormProps) => {
   const { t } = useTranslation(["forms", "genres"])
   const dispatch = useAppDispatch()
-  const { isGenresLoading, isGenresError, genres } = useAppSelector(
-    (state) => state.genres,
-  )
 
   const initialValues: AddBookFormValues = {
     bookCoverImage: undefined,
@@ -43,23 +31,6 @@ const AddBookForm = () => {
     numberOfPages: 0,
     genre: [],
   }
-
-  useEffect(() => {
-    if (!genres) {
-      dispatch(getAllGenres())
-    }
-  }, [dispatch, genres])
-
-  if (isGenresLoading || !genres)
-    return isGenresError ? (
-      <DataFetchingError
-        refreshFunction={() => {
-          dispatch(getAllGenres())
-        }}
-      />
-    ) : (
-      <Loader />
-    )
 
   const genresSelectOptions = genres.map((item) => ({
     key: item._id,
@@ -107,14 +78,14 @@ const AddBookForm = () => {
                 <FormikTextField
                   name="title"
                   label={t("forms:labels.title")}
-                  variant="filled"
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormikTextField
                   name="author"
                   label={t("forms:labels.author")}
-                  variant="filled"
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -124,7 +95,7 @@ const AddBookForm = () => {
                   helperText={t("forms:helperTexts.genre")}
                   select
                   SelectProps={{ native: false, multiple: true }}
-                  variant="filled"
+                  variant="outlined"
                 >
                   {genresSelectOptions.map(({ key, value, label }) => (
                     <StyledMenuItem key={key} value={value}>
@@ -138,7 +109,7 @@ const AddBookForm = () => {
                   name="numberOfPages"
                   label={t("forms:labels.numberOfPages")}
                   type="number"
-                  variant="filled"
+                  variant="outlined"
                 />
               </Grid>
             </Grid>
@@ -147,7 +118,7 @@ const AddBookForm = () => {
                 name="description"
                 label={t("forms:labels.description")}
                 helperText={t("forms:helperTexts.description")}
-                variant="filled"
+                variant="outlined"
                 multiline
                 rows={4}
               />
@@ -171,7 +142,6 @@ const AddBookForm = () => {
                   size="large"
                   fullWidth
                   onClick={resetForm}
-                  isSubmitting={isSubmitting}
                   disabled={!dirty || isSubmitting}
                 >
                   {t("common:reset")}

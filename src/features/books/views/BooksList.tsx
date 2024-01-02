@@ -7,14 +7,15 @@ import { Link as RouterLink } from "react-router-dom"
 import DataFetchingError from "@/components/DataFetchingError/DataFetchingError"
 import Loader from "@/components/Loader/Loader"
 import Section from "@/components/Section/Section"
-import { Box, Pagination, Stack, Typography } from "@mui/material"
+import { Backdrop, Box, Pagination, Stack, Typography } from "@mui/material"
 import BooksListView from "../components/BooksListView/BooksListView"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import BooksFilters from "../components/BooksFilters/BooksFilters"
 import { setQueryParams } from "../booksSilce"
 import Button from "@/components/Button/Button"
 import { ADD_BOOK_PATH } from "@/constants/paths"
 import ToggleViewSection from "../components/ToggleViewSection/ToggleViewSection"
+import { backgroundBreathingAnimation } from "@/styles/animations"
 
 const BooksList = () => {
   const dispatch = useAppDispatch()
@@ -48,14 +49,12 @@ const BooksList = () => {
       <PageTitle>{t("books:booksList")}</PageTitle>
       <Section>
         <BooksFilters />
-        <Stack direction={"column"} spacing={2} marginTop={3}>
+        <Stack spacing={2} marginTop={3}>
           <ToggleViewSection />
-          <Box
-            sx={{
-              opacity: isBooksLoading ? 0.3 : 1,
-              transition: "opacity 0.5s",
-            }}
-          >
+          <Box position="relative">
+            <StyledBackdrop open={isBooksLoading}>
+              <Loader />
+            </StyledBackdrop>
             {booksData.totalItems === 0 ? (
               <StyledNoBooksFoundBox>
                 <Typography variant="h4" textAlign={"center"}>
@@ -93,7 +92,21 @@ const BooksList = () => {
   )
 }
 
+const StyledBackdrop = styled(Backdrop)`
+  ${({ theme }) => css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: ${theme.zIndex.drawer + 1};
+    border-radius: ${theme.shape.borderRadius}px;
+    animation: 1s infinite alternate ${backgroundBreathingAnimation};
+  `}
+`
+
 const StyledPagination = styled(Pagination)`
+  margin-top: ${({ theme }) => theme.spacing(2)};
   .MuiPaginationItem-root {
     font-size: 1.6rem;
     font-weight: 500;

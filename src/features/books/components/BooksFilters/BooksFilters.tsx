@@ -13,16 +13,16 @@ const BooksFilters = () => {
   const dispatch = useAppDispatch()
   return (
     <StyledBooksFiltersGrid container spacing={2} alignItems={"center"}>
-      <Grid item xs={6}>
+      <Grid item xs={6} md={4} lg={3}>
         <Search />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={6} md={4} lg={3}>
         <GenresFilter />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={6} md={4} lg={3}>
         <SortBy />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={6} md="auto" lg={3}>
         <Button
           fullWidth
           variant="outlined"

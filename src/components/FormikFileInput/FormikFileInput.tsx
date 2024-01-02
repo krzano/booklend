@@ -15,9 +15,6 @@ interface FormikFileInputProps {
   sx?: SxProps<Theme>
 }
 // TODO TO DO: receiving yup error with custom values for interpolation
-// const testT = { key: "key", values: { val1: "123" } }
-// console.log(typeof testT === "object")
-// console.log(typeof testT === "object" ? "" : "")
 const FormikFileInput = ({
   children,
   name,

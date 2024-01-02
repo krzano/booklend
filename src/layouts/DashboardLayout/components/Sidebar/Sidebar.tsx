@@ -86,7 +86,6 @@ const Sidebar = ({
             return (
               <div key={sidebarItem.id}>
                 <ListItemButton
-                  // key={sidebarItem.id}
                   onClick={() => handleToggleItem(sidebarItem.id)}
                 >
                   <ListItemIcon>{sidebarItem.icon}</ListItemIcon>

@@ -10,7 +10,6 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded"
 import PermMediaIcon from "@mui/icons-material/PermMedia"
 import { useTranslation } from "react-i18next"
-import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
 
 const ChangeAvatar = () => {
   const { t } = useTranslation(["settings"])
@@ -41,11 +40,7 @@ const ChangeAvatar = () => {
       <Box display="flex" justifyContent={{ xs: "center", sm: "start" }}>
         <Box position="relative" display="inline-block">
           <StyledAvatar $size="20rem" src={photo || ""} />
-          <Tooltip
-            title={firstLetterToUppercase(t("common:edit"))}
-            arrow
-            followCursor
-          >
+          <Tooltip title={t("common:edit")} arrow followCursor>
             <StyledIconButton
               id="edit-avatar-button"
               aria-controls={open ? "edit-avatar-menu" : undefined}

@@ -17,7 +17,10 @@
     "description": "$t(common:description)",
     "rating": "$t(common:rating)",
     "numberOfPages": "$t(common:numberOfPages)",
-    "genre": "$t(common:genre)"
+    "genre": "$t(common:genre)",
+    "sortBy": "sort by",
+    "search": "search",
+    "filterGenres": "filter genres"
   },
   "errors": {
     "requiredField": "this field is required",
@@ -34,6 +37,8 @@
     "minDescription": "Description must be at least 10 characters"
   },
   "helperTexts": {
-    "password": "Minimum 8 characters and at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)"
+    "password": "Minimum 8 characters and at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)",
+    "description": "Minimum 10 chracters",
+    "genre": "choose at least 1"
   }
 }

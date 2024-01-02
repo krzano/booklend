@@ -17,7 +17,10 @@
     "description": "$t(common:description)",
     "rating": "$t(common:rating)",
     "numberOfPages": "$t(common:numberOfPages)",
-    "genre": "$t(common:genre)"
+    "genre": "$t(common:genre)",
+    "sortBy": "sortuj wg",
+    "search": "szukaj",
+    "filterGenres": "filtruj gatunki"
   },
   "errors": {
     "requiredField": "to pole jest wymagane",
@@ -34,6 +37,8 @@
     "minDescription": "Opis musi mieć przynajmniej 10 znaków"
   },
   "helperTexts": {
-    "password": "Minimum 8 znaków, przynajmniej jedna mała i wielka litera, cyfra oraz symbol (!@#$%^& itd.)"
+    "password": "Minimum 8 znaków, przynajmniej jedna mała i wielka litera, cyfra oraz symbol (!@#$%^& itd.)",
+    "description": "Minimum 10 znaków",
+    "genre": "wybierz przynajmniej 1"
   }
 }

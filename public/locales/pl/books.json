@@ -1,5 +1,28 @@
 {
   "addNewBook": "dodaj nową książkę",
   "bookCover": "okładka książki",
-  "cover": "okładka"
+  "cover": "okładka",
+  "booksList": "lista książek",
+  "numberOfPages": "$t(common:numberOfPages)",
+  "pages": "strony",
+  "description": "$t(common:description)",
+  "goToBook": "przejdź do książki",
+  "options": "$t(common:options)",
+  "foundBooksNumber_one": "Znaleziono {{count}} książkę",
+  "foundBooksNumber_few": "Znaleziono {{count}} książki",
+  "foundBooksNumber_many": "Znaleziono {{count}} książek",
+  "sortOptions": {
+    "titleAsc": "$t(common:title) (A-Z)",
+    "titleDesc": "$t(common:title) (Z-A)",
+    "authorAsc": "$t(common:author) (A-Z)",
+    "authorDesc": "$t(common:author) (Z-A)",
+    "highestRating": "najwyższa ocena",
+    "lowestRating": "najniższa ocena",
+    "mostPages": "najwięcej stron",
+    "leastPages": "najmniej stron",
+    "oldest": "najstarsze",
+    "newest": "najnowsze"
+  },
+  "noBooksFound": "Nie znaleziono żadnej książki",
+  "addBook": "$t(common:addBook)"
 }

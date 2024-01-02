@@ -1,5 +1,4 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
-import { Settings, Logout } from "@mui/icons-material"
 import MenuIcon from "@mui/icons-material/Menu"
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft"
 import {
@@ -19,20 +18,23 @@ import {
   Typography,
 } from "@mui/material"
 import { useState } from "react"
-import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import { LogoutUserReason, logoutUser } from "@/features/auth/authSlice"
+import { useAppSelector } from "@/app/hooks"
 import { useTranslation } from "react-i18next"
 import styled, { css } from "styled-components"
 import { Link as RouterLink } from "react-router-dom"
-import { SETTINGS_PATH } from "@/constants/paths"
-import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
+import { TopbarAccountMenuItemsType } from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
 
 export interface TopbarProps {
   toggleSidebar: () => void
-  isDesktopSidebarOpen: boolean
+  $isDesktopSidebarOpen: boolean
+  topbarAccountMenuItems: TopbarAccountMenuItemsType
 }
 
-const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
+const Topbar = ({
+  toggleSidebar,
+  $isDesktopSidebarOpen,
+  topbarAccountMenuItems,
+}: TopbarProps) => {
   const { t } = useTranslation(["dashboard"])
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -42,7 +44,6 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
-  const dispatch = useAppDispatch()
   const {
     isUserDataLoading,
     userData: { firstName, photo },
@@ -53,7 +54,7 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
     <AppBar position="static" color="primary">
       <Toolbar sx={{ py: 1 }}>
         <IconButton size="large" onClick={toggleSidebar} color="inherit">
-          {isDesktopSidebarOpen ? (
+          {$isDesktopSidebarOpen ? (
             <KeyboardDoubleArrowLeftIcon fontSize="large" />
           ) : (
             <MenuIcon fontSize="large" />
@@ -75,9 +76,7 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
           <Tooltip
             arrow={false}
             followCursor={true}
-            title={firstLetterToUppercase(
-              t("dashboard:topbar.accountSettings"),
-            )}
+            title={t("dashboard:topbar.accountSettings")}
           >
             <Button
               id="basic-button"
@@ -99,28 +98,39 @@ const Topbar = ({ toggleSidebar, isDesktopSidebarOpen }: TopbarProps) => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem
-              component={RouterLink}
-              to={SETTINGS_PATH}
-              onClick={handleClose}
-            >
-              <ListItemIcon>
-                <Settings />
-              </ListItemIcon>
-              <ListItemText>{t("dashboard:topbar.settings")}</ListItemText>
-            </MenuItem>
-            <MenuItem
-              component="button"
-              onClick={() => {
-                handleClose()
-                dispatch(logoutUser(LogoutUserReason.USER_LOGOUT))
-              }}
-            >
-              <ListItemIcon>
-                <Logout />
-              </ListItemIcon>
-              <ListItemText>{t("dashboard:topbar.logout")}</ListItemText>
-            </MenuItem>
+            {topbarAccountMenuItems.map((item) => {
+              if (item.component === "link") {
+                const { id, icon, text, path } = item
+                return (
+                  <MenuItem
+                    key={id}
+                    component={RouterLink}
+                    to={path}
+                    onClick={handleClose}
+                  >
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText>{text}</ListItemText>
+                  </MenuItem>
+                )
+              }
+              if (item.component === "button") {
+                const { id, icon, text, onClick } = item
+                return (
+                  <MenuItem
+                    key={id}
+                    component="button"
+                    onClick={() => {
+                      handleClose()
+                      onClick()
+                    }}
+                  >
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText>{text}</ListItemText>
+                  </MenuItem>
+                )
+              }
+              return null
+            })}
             <Divider />
             <Box
               component={"li"}

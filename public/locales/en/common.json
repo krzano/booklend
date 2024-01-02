@@ -36,5 +36,10 @@
   "description": "description",
   "rating": "rating",
   "numberOfPages": "number of pages",
-  "genre": "genre"
+  "genre": "genre",
+  "somethingWrong": "Something went wrong...",
+  "fetchingErrorMsg": "Failed to retrieve data from the server, please try again later...",
+  "refresh": "refresh",
+  "options": "options",
+  "clearFilters": "clear filters"
 }

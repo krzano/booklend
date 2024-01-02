@@ -15,6 +15,15 @@ declare module "@mui/material/styles" {
 }
 
 const theme: ThemeOptions = createTheme({
+  components: {
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          "&::first-letter": { textTransform: "uppercase" },
+        },
+      },
+    },
+  },
   palette: {
     mode: "light",
     primary: {

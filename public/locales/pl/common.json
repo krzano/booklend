@@ -36,5 +36,10 @@
   "description": "opis",
   "rating": "ocena",
   "numberOfPages": "ilość stron",
-  "genre": "gatunek"
+  "genre": "gatunek",
+  "somethingWrong": "Coś poszło nie tak...",
+  "fetchingErrorMsg": "Nie udało się pobrać danych z serwera, proszę spróbować później...",
+  "refresh": "odśwież",
+  "options": "opcje",
+  "clearFilters": "wyczyść filtry"
 }

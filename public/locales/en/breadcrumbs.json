@@ -1,0 +1,11 @@
+{
+  "dashboard": "dashboard",
+  "overview": "$t(common:overview)",
+  "readers": "$t(common:readers)",
+  "add-reader": "$t(common:addReader)",
+  "edit-reader": "$t(common:editReader)",
+  "books": "$t(common:books)",
+  "add-book": "$t(common:addBook)",
+  "edit-book": "$t(common:editBook)",
+  "settings": "$t(common:settings)"
+}

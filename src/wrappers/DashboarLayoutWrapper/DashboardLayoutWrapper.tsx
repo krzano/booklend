@@ -7,6 +7,8 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded"
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded"
 import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded"
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded"
+import SettingsIcon from "@mui/icons-material/Settings"
+import LogoutIcon from "@mui/icons-material/Logout"
 import { ReactElement, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import {
@@ -21,6 +23,25 @@ import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { getUserData } from "@/features/user/userThunk"
 import { LogoutUserReason, logoutUser } from "@/features/auth/authSlice"
 
+interface TopbarAccountMenuItemLink {
+  id: number
+  component: "link"
+  path: string
+  text: string
+  icon: ReactElement
+}
+interface TopbarAccountMenuItemButton {
+  id: number
+  component: "button"
+  onClick: () => void
+  text: string
+  icon: ReactElement
+}
+export type TopbarAccountMenuItemsType = (
+  | TopbarAccountMenuItemLink
+  | TopbarAccountMenuItemButton
+)[]
+
 interface SidebarBasicListItemType {
   id: number
   variant: "basic"
@@ -28,7 +49,6 @@ interface SidebarBasicListItemType {
   text: string
   icon: ReactElement
 }
-
 export interface SidebarDropdownListItemType {
   id: number
   variant: "dropdown"
@@ -36,7 +56,6 @@ export interface SidebarDropdownListItemType {
   icon: ReactElement
   dropdownItems: Omit<SidebarBasicListItemType, "variant">[]
 }
-
 export type SidebarListItemsType = (
   | SidebarBasicListItemType
   | SidebarDropdownListItemType
@@ -44,6 +63,28 @@ export type SidebarListItemsType = (
 
 const DashboardLayoutWrapper = () => {
   const { t } = useTranslation(["dashboard"])
+  const dispatch = useAppDispatch()
+  const { isUserDataError } = useAppSelector((store) => store.user)
+
+  const topbarAccountMenuItems: TopbarAccountMenuItemsType = [
+    {
+      id: 1,
+      component: "link",
+      path: SETTINGS_PATH,
+      text: t("topbar.settings"),
+      icon: <SettingsIcon />,
+    },
+    {
+      id: 2,
+      component: "button",
+      onClick: () => {
+        dispatch(logoutUser(LogoutUserReason.USER_LOGOUT))
+      },
+      text: t("topbar.logout"),
+      icon: <LogoutIcon />,
+    },
+  ]
+
   const sidebarListItems: SidebarListItemsType = [
     {
       id: 1,
@@ -101,9 +142,6 @@ const DashboardLayoutWrapper = () => {
     },
   ]
 
-  const dispatch = useAppDispatch()
-  const { isUserDataError } = useAppSelector((store) => store.user)
-
   useEffect(() => {
     dispatch(getUserData())
   }, [dispatch])
@@ -112,6 +150,11 @@ const DashboardLayoutWrapper = () => {
     dispatch(logoutUser(LogoutUserReason.SERVER_ERROR))
   }
 
-  return <DashboardLayout sidebarListItems={sidebarListItems} />
+  return (
+    <DashboardLayout
+      topbarAccountMenuItems={topbarAccountMenuItems}
+      sidebarListItems={sidebarListItems}
+    />
+  )
 }
 export default DashboardLayoutWrapper

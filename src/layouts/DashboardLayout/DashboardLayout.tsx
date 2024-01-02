@@ -4,18 +4,25 @@ import Topbar from "./components/Topbar/Topbar"
 import { Outlet } from "react-router-dom"
 import styled, { css } from "styled-components"
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs"
-import { SidebarListItemsType } from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
+import {
+  SidebarListItemsType,
+  TopbarAccountMenuItemsType,
+} from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
 import { useAppSelector } from "@/app/hooks"
 import Loader from "@/components/Loader/Loader"
 import { Suspense, useState } from "react"
 
 export interface DashboardLayoutProps {
   sidebarListItems: SidebarListItemsType
+  topbarAccountMenuItems: TopbarAccountMenuItemsType
 }
 
-const sidebarWidth = 240
+const $sidebarWidth = 240
 
-const DashboardLayout = ({ sidebarListItems }: DashboardLayoutProps) => {
+const DashboardLayout = ({
+  sidebarListItems,
+  topbarAccountMenuItems,
+}: DashboardLayoutProps) => {
   const { isUserDataLoading } = useAppSelector((store) => store.user)
   const theme = useTheme()
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
@@ -23,24 +30,25 @@ const DashboardLayout = ({ sidebarListItems }: DashboardLayoutProps) => {
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev)
   }
-  const isDesktopSidebarOpen = !isMobileScreen && isSidebarOpen
+  const $isDesktopSidebarOpen = !isMobileScreen && isSidebarOpen
 
   return (
     <>
       <Sidebar
-        sidebarWidth={sidebarWidth}
+        $sidebarWidth={$sidebarWidth}
         sidebarListItems={sidebarListItems}
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
         isMobileScreen={isMobileScreen}
       />
       <StyledContent
-        isDesktopSidebarOpen={isDesktopSidebarOpen}
-        sidebarWidth={sidebarWidth}
+        $isDesktopSidebarOpen={$isDesktopSidebarOpen}
+        $sidebarWidth={$sidebarWidth}
       >
         <Topbar
+          topbarAccountMenuItems={topbarAccountMenuItems}
           toggleSidebar={toggleSidebar}
-          isDesktopSidebarOpen={isDesktopSidebarOpen}
+          $isDesktopSidebarOpen={$isDesktopSidebarOpen}
         />
         <Box py={{ xs: 3, sm: 4 }}>
           <Container sx={{ pb: 4 }}>
@@ -58,11 +66,11 @@ const DashboardLayout = ({ sidebarListItems }: DashboardLayoutProps) => {
 }
 
 const StyledContent = styled.div<{
-  isDesktopSidebarOpen: boolean
-  sidebarWidth: number
+  $isDesktopSidebarOpen: boolean
+  $sidebarWidth: number
 }>`
-  ${({ theme, isDesktopSidebarOpen, sidebarWidth }) => css`
-    transition: ${isDesktopSidebarOpen
+  ${({ theme, $isDesktopSidebarOpen, $sidebarWidth }) => css`
+    transition: ${$isDesktopSidebarOpen
       ? theme.transitions.create(["margin-left", "width"], {
           duration: theme.transitions.duration.enteringScreen,
           easing: theme.transitions.easing.easeOut,
@@ -72,10 +80,10 @@ const StyledContent = styled.div<{
           easing: theme.transitions.easing.sharp,
         })};
 
-    ${isDesktopSidebarOpen &&
+    ${$isDesktopSidebarOpen &&
     css`
-      margin-left: ${sidebarWidth}px;
-      width: calc(100%-${sidebarWidth}px);
+      margin-left: ${$sidebarWidth}px;
+      width: calc(100%-${$sidebarWidth}px);
     `}
   `};
 `

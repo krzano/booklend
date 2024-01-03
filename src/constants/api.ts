@@ -13,6 +13,7 @@ export const AUTH_UPLOAD_PHOTO_ENDPOINT = `${AUTH_ME_ENDPOINT}/uploadPhoto`
 export const AUTH_REMOVE_PHOTO_ENDPOINT = `${AUTH_ME_ENDPOINT}/removePhoto`
 export const BOOKS_ENDPOINT = "/books"
 export const BOOKS_UPLOAD_PHOTO_ENDPOINT = `${BOOKS_ENDPOINT}/uploadPhoto`
+export const BOOKS_DELETE_PHOTO_ENDPOINT = `${BOOKS_ENDPOINT}/deletePhoto`
 export const GENRES_ENDPOINT = "/genres"
 export const READERS_ENDPOINT = "/readers"
 export const READERS_UPLOAD_PHOTO_ENDPOINT = `${READERS_ENDPOINT}/uploadPhoto`

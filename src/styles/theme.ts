@@ -1,4 +1,4 @@
-import { ThemeOptions, createTheme } from "@mui/material/styles"
+import { Theme, createTheme } from "@mui/material/styles"
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -14,16 +14,7 @@ declare module "@mui/material/styles" {
   }
 }
 
-const theme: ThemeOptions = createTheme({
-  components: {
-    MuiTooltip: {
-      styleOverrides: {
-        tooltip: {
-          "&::first-letter": { textTransform: "uppercase" },
-        },
-      },
-    },
-  },
+let theme: Theme = createTheme({
   palette: {
     mode: "light",
     primary: {
@@ -66,6 +57,25 @@ const theme: ThemeOptions = createTheme({
   },
   shape: {
     borderRadius: 12,
+  },
+})
+
+theme = createTheme(theme, {
+  components: {
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          "&::first-letter": { textTransform: "uppercase" },
+        },
+      },
+    },
+    MuiRating: {
+      styleOverrides: {
+        iconFilled: {
+          color: theme.palette.secondary.light,
+        },
+      },
+    },
   },
 })
 

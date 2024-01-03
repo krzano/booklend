@@ -10,9 +10,9 @@ import styled from "styled-components"
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined"
 import MoreHoriz from "@mui/icons-material/MoreHoriz"
 import { Link as RouterLink } from "react-router-dom"
-import { BOOKS_PATH, EDIT_BOOK_PATH } from "@/constants/paths"
+import { EDIT_BOOK_PATH } from "@/constants/paths"
 import MuiButton from "@mui/material/Button/Button"
-import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import { useAppDispatch } from "@/app/hooks"
 import { deleteBook } from "../../booksThunk"
 interface BookMenuButtonProps {
   bookId: string
@@ -21,7 +21,6 @@ interface BookMenuButtonProps {
 const BookMenuButton = ({ bookId }: BookMenuButtonProps) => {
   const { t } = useTranslation(["books"])
   const dispatch = useAppDispatch()
-  const { isBooksLoading } = useAppSelector((store) => store.books)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClickMenu = (event: MouseEvent<HTMLButtonElement>) => {
@@ -36,23 +35,16 @@ const BookMenuButton = ({ bookId }: BookMenuButtonProps) => {
   }
   return (
     <>
-      <Tooltip
-        title={t("books:options")}
-        placement="left"
-        disableHoverListener={isBooksLoading}
-      >
-        <span>
-          <IconButton
-            disabled={isBooksLoading}
-            id="book-more-actions-button"
-            aria-controls={open ? "book-more-actions-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClickMenu}
-          >
-            <MoreHoriz />
-          </IconButton>
-        </span>
+      <Tooltip title={t("books:options")} placement="left">
+        <IconButton
+          id="book-more-actions-button"
+          aria-controls={open ? "book-more-actions-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClickMenu}
+        >
+          <MoreHoriz />
+        </IconButton>
       </Tooltip>
       <StyledMenu
         id="book-more-actions-menu"

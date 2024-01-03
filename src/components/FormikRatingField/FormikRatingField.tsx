@@ -56,9 +56,6 @@ const FormikRatingField = ({
 const StyledFormikRatingField = styled.div`
   ${({ theme }) => css`
     padding: ${theme.spacing(1)} ${theme.spacing(1.5)};
-    & .MuiRating-iconFilled {
-      color: ${theme.palette.secondary.light};
-    }
     & .MuiRating-iconHover {
       color: ${theme.palette.secondary.main};
     }

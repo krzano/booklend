@@ -41,5 +41,7 @@
   "fetchingErrorMsg": "Nie udało się pobrać danych z serwera, proszę spróbować później...",
   "refresh": "odśwież",
   "options": "opcje",
-  "clearFilters": "wyczyść filtry"
+  "clearFilters": "wyczyść filtry",
+  "showMore": "pokaż więcej",
+  "showLess": "pokaż mniej"
 }

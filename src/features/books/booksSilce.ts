@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getBooks } from "./booksThunk"
-import { GetBooksResponse, GetRequestQueryParams } from "@/types/api"
+import {
+  deleteBookPhoto,
+  editBook,
+  getBooks,
+  getSingleBook,
+} from "./booksThunk"
+import { Book, GetBooksResponse, GetRequestQueryParams } from "@/types/api"
 
 export enum ViewVariants {
   list,
@@ -19,6 +24,7 @@ interface BooksInitialState {
   booksData: BooksDataValues | undefined
   view: ViewVariants
   queryParams: GetRequestQueryParams
+  singleBook: Book | undefined
 }
 
 const defaultQueryParams: GetRequestQueryParams = {
@@ -36,6 +42,7 @@ const initialState: BooksInitialState = {
   booksData: undefined,
   view: ViewVariants.grid,
   queryParams: defaultQueryParams,
+  singleBook: undefined,
 }
 
 const booksSlice = createSlice({
@@ -62,7 +69,13 @@ const booksSlice = createSlice({
       },
     }),
     resetQueryParams: (state) => {
-      state.queryParams = defaultQueryParams
+      return {
+        ...state,
+        queryParams: {
+          ...defaultQueryParams,
+          pageSize: state.view === ViewVariants.grid ? 9 : 14,
+        },
+      }
     },
   },
   extraReducers: (builder) => {
@@ -84,6 +97,29 @@ const booksSlice = createSlice({
       .addCase(getBooks.rejected, (state) => {
         state.isBooksLoading = false
         state.isBooksError = true
+      })
+      .addCase(getSingleBook.pending, (state) => {
+        state.isBooksError = false
+        state.isBooksLoading = true
+        // state.singleBook = undefined
+      })
+      .addCase(getSingleBook.fulfilled, (state, { payload }) => {
+        state.singleBook = payload
+        state.isBooksLoading = false
+      })
+      .addCase(getSingleBook.rejected, (state) => {
+        state.isBooksError = true
+        state.isBooksLoading = false
+      })
+      .addCase(editBook.fulfilled, (state, { payload }) => {
+        if (payload && state.singleBook) {
+          return { ...state, singleBook: { ...state.singleBook, ...payload } }
+        }
+      })
+      .addCase(deleteBookPhoto.fulfilled, (state, { payload }) => {
+        if (payload && state.singleBook && state.singleBook._id === payload) {
+          state.singleBook.photo = null
+        }
       })
   },
 })

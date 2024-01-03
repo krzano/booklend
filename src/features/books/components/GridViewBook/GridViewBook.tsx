@@ -1,6 +1,6 @@
 import { Book } from "@/types/api"
 import styled, { css } from "styled-components"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CardMedia from "@mui/material/CardMedia/CardMedia"
 import Card from "@mui/material/Card/Card"
 import Typography from "@mui/material/Typography/Typography"
@@ -14,7 +14,6 @@ import { Link as RouterLink } from "react-router-dom"
 import { BOOKS_PATH } from "@/constants/paths"
 import Button from "@/components/Button/Button"
 import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
-import { useAppSelector } from "@/app/hooks"
 import truncateString from "@/utils/truncateString"
 
 const GridViewBook = ({
@@ -28,11 +27,14 @@ const GridViewBook = ({
   photo,
 }: Book) => {
   const { t } = useTranslation(["genres", "books"])
-  const { isBooksLoading } = useAppSelector((store) => store.books)
   const [imgSrcToRender, setImgSrcToRender] = useState(
     photo ? BASE_URL + photo : defaultBookCoverImg,
   )
-
+  useEffect(() => {
+    if (photo) {
+      setImgSrcToRender(BASE_URL + photo)
+    }
+  }, [photo])
   return (
     <StyledGridViewBookCard component="li" variant="outlined">
       <StyledBookMenuButtonBox>
@@ -40,7 +42,7 @@ const GridViewBook = ({
       </StyledBookMenuButtonBox>
       <CardMedia
         component="img"
-        src={imgSrcToRender || defaultBookCoverImg}
+        src={imgSrcToRender}
         alt={title}
         onError={() => {
           setImgSrcToRender(defaultBookCoverImg)
@@ -90,7 +92,6 @@ const GridViewBook = ({
       </StyledCardContent>
       <StyledBottomButtonBox>
         <Button
-          disabled={isBooksLoading}
           color="secondary"
           variant="text"
           {...{ component: RouterLink, to: `${BOOKS_PATH}/${_id}` }}
@@ -106,10 +107,7 @@ const StyledGridViewBookCard = styled(Card)`
   display: flex;
   flex-direction: column;
   position: relative;
-  max-width: 30rem;
-  .MuiRating-iconFilled {
-    color: ${({ theme }) => theme.palette.secondary.light};
-  }
+  width: 30rem;
   .MuiChip-label::first-letter {
     text-transform: uppercase;
   }

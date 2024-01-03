@@ -6,7 +6,6 @@ import styled from "styled-components"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import RefreshIcon from "@mui/icons-material/Refresh"
-import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
 
 interface DataFetchingErrorProps {
   text?: string

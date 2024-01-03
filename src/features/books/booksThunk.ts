@@ -1,8 +1,16 @@
 import { RootState } from "@/app/store"
-import { BOOKS_ENDPOINT, BOOKS_UPLOAD_PHOTO_ENDPOINT } from "@/constants/api"
+import {
+  BOOKS_DELETE_PHOTO_ENDPOINT,
+  BOOKS_ENDPOINT,
+  BOOKS_UPLOAD_PHOTO_ENDPOINT,
+} from "@/constants/api"
 import axiosProtectedInstance from "@/libs/axios/axiosPrivateInstance"
 import { AddBookFormValues } from "@/libs/yup/schemas/addBook"
-import { GetBooksResponse, GetRequestQueryParamsValues } from "@/types/api"
+import {
+  Book,
+  GetBooksResponse,
+  GetRequestQueryParamsValues,
+} from "@/types/api"
 import thunkErrorHandler from "@/utils/thunkErrorHandler"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
@@ -18,6 +26,19 @@ export const getBooks = createAsyncThunk(
             ...getRequestQueryParams,
           },
         },
+      )
+      return data
+    } catch (error) {
+      thunkErrorHandler({ error, thunkAPI })
+    }
+  },
+)
+export const getSingleBook = createAsyncThunk(
+  "books/getSingleBook",
+  async (bookId: string, thunkAPI) => {
+    try {
+      const { data } = await axiosProtectedInstance.get<Book>(
+        `${BOOKS_ENDPOINT}/${bookId}`,
       )
       return data
     } catch (error) {
@@ -67,7 +88,77 @@ export const addBook = createAsyncThunk(
     }
   },
 )
-
+export const editBook = createAsyncThunk(
+  "books/editBook",
+  async (
+    {
+      bookId,
+      editBookValues: {
+        title,
+        description,
+        author,
+        rating,
+        genre,
+        numberOfPages,
+        bookCoverImage,
+      },
+    }: { bookId: string; editBookValues: AddBookFormValues },
+    thunkAPI,
+  ) => {
+    try {
+      const { data } = await axiosProtectedInstance.put(
+        `${BOOKS_ENDPOINT}/${bookId}`,
+        {
+          title,
+          description,
+          author,
+          rating,
+          genre,
+          numberOfPages,
+        },
+      )
+      if (bookCoverImage) {
+        const formData = new FormData()
+        formData.append("file", bookCoverImage)
+        const photoResponse = await axiosProtectedInstance.post(
+          `${BOOKS_UPLOAD_PHOTO_ENDPOINT}/${bookId}`,
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          },
+        )
+        toast.success(photoResponse.data.message)
+        return {
+          title,
+          description,
+          author,
+          rating,
+          genre,
+          numberOfPages,
+          photo: `/uploads/${bookCoverImage.name}`,
+        }
+      }
+      toast.success(data.message)
+      return { title, description, author, rating, genre, numberOfPages }
+    } catch (error) {
+      thunkErrorHandler({ error, thunkAPI })
+    }
+  },
+)
+export const deleteBookPhoto = createAsyncThunk(
+  "books/deleteBookPhoto",
+  async (bookId: string, thunkAPI) => {
+    try {
+      const { data } = await axiosProtectedInstance.delete(
+        `${BOOKS_DELETE_PHOTO_ENDPOINT}/${bookId}`,
+      )
+      toast.success(data.message)
+      return bookId
+    } catch (error) {
+      thunkErrorHandler({ error, thunkAPI })
+    }
+  },
+)
 export const deleteBook = createAsyncThunk(
   "books/deleteBook",
   async (bookId: string, thunkAPI) => {

@@ -24,5 +24,7 @@
     "newest": "najnowsze"
   },
   "noBooksFound": "Nie znaleziono żadnej książki",
-  "addBook": "$t(common:addBook)"
+  "addBook": "$t(common:addBook)",
+  "deleteCover": "usuń okładkę książki",
+  "backToBooks": "wróć do książek"
 }

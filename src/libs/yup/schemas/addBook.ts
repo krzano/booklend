@@ -12,7 +12,7 @@ const addBookSchema = yup.object().shape({
     .required(),
   genre: yup
     .array()
-    .of(yup.string())
+    .of(yup.string().required())
     .min(1, "forms:errors.minGenre")
     .required(),
 })

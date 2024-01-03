@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link as RouterLink } from "react-router-dom"
 import styled from "styled-components"
 import { BASE_URL } from "@/constants/api"
@@ -17,7 +17,6 @@ import defaultBookCoverImg from "@/assets/images/default-book.png"
 import BookMenuButton from "../BookMenuButton/BookMenuButton"
 import { useTranslation } from "react-i18next"
 import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
-import { useAppSelector } from "@/app/hooks"
 import truncateString from "@/utils/truncateString"
 
 const ListViewBook = ({
@@ -29,10 +28,14 @@ const ListViewBook = ({
   photo,
 }: Book) => {
   const { t } = useTranslation(["books"])
-  const { isBooksLoading } = useAppSelector((store) => store.books)
   const [imgSrcToRender, setImgSrcToRender] = useState(
     photo ? BASE_URL + photo : defaultBookCoverImg,
   )
+  useEffect(() => {
+    if (photo) {
+      setImgSrcToRender(BASE_URL + photo)
+    }
+  }, [photo])
   return (
     <StyledListViewBook component="li" variant="outlined">
       <img
@@ -76,21 +79,14 @@ const ListViewBook = ({
       </Stack>
       <Stack justifyContent={"space-between"}>
         <BookMenuButton bookId={_id} />
-        <Tooltip
-          title={t("books:goToBook")}
-          placement="left"
-          disableHoverListener={isBooksLoading}
-        >
-          <span>
-            <IconButton
-              disabled={isBooksLoading}
-              color="secondary"
-              component={RouterLink}
-              to={`${BOOKS_PATH}/${_id}`}
-            >
-              <ReadMoreIcon />
-            </IconButton>
-          </span>
+        <Tooltip title={t("books:goToBook")} placement="left">
+          <IconButton
+            color="secondary"
+            component={RouterLink}
+            to={`${BOOKS_PATH}/${_id}`}
+          >
+            <ReadMoreIcon />
+          </IconButton>
         </Tooltip>
       </Stack>
     </StyledListViewBook>
@@ -109,9 +105,6 @@ const StyledListViewBook = styled(Paper)`
     aspect-ratio: 2/3;
     border-radius: 5px;
     object-fit: cover;
-  }
-  .MuiRating-iconFilled {
-    color: ${({ theme }) => theme.palette.secondary.light};
   }
 `
 export default ListViewBook

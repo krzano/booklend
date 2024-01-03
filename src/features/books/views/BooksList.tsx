@@ -99,7 +99,7 @@ const StyledBackdrop = styled(Backdrop)`
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: ${theme.zIndex.drawer + 1};
+    z-index: ${theme.zIndex.drawer - 1};
     border-radius: ${theme.shape.borderRadius}px;
     animation: 1s infinite alternate ${backgroundBreathingAnimation};
   `}

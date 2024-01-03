@@ -41,5 +41,7 @@
   "fetchingErrorMsg": "Failed to retrieve data from the server, please try again later...",
   "refresh": "refresh",
   "options": "options",
-  "clearFilters": "clear filters"
+  "clearFilters": "clear filters",
+  "showMore": "show more",
+  "showLess": "show less"
 }

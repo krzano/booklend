@@ -16,10 +16,8 @@ const AddBook = () => {
   )
 
   useEffect(() => {
-    if (!genres) {
-      dispatch(getAllGenres())
-    }
-  }, [dispatch, genres])
+    dispatch(getAllGenres())
+  }, [dispatch])
 
   return (
     <>

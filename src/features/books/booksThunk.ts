@@ -39,11 +39,6 @@ export const getSingleBook = createAsyncThunk(
     try {
       const { data } = await axiosProtectedInstance.get<Book>(
         `${BOOKS_ENDPOINT}/${bookId}`,
-        {
-          params: {
-            bookId,
-          },
-        },
       )
       return data
     } catch (error) {
@@ -120,11 +115,6 @@ export const editBook = createAsyncThunk(
           rating,
           genre,
           numberOfPages,
-        },
-        {
-          params: {
-            bookId,
-          },
         },
       )
       if (bookCoverImage) {

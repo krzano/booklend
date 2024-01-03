@@ -55,10 +55,6 @@ export const userSlice = createSlice({
           }
         },
       )
-      .addCase(changeUserData.rejected, (state) => {
-        console.log("rejected")
-        return { ...state }
-      })
       .addCase(uploadUserPhoto.fulfilled, (state, { payload }) => {
         if (payload) {
           state.userData.photo = payload

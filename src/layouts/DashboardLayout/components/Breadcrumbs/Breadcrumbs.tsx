@@ -7,8 +7,7 @@ import { useAppSelector } from "@/app/hooks"
 import truncateString from "@/utils/truncateString"
 
 const Breadcrumbs = () => {
-  // TODO TO DO: after I add the currentBook to the booksSlice, I have to change the booksList to currentBook
-  const { booksData } = useAppSelector((store) => store.books)
+  const { singleBook } = useAppSelector((store) => store.books)
   const { bookId } = useParams()
   const location = useLocation()
   const { t } = useTranslation(["breadcrumbs"])
@@ -17,16 +16,11 @@ const Breadcrumbs = () => {
   const breadcrumbsList = location.pathname
     .split("/")
     .filter((crumb) => crumb !== "")
-    .map((crumb, index, array) => {
+    .map((crumb, index) => {
       currentLink += `/${crumb}`
       let label = t(`breadcrumbs:${crumb}`)
-      if (index === array.length - 1 && label === bookId && booksData) {
-        const bookTitle = booksData.booksList.find(
-          (book) => book._id === bookId,
-        )?.title
-        if (bookTitle) {
-          label = truncateString(bookTitle, 20)
-        }
+      if (label === bookId && singleBook && singleBook._id === bookId) {
+        label = truncateString(singleBook.title, 20)
       }
       const breadcrumb = {
         id: index,

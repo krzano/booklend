@@ -23,7 +23,7 @@ declare module "yup" {
 }
 
 const DEFAULT_MAX_FILE_SIZE = 2
-const VALID_IMAGE_EXTENSIONS = ["jpg", "gif", "png", "jpeg", "svg", "webp"]
+const VALID_IMAGE_EXTENSIONS = ["jpg", "png", "jpeg"]
 
 yup.addMethod(yup.string, "password", function password() {
   return this.min(8, "forms:errors.passwordMinLength").matches(

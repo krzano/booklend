@@ -23,5 +23,7 @@
     "newest": "newest"
   },
   "noBooksFound": "No books found",
-  "addBook": "$t(common:addBook)"
+  "addBook": "$t(common:addBook)",
+  "deleteCover": "delete book cover",
+  "backToBooks": "go back to books"
 }

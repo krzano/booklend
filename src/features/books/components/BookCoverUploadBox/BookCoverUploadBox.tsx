@@ -42,7 +42,6 @@ const BookCoverUploadBox = ({
       {!bookCoverImage && !coverImgSrc && imgSrcToRender === defaultBookImg && (
         <StyledTextBox>
           <Typography
-            fontFamily={(theme) => theme.otherFonts.serif}
             fontSize={20}
             fontWeight={500}
             textTransform={"capitalize"}
@@ -68,7 +67,7 @@ const StyledBookCoverUploadBox = styled.div`
   width: 200px;
   height: 300px;
   text-align: center;
-  color: ${({ theme }) => theme.palette.grey[800]};
+  color: ${({ theme }) => theme.palette.grey[700]};
 `
 const StyledTextBox = styled.div`
   position: absolute;

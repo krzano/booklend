@@ -20,7 +20,12 @@
     "genre": "$t(common:genre)",
     "sortBy": "sort by",
     "search": "search",
-    "filterGenres": "filter genres"
+    "filterGenres": "filter genres",
+    "phoneNumber": "phone number",
+    "street": "street",
+    "city": "city",
+    "postalCode": "postal code",
+    "readerPhoto": "reader photo"
   },
   "errors": {
     "requiredField": "this field is required",
@@ -34,11 +39,17 @@
     "minGenre": "you have to choose at least 1 genre",
     "positivePagesNumber": "number of pages has to be greater than 0",
     "minRating": "the lowest possible rating is 1",
-    "minDescription": "Description must be at least 10 characters"
+    "minDescription": "Description must be at least 10 characters",
+    "phoneNumber": "Phone number must have 9 chracters",
+    "postalCode": "Postal code must have 6 chracters"
   },
   "helperTexts": {
     "password": "Minimum 8 characters and at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)",
     "description": "Minimum 10 chracters",
-    "genre": "choose at least 1"
+    "genre": "choose at least 1",
+    "phoneNumber": "$t(common:example): 990555333",
+    "street": "$t(common:example): Warszawska 20",
+    "city": "$t(common:example): Kraków",
+    "postalCode": "$t(common:example): 30-000"
   }
 }

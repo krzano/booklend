@@ -14,11 +14,7 @@ const AvatarUploadBox = ({ avatarImage }: AvatarUploadBoxProps) => {
   } = useAppSelector((state) => state.user)
 
   return (
-    <Box
-      py={1}
-      color={(theme) => theme.palette.grey[600]}
-      textTransform="uppercase"
-    >
+    <Box py={1} color={(theme) => theme.palette.grey[600]}>
       <Box display="grid" gridTemplateColumns="1fr" gap={0.5} pt={2} pb={1}>
         <StyledAvatar
           $size="20rem"
@@ -31,10 +27,12 @@ const AvatarUploadBox = ({ avatarImage }: AvatarUploadBoxProps) => {
           gap={1}
           marginTop={1}
         >
-          <Typography fontWeight={500}>{t("common:chooseFile")}</Typography>
+          <Typography textTransform={"uppercase"} fontWeight={500}>
+            {t("common:chooseFile")}
+          </Typography>
         </Box>
-        <Typography textTransform="lowercase" fontSize={14} fontWeight={400}>
-          ({t("common:orDropFiles")})
+        <Typography fontSize={14} fontWeight={400}>
+          ({t("common:orDropFile")})
         </Typography>
       </Box>
     </Box>

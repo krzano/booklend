@@ -83,7 +83,11 @@ const SingleBook = () => {
           >
             {singleBook.title}
           </Typography>
-          <Typography fontFamily={"inherit"} variant="h4">
+          <Typography
+            fontFamily={"inherit"}
+            variant="h4"
+            textTransform={"capitalize"}
+          >
             {singleBook.author}
           </Typography>
           <Stack
@@ -182,7 +186,7 @@ const StyledCoverImageBox = styled.div`
     width: 200px;
     aspect-ratio: 2/3;
     object-fit: cover;
-    box-shadow: ${({ theme }) => theme.shadows[3]};
+    box-shadow: 0px 0px 70px -50px rgba(66, 68, 90, 1);
     border: 1px solid ${({ theme }) => theme.palette.primary.light};
   }
 `

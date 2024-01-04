@@ -25,6 +25,8 @@ import AddBook from "@/features/books/views/AddBook"
 import BooksList from "@/features/books/views/BooksList"
 import EditBook from "@/features/books/views/EditBook"
 import SingleBook from "@/features/books/views/SingleBook"
+import AddReader from "@/features/readers/views/AddReader"
+import ReadersList from "@/features/readers/views/ReadersList"
 
 const router = createBrowserRouter([
   {
@@ -70,11 +72,11 @@ const router = createBrowserRouter([
       },
       {
         path: READERS_PATH,
-        element: <Typography variant="h2">Readers page</Typography>,
+        element: <ReadersList />,
       },
       {
         path: ADD_READER_PATH,
-        element: <Typography variant="h2">Add reader page</Typography>,
+        element: <AddReader />,
       },
       {
         path: BOOKS_PATH,

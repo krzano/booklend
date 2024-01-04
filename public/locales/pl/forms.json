@@ -20,7 +20,12 @@
     "genre": "$t(common:genre)",
     "sortBy": "sortuj wg",
     "search": "szukaj",
-    "filterGenres": "filtruj gatunki"
+    "filterGenres": "filtruj gatunki",
+    "phoneNumber": "numer telefonu",
+    "street": "ulica",
+    "city": "miasto",
+    "postalCode": "kod pocztowy",
+    "readerPhoto": "zdjęcie czytelnika"
   },
   "errors": {
     "requiredField": "to pole jest wymagane",
@@ -34,11 +39,17 @@
     "minGenre": "musisz wybrać przynajmniej 1 gatunek",
     "positivePagesNumber": "ilość stron musi być większa od 0",
     "minRating": "Najmniejsza możliwa ocena to 1",
-    "minDescription": "Opis musi mieć przynajmniej 10 znaków"
+    "minDescription": "Opis musi mieć przynajmniej 10 znaków",
+    "phoneNumber": "numer telefonu musi mieć 9 znaków",
+    "postalCode": "kod pocztowy musi mieć 6 znaków"
   },
   "helperTexts": {
     "password": "Minimum 8 znaków, przynajmniej jedna mała i wielka litera, cyfra oraz symbol (!@#$%^& itd.)",
     "description": "Minimum 10 znaków",
-    "genre": "wybierz przynajmniej 1"
+    "genre": "wybierz przynajmniej 1",
+    "phoneNumber": "$t(common:example): 990555333",
+    "street": "$t(common:example): Warszawska 20",
+    "city": "$t(common:example): Kraków",
+    "postalCode": "$t(common:example): 30-000"
   }
 }

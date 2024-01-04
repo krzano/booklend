@@ -98,17 +98,12 @@ const AddBookForm = ({
                 </Box>
               </Grid>
               <Grid item xs={12}>
-                <FormikTextField
-                  name="title"
-                  label={t("forms:labels.title")}
-                  variant="outlined"
-                />
+                <FormikTextField name="title" label={t("forms:labels.title")} />
               </Grid>
               <Grid item xs={12}>
                 <FormikTextField
                   name="author"
                   label={t("forms:labels.author")}
-                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -118,7 +113,6 @@ const AddBookForm = ({
                   helperText={t("forms:helperTexts.genre")}
                   select
                   SelectProps={{ native: false, multiple: true }}
-                  variant="outlined"
                 >
                   {genresSelectOptions.map(({ key, value, label }) => (
                     <StyledMenuItem key={key} value={value}>
@@ -132,7 +126,6 @@ const AddBookForm = ({
                   name="numberOfPages"
                   label={t("forms:labels.numberOfPages")}
                   type="number"
-                  variant="outlined"
                 />
               </Grid>
             </Grid>
@@ -141,7 +134,6 @@ const AddBookForm = ({
                 name="description"
                 label={t("forms:labels.description")}
                 helperText={t("forms:helperTexts.description")}
-                variant="outlined"
                 multiline
                 rows={4}
               />

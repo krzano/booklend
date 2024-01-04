@@ -26,7 +26,7 @@
   "change": "zmień",
   "delete": "usuń",
   "chooseFile": "wybierz plik",
-  "orDropFiles": "lub upuść pliki tutaj",
+  "orDropFile": "lub upuść plik tutaj",
   "save": "zapisz",
   "close": "zamknij",
   "cancel": "anuluj",
@@ -43,5 +43,6 @@
   "options": "opcje",
   "clearFilters": "wyczyść filtry",
   "showMore": "pokaż więcej",
-  "showLess": "pokaż mniej"
+  "showLess": "pokaż mniej",
+  "photo": "zdjęcie"
 }

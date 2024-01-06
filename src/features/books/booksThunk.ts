@@ -6,18 +6,14 @@ import {
 } from "@/constants/api"
 import axiosProtectedInstance from "@/libs/axios/axiosPrivateInstance"
 import { AddBookFormValues } from "@/libs/yup/schemas/addBook"
-import {
-  Book,
-  GetBooksResponse,
-  GetRequestQueryParamsValues,
-} from "@/types/api"
+import { Book, GetBooksResponse, GetBooksQueryParams } from "@/types/api"
 import thunkErrorHandler from "@/utils/thunkErrorHandler"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 
 export const getBooks = createAsyncThunk(
   "books/getBooks",
-  async (getRequestQueryParams: GetRequestQueryParamsValues, thunkAPI) => {
+  async (getRequestQueryParams: GetBooksQueryParams, thunkAPI) => {
     try {
       const { data } = await axiosProtectedInstance.get<GetBooksResponse>(
         BOOKS_ENDPOINT,

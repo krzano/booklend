@@ -103,6 +103,7 @@ const AddReaderForm = ({
                 inputProps={{
                   maxLength: 6,
                   onKeyUp: handlePostalCodeKeyUp,
+                  inputMode: "numeric",
                 }}
                 name="address.postalCode"
                 label={t("forms:labels.postalCode")}

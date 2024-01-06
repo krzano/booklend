@@ -28,13 +28,20 @@ export interface Genre {
   createdAt: string
   updatedAt: string
 }
-export interface GetRequestQueryParams {
-  currentPage?: number
-  pageSize?: number
-  sortDirection?: "asc" | "desc"
-  sortBy?: "title" | "author" | "rating" | "numberOfPages" | "createdAt"
-  search?: string
-  genre?: string | string[]
+export interface GetBooksQueryParams {
+  currentPage: number
+  pageSize: number
+  sortDirection: "asc" | "desc"
+  sortBy: "title" | "author" | "rating" | "numberOfPages" | "createdAt"
+  search: string
+  genre: string | string[]
+}
+export interface GetReadersQueryParams {
+  currentPage: number
+  pageSize: number
+  sortDirection: "asc" | "desc"
+  sortBy: string
+  search: string
 }
 export interface Book {
   _id: string
@@ -49,7 +56,22 @@ export interface Book {
   createdAt: string
   updatedAt: string
 }
+export interface Reader {
+  _id: string
+  adminId: string
+  firstName: string
+  lastName: string
+  phoneNumber: string
+  address: {
+    street: string
+    city: string
+    postalCode: string
+  }
+  photo: string | null
+  createdAt: string
+  updatedAt: string
+}
 
 export type GetGenresResponse = Genre[]
-export type GetRequestQueryParamsValues = GetRequestQueryParams | undefined
 export type GetBooksResponse = GetListResponse<Book>
+export type GetReadersResponse = GetListResponse<Reader>

@@ -8,7 +8,7 @@ import { useState } from "react"
 // Fake async function
 // await new Promise((resolve) => setTimeout(resolve, 2000))
 
-interface ButtonProps extends MuiButtonProps {
+export interface ButtonProps extends MuiButtonProps {
   onClick?: () => void
   onAsyncClick?: () => Promise<void>
   isSubmitting?: boolean

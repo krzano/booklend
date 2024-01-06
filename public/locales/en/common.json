@@ -44,5 +44,8 @@
   "clearFilters": "clear filters",
   "showMore": "show more",
   "showLess": "show less",
-  "photo": "photo"
+  "photo": "photo",
+  "showFilters": "show filters",
+  "hideFilters": "hide filters",
+  "actions": "actions"
 }

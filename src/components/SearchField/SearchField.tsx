@@ -3,31 +3,25 @@ import TextField from "@mui/material/TextField/TextField"
 import { useEffect, useState } from "react"
 import SearchIcon from "@mui/icons-material/Search"
 import { useTranslation } from "react-i18next"
-import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import { setQueryParams } from "../../booksSilce"
 
-const Search = () => {
+interface SearchFieldProps {
+  search: string
+  onSearchChange: (searchTerm: string) => void
+}
+const SearchField = ({ onSearchChange, search }: SearchFieldProps) => {
   const { t } = useTranslation(["forms"])
-  const dispatch = useAppDispatch()
-  const {
-    queryParams: { search },
-  } = useAppSelector((store) => store.books)
   const [searchTerm, setSearchTerm] = useState<string>(search || "")
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      dispatch(setQueryParams({ search: searchTerm }))
-    }, 800)
-    return () => {
-      clearInterval(timeoutId)
+    if (searchTerm !== search) {
+      const timeoutId = setTimeout(() => {
+        onSearchChange(searchTerm)
+      }, 800)
+      return () => {
+        clearInterval(timeoutId)
+      }
     }
-  }, [searchTerm, dispatch])
-
-  useEffect(() => {
-    if (search !== undefined) {
-      setSearchTerm(search)
-    }
-  }, [search])
+  }, [searchTerm, onSearchChange, search])
 
   return (
     <TextField
@@ -50,4 +44,4 @@ const Search = () => {
     />
   )
 }
-export default Search
+export default SearchField

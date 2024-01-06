@@ -1,10 +1,10 @@
-import { GetRequestQueryParams } from "@/types/api"
+import { GetBooksQueryParams } from "@/types/api"
 
 interface SortOption {
   optionTranslationKey: string
   value: {
-    sortBy: GetRequestQueryParams["sortBy"]
-    sortDirection: GetRequestQueryParams["sortDirection"]
+    sortBy: GetBooksQueryParams["sortBy"]
+    sortDirection: GetBooksQueryParams["sortDirection"]
   }
 }
 

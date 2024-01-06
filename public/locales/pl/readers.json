@@ -1,4 +1,5 @@
 {
   "addNewReader": "dodaj nowego czytelnika",
-  "readersList": "lista czytelników"
+  "readersList": "lista czytelników",
+  "readers": "$t(common:readers)"
 }

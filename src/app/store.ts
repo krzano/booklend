@@ -3,6 +3,7 @@ import authReducer from "@/features/auth/authSlice"
 import userReducer from "@/features/user/userSlice"
 import booksReducer from "@/features/books/booksSilce"
 import genresReducer from "@/features/genres/genresSilce"
+import readersReducer from "@/features/readers/readersSlice"
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     user: userReducer,
     books: booksReducer,
     genres: genresReducer,
+    readers: readersReducer,
   },
 })
 

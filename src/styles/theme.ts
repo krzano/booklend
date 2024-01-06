@@ -47,7 +47,6 @@ let theme: Theme = createTheme({
       fontWeight: 300,
     },
     body1: { fontFamily: "'Source Sans 3', sans-serif" },
-    body2: { fontFamily: "'Vollkorn', serif" },
     button: {
       fontWeight: 500,
     },
@@ -73,6 +72,21 @@ theme = createTheme(theme, {
       styleOverrides: {
         iconFilled: {
           color: theme.palette.secondary.light,
+        },
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          fontWeight: 500,
+          "&::first-letter": { textTransform: "uppercase" },
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          "&::first-letter": { textTransform: "uppercase" },
         },
       },
     },

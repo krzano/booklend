@@ -8,6 +8,7 @@ import theme from "./styles/theme"
 import CustomToastContainer from "./components/CustomToastContainer/CustomToastContainer"
 import Loader from "./components/Loader/Loader"
 import Box from "@mui/material/Box/Box"
+import TranslatedThemeProvider from "./i18n/TranslatedThemeProvider"
 
 function App() {
   return (
@@ -29,7 +30,9 @@ function App() {
             </Box>
           }
         >
-          <RouterProvider router={router} />
+          <TranslatedThemeProvider>
+            <RouterProvider router={router} />
+          </TranslatedThemeProvider>
         </Suspense>
       </ThemeProvider>
     </>

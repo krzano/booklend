@@ -5,7 +5,7 @@ import {
   getBooks,
   getSingleBook,
 } from "./booksThunk"
-import { Book, GetBooksResponse, GetRequestQueryParams } from "@/types/api"
+import { Book, GetBooksQueryParams, GetBooksResponse } from "@/types/api"
 
 export enum ViewVariants {
   list,
@@ -23,11 +23,11 @@ interface BooksInitialState {
   isBooksError: boolean
   booksData: BooksDataValues | undefined
   view: ViewVariants
-  queryParams: GetRequestQueryParams
+  queryParams: GetBooksQueryParams
   singleBook: Book | undefined
 }
 
-const defaultQueryParams: GetRequestQueryParams = {
+const defaultQueryParams: GetBooksQueryParams = {
   currentPage: 1,
   pageSize: 9,
   sortBy: "title",
@@ -56,7 +56,7 @@ const booksSlice = createSlice({
     },
     setQueryParams: (
       state,
-      { payload }: { payload: GetRequestQueryParams },
+      { payload }: { payload: Partial<GetBooksQueryParams> },
     ) => ({
       ...state,
       queryParams: {
@@ -66,6 +66,7 @@ const booksSlice = createSlice({
           Array.isArray(payload.genre) && {
             genre: payload.genre.join("_"),
           }),
+        ...(!payload.currentPage && { currentPage: 1 }),
       },
     }),
     resetQueryParams: (state) => {

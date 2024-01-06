@@ -44,5 +44,8 @@
   "clearFilters": "wyczyść filtry",
   "showMore": "pokaż więcej",
   "showLess": "pokaż mniej",
-  "photo": "zdjęcie"
+  "photo": "zdjęcie",
+  "showFilters": "pokaż filtry",
+  "hideFilters": "ukryj filtry",
+  "actions": "akcje"
 }

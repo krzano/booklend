@@ -5,7 +5,6 @@ import TextField, { TextFieldProps } from "@mui/material/TextField/TextField"
 import { useField } from "formik"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
-import styled from "styled-components"
 
 export interface FormikTextFieldProps
   extends Omit<
@@ -32,7 +31,7 @@ const FormikTextField = ({
   const handleClickShowPassword = () => setShowPassword((prev) => !prev)
 
   return (
-    <StyledTextField
+    <TextField
       {...restTextFieldProps}
       disabled={disabled}
       variant={variant}
@@ -71,19 +70,5 @@ const FormikTextField = ({
     />
   )
 }
-
-const StyledTextField = styled(TextField)`
-  .MuiFormLabel-root {
-    font-weight: 500;
-    &::first-letter {
-      text-transform: uppercase;
-    }
-  }
-  .MuiFormHelperText-root {
-    &::first-letter {
-      text-transform: uppercase;
-    }
-  }
-`
 
 export default FormikTextField

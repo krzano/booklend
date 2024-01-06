@@ -7,20 +7,31 @@ import { Link as RouterLink } from "react-router-dom"
 import DataFetchingError from "@/components/DataFetchingError/DataFetchingError"
 import Loader from "@/components/Loader/Loader"
 import Section from "@/components/Section/Section"
-import { Backdrop, Box, Pagination, Stack, Typography } from "@mui/material"
+import { Box, Pagination, Stack, Typography } from "@mui/material"
 import BooksListView from "../components/BooksListView/BooksListView"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import BooksFilters from "../components/BooksFilters/BooksFilters"
 import { setQueryParams } from "../booksSilce"
 import Button from "@/components/Button/Button"
 import { ADD_BOOK_PATH } from "@/constants/paths"
 import ToggleViewSection from "../components/ToggleViewSection/ToggleViewSection"
-import { backgroundBreathingAnimation } from "@/styles/animations"
+import CustomBackdrop from "@/components/CustomBackdrop/CustomBackdrop"
 
 const BooksList = () => {
   const dispatch = useAppDispatch()
-  const { isBooksLoading, isBooksError, booksData, queryParams } =
-    useAppSelector((store) => store.books)
+  const {
+    isBooksLoading,
+    isBooksError,
+    booksData,
+    queryParams: {
+      currentPage,
+      pageSize,
+      sortBy,
+      sortDirection,
+      genre,
+      search,
+    },
+  } = useAppSelector((store) => store.books)
   const { t } = useTranslation(["books"])
 
   const handlePaginationChange = (
@@ -31,14 +42,25 @@ const BooksList = () => {
   }
 
   useEffect(() => {
-    dispatch(getBooks(queryParams))
-  }, [queryParams, dispatch])
+    dispatch(
+      getBooks({ currentPage, pageSize, sortBy, sortDirection, genre, search }),
+    )
+  }, [currentPage, pageSize, sortBy, sortDirection, genre, search, dispatch])
 
   if (!booksData)
     return isBooksError ? (
       <DataFetchingError
         refreshFunction={() => {
-          dispatch(getBooks())
+          dispatch(
+            getBooks({
+              currentPage,
+              pageSize,
+              sortBy,
+              sortDirection,
+              genre,
+              search,
+            }),
+          )
         }}
       />
     ) : (
@@ -52,9 +74,7 @@ const BooksList = () => {
         <Stack spacing={2} marginTop={3}>
           <ToggleViewSection />
           <Box position="relative">
-            <StyledBackdrop open={isBooksLoading}>
-              <Loader />
-            </StyledBackdrop>
+            <CustomBackdrop open={isBooksLoading} rounded />
             {booksData.totalItems === 0 ? (
               <StyledNoBooksFoundBox>
                 <Typography variant="h4" textAlign={"center"}>
@@ -78,7 +98,7 @@ const BooksList = () => {
               <StyledPagination
                 disabled={isBooksLoading}
                 color="primary"
-                page={queryParams.currentPage}
+                page={currentPage}
                 count={booksData.numOfPages}
                 variant="outlined"
                 size="large"
@@ -91,19 +111,6 @@ const BooksList = () => {
     </>
   )
 }
-
-const StyledBackdrop = styled(Backdrop)`
-  ${({ theme }) => css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: ${theme.zIndex.drawer - 1};
-    border-radius: ${theme.shape.borderRadius}px;
-    animation: 1s infinite alternate ${backgroundBreathingAnimation};
-  `}
-`
 
 const StyledPagination = styled(Pagination)`
   margin-top: ${({ theme }) => theme.spacing(2)};

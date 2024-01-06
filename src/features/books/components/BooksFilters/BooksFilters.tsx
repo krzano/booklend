@@ -1,20 +1,27 @@
 import { Grid } from "@mui/material"
-import styled from "styled-components"
-import Search from "../Search/Search"
 import SortBy from "../SortBy/SortBy"
 import GenresFilter from "../GenresFilter.tsx/GenresFilter"
 import Button from "@/components/Button/Button"
-import { useAppDispatch } from "@/app/hooks"
-import { resetQueryParams } from "../../booksSilce"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import { resetQueryParams, setQueryParams } from "../../booksSilce"
 import { useTranslation } from "react-i18next"
+import SearchField from "@/components/SearchField/SearchField"
 
 const BooksFilters = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const {
+    queryParams: { search },
+  } = useAppSelector((store) => store.books)
   return (
-    <StyledBooksFiltersGrid container spacing={2} alignItems={"center"}>
+    <Grid container spacing={2} alignItems={"center"}>
       <Grid item xs={6} md={4} lg={3}>
-        <Search />
+        <SearchField
+          search={search}
+          onSearchChange={(searchTerm) => {
+            dispatch(setQueryParams({ search: searchTerm }))
+          }}
+        />
       </Grid>
       <Grid item xs={6} md={4} lg={3}>
         <GenresFilter />
@@ -33,13 +40,8 @@ const BooksFilters = () => {
           {t("common:clearFilters")}
         </Button>
       </Grid>
-    </StyledBooksFiltersGrid>
+    </Grid>
   )
 }
-const StyledBooksFiltersGrid = styled(Grid)`
-  .MuiFormLabel-root::first-letter {
-    text-transform: uppercase;
-  }
-`
 
 export default BooksFilters

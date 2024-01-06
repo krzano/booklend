@@ -1,6 +1,5 @@
 import { Navigate, createBrowserRouter } from "react-router-dom"
 import BasePageLayout from "@/layouts/BasePageLayout/BasePageLayout"
-import { Typography } from "@mui/material"
 import DashboardLayoutWrapper from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
 import Overview from "@/features/views/Overview"
 import Login from "@/features/auth/views/Login"
@@ -14,6 +13,7 @@ import {
   BOOKS_PATH,
   DASHBOARD_PATH,
   EDIT_BOOK_PATH,
+  EDIT_READER_PATH,
   LOGIN_PATH,
   OVERVIEW_PATH,
   READERS_PATH,
@@ -27,6 +27,7 @@ import EditBook from "@/features/books/views/EditBook"
 import SingleBook from "@/features/books/views/SingleBook"
 import AddReader from "@/features/readers/views/AddReader"
 import ReadersList from "@/features/readers/views/ReadersList"
+import EditReader from "@/features/readers/views/EditReader"
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,14 @@ const router = createBrowserRouter([
       {
         path: ADD_READER_PATH,
         element: <AddReader />,
+      },
+      {
+        path: EDIT_READER_PATH,
+        element: <Navigate to={READERS_PATH} />,
+      },
+      {
+        path: `${EDIT_READER_PATH}/:readerId`,
+        element: <EditReader />,
       },
       {
         path: BOOKS_PATH,

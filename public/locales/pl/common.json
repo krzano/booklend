@@ -47,5 +47,8 @@
   "photo": "zdjęcie",
   "showFilters": "pokaż filtry",
   "hideFilters": "ukryj filtry",
-  "actions": "akcje"
+  "actions": "akcje",
+  "deletePhoto": "usuń zdjęcie",
+  "phoneNumber": "numer telefonu",
+  "address": "adres"
 }

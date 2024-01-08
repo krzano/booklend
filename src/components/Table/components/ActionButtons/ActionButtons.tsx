@@ -29,11 +29,11 @@ interface ActionButtonsProps {
 }
 const ActionButtons = ({
   buttonList,
-  variant = "outlined",
+  variant = "text",
 }: ActionButtonsProps) => {
   return (
     <Box display={"inline-block"}>
-      <ButtonGroup>
+      <ButtonGroup variant={variant}>
         {buttonList.map((item) => {
           const props =
             item.component === "link"

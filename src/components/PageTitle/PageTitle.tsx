@@ -1,5 +1,4 @@
 import { Typography, TypographyProps } from "@mui/material"
-import styled from "styled-components"
 
 interface PageTitleProps
   extends Omit<TypographyProps, "children" | "variant" | "component"> {
@@ -12,19 +11,14 @@ const PageTitle = ({
   ...restTypographyProps
 }: PageTitleProps) => {
   return (
-    <StyledPageTitle
+    <Typography
       variant="h2"
       marginBottom={marginBottom}
       {...restTypographyProps}
     >
       {children}
-    </StyledPageTitle>
+    </Typography>
   )
 }
 
-const StyledPageTitle = styled(Typography)`
-  &::first-letter {
-    text-transform: uppercase;
-  }
-`
 export default PageTitle

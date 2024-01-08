@@ -24,14 +24,14 @@ const PaperModal = ({
     >
       <Paper elevation={0}>
         {title && (
-          <StyledTitle
+          <Typography
             component="h2"
             fontSize={{ xs: 36, sm: 44 }}
             marginBottom={3}
             fontWeight="300"
           >
             {title}
-          </StyledTitle>
+          </Typography>
         )}
         <>{children}</>
       </Paper>
@@ -57,12 +57,6 @@ const StyledModal = styled(Modal)`
       background-color: ${theme.palette.background.default};
       border: 1px solid ${theme.palette.primary.main};
     `}
-  }
-`
-
-const StyledTitle = styled(Typography)`
-  &::first-letter {
-    text-transform: uppercase;
   }
 `
 

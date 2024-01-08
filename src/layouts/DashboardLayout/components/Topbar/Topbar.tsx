@@ -89,7 +89,7 @@ const Topbar = ({
               <StyledAvatar src={photo || ""} />
             </Button>
           </Tooltip>
-          <StyledMenu
+          <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -138,7 +138,7 @@ const Topbar = ({
             >
               <LanguageSwitcher variant="text" />
             </Box>
-          </StyledMenu>
+          </Menu>
         </div>
       </Toolbar>
     </AppBar>
@@ -149,14 +149,6 @@ const StyledAvatar = styled(Avatar)`
   ${({ theme }) => css`
     background-color: ${theme.palette.grey[600]};
   `};
-`
-
-const StyledMenu = styled(Menu)`
-  .MuiTypography-root {
-    &::first-letter {
-      text-transform: capitalize;
-    }
-  }
 `
 
 export default Topbar

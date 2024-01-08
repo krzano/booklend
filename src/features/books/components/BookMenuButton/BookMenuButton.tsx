@@ -10,7 +10,7 @@ import styled from "styled-components"
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined"
 import MoreHoriz from "@mui/icons-material/MoreHoriz"
 import { Link as RouterLink } from "react-router-dom"
-import { EDIT_BOOK_PATH } from "@/constants/paths"
+import { BOOKS_PATH, EDIT_BOOK, EDIT_BOOK_PATH } from "@/constants/paths"
 import MuiButton from "@mui/material/Button/Button"
 import { useAppDispatch } from "@/app/hooks"
 import { deleteBook } from "../../booksThunk"
@@ -59,7 +59,7 @@ const BookMenuButton = ({ bookId }: BookMenuButtonProps) => {
         <li onClick={handleCloseMenu}>
           <MuiButton
             component={RouterLink}
-            to={`${EDIT_BOOK_PATH}/${bookId}`}
+            to={`${BOOKS_PATH}/${bookId}/${EDIT_BOOK}`}
             variant="text"
             size="large"
             fullWidth

@@ -13,7 +13,6 @@ import { useTranslation } from "react-i18next"
 import { Link as RouterLink } from "react-router-dom"
 import { BOOKS_PATH } from "@/constants/paths"
 import Button from "@/components/Button/Button"
-import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
 import truncateString from "@/utils/truncateString"
 
 const GridViewBook = ({
@@ -81,10 +80,10 @@ const GridViewBook = ({
             ))}
           </Stack>
           <Typography>
-            {firstLetterToUppercase(t(`books:pages`))}: {numberOfPages}
+            {t(`books:pages`)}: {numberOfPages}
           </Typography>
           <Typography>
-            {firstLetterToUppercase(t(`books:description`))}:
+            {t(`books:description`)}:
             <br />
             {truncateString(description, 100)}
           </Typography>
@@ -108,9 +107,6 @@ const StyledGridViewBookCard = styled(Card)`
   flex-direction: column;
   position: relative;
   width: 30rem;
-  .MuiChip-label::first-letter {
-    text-transform: uppercase;
-  }
 `
 
 const StyledBookMenuButtonBox = styled.div`

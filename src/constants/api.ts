@@ -17,5 +17,6 @@ export const BOOKS_DELETE_PHOTO_ENDPOINT = `${BOOKS_ENDPOINT}/deletePhoto`
 export const GENRES_ENDPOINT = "/genres"
 export const READERS_ENDPOINT = "/readers"
 export const READERS_UPLOAD_PHOTO_ENDPOINT = `${READERS_ENDPOINT}/uploadPhoto`
+export const READERS_DELETE_PHOTO_ENDPOINT = `${READERS_ENDPOINT}/deletePhoto`
 export const LEND_BOOK_ENDPOINT = "/lend-book"
 export const LEND_BOOK_READER_ENDPOINT = `${LEND_BOOK_ENDPOINT}/reader`

@@ -9,6 +9,9 @@ import Button from "@/components/Button/Button"
 import FormikFileInput from "@/components/FormikFileInput/FormikFileInput"
 import ReaderImageUploadBox from "../ReaderImageUploadBox/ReaderImageUploadBox"
 import Box from "@mui/material/Box/Box"
+import { deleteReaderPhoto } from "../../readersThunk"
+import { useParams } from "react-router-dom"
+import { useAppDispatch } from "@/app/hooks"
 
 interface AddReaderFormProps {
   initialValues: AddReaderFormValues
@@ -25,6 +28,8 @@ const AddReaderForm = ({
   readerImgSrc,
 }: AddReaderFormProps) => {
   const { t } = useTranslation(["forms"])
+  const { readerId } = useParams()
+  const dispatch = useAppDispatch()
   const handlePostalCodeKeyUp = (e: any) => {
     let newValue = e.target.value.replaceAll(" ", "")
     if (e.target.value.length === 3 && e.target.value.endsWith("-")) {
@@ -54,28 +59,53 @@ const AddReaderForm = ({
             alignItems={{ xs: "center", md: "flex-start" }}
           >
             <FormikFileInput
+              disabled={isSubmitting}
               accept="image/*"
               name="readerImage"
               sx={{ width: 240 }}
             >
-              <ReaderImageUploadBox readerImage={values.readerImage} />
+              <ReaderImageUploadBox
+                readerImage={values.readerImage}
+                readerImgSrc={readerImgSrc}
+              />
             </FormikFileInput>
+            {readerImgSrc && !values.readerImage && (
+              <Box width={240}>
+                <Button
+                  isSubmitting={isSubmitting}
+                  variant="outlined"
+                  color="error"
+                  size="small"
+                  fullWidth
+                  onAsyncClick={async () => {
+                    if (readerId) {
+                      await dispatch(deleteReaderPhoto(readerId))
+                    }
+                  }}
+                >
+                  {t("common:deletePhoto")}
+                </Button>
+              </Box>
+            )}
           </Box>
           <Grid container columnSpacing={1} rowSpacing={2} item lg={10}>
             <Grid item xs={6}>
               <FormikTextField
+                disabled={isSubmitting}
                 name="firstName"
                 label={t("forms:labels.firstName")}
               />
             </Grid>
             <Grid item xs={6}>
               <FormikTextField
+                disabled={isSubmitting}
                 name="lastName"
                 label={t("forms:labels.lastName")}
               />
             </Grid>
             <Grid item xs={12}>
               <FormikTextField
+                disabled={isSubmitting}
                 inputProps={{
                   maxLength: 9,
                 }}
@@ -87,6 +117,7 @@ const AddReaderForm = ({
             </Grid>
             <Grid item xs={12}>
               <FormikTextField
+                disabled={isSubmitting}
                 name="address.street"
                 label={t("forms:labels.street")}
                 helperText={t("forms:helperTexts.street")}
@@ -94,12 +125,14 @@ const AddReaderForm = ({
             </Grid>
             <Grid item xs={7}>
               <FormikTextField
+                disabled={isSubmitting}
                 name="address.city"
                 label={t("forms:labels.city")}
               />
             </Grid>
             <Grid item xs={5}>
               <FormikTextField
+                disabled={isSubmitting}
                 inputProps={{
                   maxLength: 6,
                   onKeyUp: handlePostalCodeKeyUp,

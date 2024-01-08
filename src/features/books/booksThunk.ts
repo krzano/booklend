@@ -7,6 +7,7 @@ import {
 import axiosProtectedInstance from "@/libs/axios/axiosPrivateInstance"
 import { AddBookFormValues } from "@/libs/yup/schemas/addBook"
 import { Book, GetBooksResponse, GetBooksQueryParams } from "@/types/api"
+import generateUniqueFileName from "@/utils/generateUniqueFileName"
 import thunkErrorHandler from "@/utils/thunkErrorHandler"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
@@ -66,8 +67,12 @@ export const addBook = createAsyncThunk(
         numberOfPages,
       })
       if (bookCoverImage) {
+        const newFileName = generateUniqueFileName(
+          bookCoverImage.name,
+          "readerPhoto",
+        )
         const formData = new FormData()
-        formData.append("file", bookCoverImage)
+        formData.append("file", bookCoverImage, newFileName)
         const photoResponse = await axiosProtectedInstance.post(
           `${BOOKS_UPLOAD_PHOTO_ENDPOINT}/${data.bookId}`,
           formData,
@@ -114,8 +119,12 @@ export const editBook = createAsyncThunk(
         },
       )
       if (bookCoverImage) {
+        const newFileName = generateUniqueFileName(
+          bookCoverImage.name,
+          "bookPhoto",
+        )
         const formData = new FormData()
-        formData.append("file", bookCoverImage)
+        formData.append("file", bookCoverImage, newFileName)
         const photoResponse = await axiosProtectedInstance.post(
           `${BOOKS_UPLOAD_PHOTO_ENDPOINT}/${bookId}`,
           formData,
@@ -124,18 +133,9 @@ export const editBook = createAsyncThunk(
           },
         )
         toast.success(photoResponse.data.message)
-        return {
-          title,
-          description,
-          author,
-          rating,
-          genre,
-          numberOfPages,
-          photo: `/uploads/${bookCoverImage.name}`,
-        }
       }
       toast.success(data.message)
-      return { title, description, author, rating, genre, numberOfPages }
+      return thunkAPI.dispatch(getSingleBook(bookId))
     } catch (error) {
       thunkErrorHandler({ error, thunkAPI })
     }
@@ -149,7 +149,7 @@ export const deleteBookPhoto = createAsyncThunk(
         `${BOOKS_DELETE_PHOTO_ENDPOINT}/${bookId}`,
       )
       toast.success(data.message)
-      return bookId
+      return thunkAPI.dispatch(getSingleBook(bookId))
     } catch (error) {
       thunkErrorHandler({ error, thunkAPI })
     }

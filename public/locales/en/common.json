@@ -47,5 +47,8 @@
   "photo": "photo",
   "showFilters": "show filters",
   "hideFilters": "hide filters",
-  "actions": "actions"
+  "actions": "actions",
+  "deletePhoto": "delete photo",
+  "phoneNumber": "phone number",
+  "address": "address"
 }

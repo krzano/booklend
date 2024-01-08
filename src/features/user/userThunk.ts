@@ -15,6 +15,7 @@ import { LogoutUserReason, logoutUser } from "../auth/authSlice"
 import { AvatarFormValues } from "@/libs/yup/schemas/avatar"
 import { RootState } from "@/app/store"
 import { ChangeUserDataBody, GetUserDataResponse } from "@/types/api"
+import generateUniqueFileName from "@/utils/generateUniqueFileName"
 
 export const getUserData = createAsyncThunk(
   "user/getUserData",
@@ -92,8 +93,9 @@ export const deleteUserAccount = createAsyncThunk(
 export const uploadUserPhoto = createAsyncThunk(
   "user/uploadUserPhoto",
   async ({ avatarImage }: AvatarFormValues, thunkAPI) => {
+    const newFileName = generateUniqueFileName(avatarImage.name, "userPhoto")
     const formData = new FormData()
-    formData.append("file", avatarImage)
+    formData.append("file", avatarImage, newFileName)
     try {
       const { data } = await axiosProtectedInstance.post(
         AUTH_UPLOAD_PHOTO_ENDPOINT,
@@ -106,7 +108,7 @@ export const uploadUserPhoto = createAsyncThunk(
       )
       const state = thunkAPI.getState() as RootState
       const { firstName, lastName, email } = state.user.userData
-      const photo = `${UPLOADS_BASE_URL}/${avatarImage.name}`
+      const photo = `${UPLOADS_BASE_URL}/${newFileName}`
       thunkAPI.dispatch(changeUserData({ firstName, lastName, email, photo }))
       toast.success(data.message)
       return photo

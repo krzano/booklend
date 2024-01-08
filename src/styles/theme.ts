@@ -90,6 +90,20 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          "&::first-letter": { textTransform: "uppercase" },
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        label: {
+          "&::first-letter": { textTransform: "uppercase" },
+        },
+      },
+    },
   },
 })
 

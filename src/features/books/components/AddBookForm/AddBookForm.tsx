@@ -92,22 +92,29 @@ const AddBookForm = ({
               <Grid item xs={12} md={"auto"}>
                 <Box display="grid" justifyContent={"center"}>
                   <FormikRatingField
+                    disabled={isSubmitting}
                     name="rating"
                     label={t("forms:labels.rating")}
                   />
                 </Box>
               </Grid>
               <Grid item xs={12}>
-                <FormikTextField name="title" label={t("forms:labels.title")} />
+                <FormikTextField
+                  disabled={isSubmitting}
+                  name="title"
+                  label={t("forms:labels.title")}
+                />
               </Grid>
               <Grid item xs={12}>
                 <FormikTextField
+                  disabled={isSubmitting}
                   name="author"
                   label={t("forms:labels.author")}
                 />
               </Grid>
               <Grid item xs={6}>
                 <FormikTextField
+                  disabled={isSubmitting}
                   name="genre"
                   label={t("forms:labels.genre")}
                   helperText={t("forms:helperTexts.genre")}
@@ -123,6 +130,7 @@ const AddBookForm = ({
               </Grid>
               <Grid item xs={6}>
                 <FormikTextField
+                  disabled={isSubmitting}
                   name="numberOfPages"
                   label={t("forms:labels.numberOfPages")}
                   type="number"
@@ -131,6 +139,7 @@ const AddBookForm = ({
             </Grid>
             <Grid item xs={12}>
               <FormikTextField
+                disabled={isSubmitting}
                 name="description"
                 label={t("forms:labels.description")}
                 helperText={t("forms:helperTexts.description")}

@@ -59,11 +59,6 @@ const StyledFormikRatingField = styled.div`
     & .MuiRating-iconHover {
       color: ${theme.palette.secondary.main};
     }
-    .MuiTypography-root {
-      &::first-letter {
-        text-transform: uppercase;
-      }
-    }
   `}
 `
 

@@ -16,7 +16,6 @@ import ReadMoreIcon from "@mui/icons-material/ReadMore"
 import defaultBookCoverImg from "@/assets/images/default-book.png"
 import BookMenuButton from "../BookMenuButton/BookMenuButton"
 import { useTranslation } from "react-i18next"
-import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
 import truncateString from "@/utils/truncateString"
 
 const ListViewBook = ({
@@ -73,7 +72,7 @@ const ListViewBook = ({
         <div>
           <Rating value={rating} precision={0.5} readOnly />
           <Typography>
-            {firstLetterToUppercase(t("books:pages"))}: {numberOfPages}
+            {t("books:pages")}: {numberOfPages}
           </Typography>
         </div>
       </Stack>

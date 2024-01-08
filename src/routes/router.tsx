@@ -12,8 +12,8 @@ import {
   BASE_PAGE_PATH,
   BOOKS_PATH,
   DASHBOARD_PATH,
-  EDIT_BOOK_PATH,
-  EDIT_READER_PATH,
+  EDIT_BOOK,
+  EDIT_READER,
   LOGIN_PATH,
   OVERVIEW_PATH,
   READERS_PATH,
@@ -28,6 +28,7 @@ import SingleBook from "@/features/books/views/SingleBook"
 import AddReader from "@/features/readers/views/AddReader"
 import ReadersList from "@/features/readers/views/ReadersList"
 import EditReader from "@/features/readers/views/EditReader"
+import SingleReader from "@/features/readers/views/SingleReader"
 
 const router = createBrowserRouter([
   {
@@ -80,12 +81,12 @@ const router = createBrowserRouter([
         element: <AddReader />,
       },
       {
-        path: EDIT_READER_PATH,
-        element: <Navigate to={READERS_PATH} />,
+        path: `${READERS_PATH}/:readerId/${EDIT_READER}`,
+        element: <EditReader />,
       },
       {
-        path: `${EDIT_READER_PATH}/:readerId`,
-        element: <EditReader />,
+        path: `${READERS_PATH}/:readerId`,
+        element: <SingleReader />,
       },
       {
         path: BOOKS_PATH,
@@ -96,11 +97,7 @@ const router = createBrowserRouter([
         element: <AddBook />,
       },
       {
-        path: EDIT_BOOK_PATH,
-        element: <Navigate to={BOOKS_PATH} />,
-      },
-      {
-        path: `${EDIT_BOOK_PATH}/:bookId`,
+        path: `${BOOKS_PATH}/:bookId/${EDIT_BOOK}`,
         element: <EditBook />,
       },
       {

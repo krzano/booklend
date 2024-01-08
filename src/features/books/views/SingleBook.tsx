@@ -108,12 +108,13 @@ const SingleBook = () => {
           </Stack>
           <Stack
             direction={"row"}
-            spacing={0.5}
+            flexWrap={"wrap"}
+            gap={0.5}
             py={1}
             justifyContent={"inherit"}
           >
             {singleBook.genre.map((genre) => (
-              <StyledChip label={t(`genres:${genre}`)} />
+              <Chip label={t(`genres:${genre}`)} />
             ))}
           </Stack>
           <Box py={1}>
@@ -195,12 +196,6 @@ const StyledText = styled.p`
   display: inline-block;
   font-weight: 500;
   &::first-letter {
-    text-transform: uppercase;
-  }
-`
-
-const StyledChip = styled(Chip)`
-  .MuiChip-label::first-letter {
     text-transform: uppercase;
   }
 `

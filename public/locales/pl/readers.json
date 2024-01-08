@@ -1,5 +1,10 @@
 {
   "addNewReader": "dodaj nowego czytelnika",
   "readersList": "lista czytelników",
-  "readers": "$t(common:readers)"
+  "readers": "$t(common:readers)",
+  "editReader": "$t(common:editReader)",
+  "backToReaders": "wróć do czytelników",
+  "phoneNumber": "$t(common:phoneNumber)",
+  "address": "$t(common:address)",
+  "goToReader": "przejdź do czytelnika"
 }

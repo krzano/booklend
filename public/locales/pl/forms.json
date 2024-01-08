@@ -21,7 +21,7 @@
     "sortBy": "sortuj wg",
     "search": "szukaj",
     "filterGenres": "filtruj gatunki",
-    "phoneNumber": "numer telefonu",
+    "phoneNumber": "$t(common:phoneNumber)",
     "street": "ulica",
     "city": "miasto",
     "postalCode": "kod pocztowy",

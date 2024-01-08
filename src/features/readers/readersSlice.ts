@@ -1,6 +1,11 @@
-import { GetReadersQueryParams, GetReadersResponse } from "@/types/api"
+import { GetReadersQueryParams, GetReadersResponse, Reader } from "@/types/api"
 import { createSlice } from "@reduxjs/toolkit"
-import { getReaders } from "./readersThunk"
+import {
+  deleteReaderPhoto,
+  editReader,
+  getReaders,
+  getSingleReader,
+} from "./readersThunk"
 
 export interface ReadersDataValues {
   readersList: GetReadersResponse["data"]
@@ -12,6 +17,7 @@ interface ReadersInitialState {
   isReadersError: boolean
   readersData: ReadersDataValues | undefined
   queryParams: GetReadersQueryParams
+  singleReader: Reader | undefined
 }
 
 const defaultQueryParams: GetReadersQueryParams = {
@@ -27,6 +33,7 @@ const initialState: ReadersInitialState = {
   isReadersError: false,
   readersData: undefined,
   queryParams: defaultQueryParams,
+  singleReader: undefined,
 }
 
 const readersSlice = createSlice({
@@ -64,6 +71,18 @@ const readersSlice = createSlice({
       .addCase(getReaders.rejected, (state) => {
         state.isReadersLoading = false
         state.isReadersError = true
+      })
+      .addCase(getSingleReader.pending, (state) => {
+        state.isReadersError = false
+        state.isReadersLoading = true
+      })
+      .addCase(getSingleReader.fulfilled, (state, { payload }) => {
+        state.singleReader = payload
+        state.isReadersLoading = false
+      })
+      .addCase(getSingleReader.rejected, (state) => {
+        state.isReadersError = true
+        state.isReadersLoading = false
       })
   },
 })

@@ -93,12 +93,7 @@ const Table = <T,>({
   return (
     <Paper>
       <StyledToolbar>
-        <Typography
-          pr={2}
-          fontWeight={400}
-          fontSize={20}
-          sx={{ "&::first-letter": { textTransform: "uppercase" } }}
-        >
+        <Typography pr={2} fontWeight={400} fontSize={20}>
           {title}
         </Typography>
         <Box width={1}>

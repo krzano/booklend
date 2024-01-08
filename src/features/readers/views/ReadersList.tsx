@@ -11,12 +11,14 @@ import DataFetchingError from "@/components/DataFetchingError/DataFetchingError"
 import Avatar from "@mui/material/Avatar/Avatar"
 import { BASE_URL } from "@/constants/api"
 import Box from "@mui/material/Box/Box"
-import { Typography } from "@mui/material"
+import { Tooltip, Typography } from "@mui/material"
 import EditNoteIcon from "@mui/icons-material/EditNote"
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
-import { EDIT_READER_PATH } from "@/constants/paths"
+import ReadMoreIcon from "@mui/icons-material/ReadMore"
+import { EDIT_READER, READERS_PATH } from "@/constants/paths"
 import SearchField from "@/components/SearchField/SearchField"
 import ActionButtons from "@/components/Table/components/ActionButtons/ActionButtons"
+import { Link } from "react-router-dom"
 
 const ReadersList = () => {
   const { t } = useTranslation(["readers", "forms"])
@@ -76,20 +78,25 @@ const ReadersList = () => {
                 label: t("common:photo"),
                 key: "photo",
                 isSortable: false,
-                render: ({ photo, firstName, lastName }) => (
+                render: ({ photo, firstName, lastName, _id }) => (
                   <Box display={"flex"} justifyContent={"center"}>
-                    <Avatar
-                      variant="rounded"
-                      src={photo ? BASE_URL + photo : undefined}
-                    >
-                      <Typography
-                        textTransform={"uppercase"}
-                        fontWeight={500}
-                        fontSize={18}
+                    <Tooltip arrow title={t("readers:goToReader")}>
+                      <Avatar
+                        variant="rounded"
+                        src={photo ? BASE_URL + photo : undefined}
+                        component={Link}
+                        to={`${READERS_PATH}/${_id}`}
+                        sx={{ textDecoration: "none" }}
                       >
-                        {firstName.slice(0, 1) + lastName.slice(0, 1)}
-                      </Typography>
-                    </Avatar>
+                        <Typography
+                          textTransform={"uppercase"}
+                          fontWeight={500}
+                          fontSize={18}
+                        >
+                          {firstName.slice(0, 1) + lastName.slice(0, 1)}
+                        </Typography>
+                      </Avatar>
+                    </Tooltip>
                   </Box>
                 ),
                 align: "center",
@@ -136,13 +143,22 @@ const ReadersList = () => {
                 isSortable: false,
                 render: ({ _id }) => (
                   <ActionButtons
+                    variant="outlined"
                     buttonList={[
+                      {
+                        id: 0,
+                        label: t("readers:goToReader"),
+                        icon: <ReadMoreIcon fontSize="small" />,
+                        component: "link",
+                        color: "secondary",
+                        to: `${READERS_PATH}/${_id}`,
+                      },
                       {
                         id: 1,
                         label: t("common:edit"),
                         icon: <EditNoteIcon fontSize="small" />,
                         component: "link",
-                        to: `${EDIT_READER_PATH}/${_id}`,
+                        to: `${READERS_PATH}/${_id}/${EDIT_READER}`,
                       },
                       {
                         id: 2,

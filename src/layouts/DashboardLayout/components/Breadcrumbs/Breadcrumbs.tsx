@@ -5,10 +5,11 @@ import styled from "styled-components"
 import { useTranslation } from "react-i18next"
 import { useAppSelector } from "@/app/hooks"
 import truncateString from "@/utils/truncateString"
-
+const DISPLAYED_LABEL_LENGTH = 20
 const Breadcrumbs = () => {
   const { singleBook } = useAppSelector((store) => store.books)
-  const { bookId } = useParams()
+  const { singleReader } = useAppSelector((store) => store.readers)
+  const { bookId, readerId } = useParams()
   const location = useLocation()
   const { t } = useTranslation(["breadcrumbs"])
 
@@ -20,7 +21,13 @@ const Breadcrumbs = () => {
       currentLink += `/${crumb}`
       let label = t(`breadcrumbs:${crumb}`)
       if (label === bookId && singleBook && singleBook._id === bookId) {
-        label = truncateString(singleBook.title, 20)
+        label = truncateString(singleBook.title, DISPLAYED_LABEL_LENGTH)
+      }
+      if (label === readerId && singleReader && singleReader._id === readerId) {
+        label = truncateString(
+          `${singleReader.firstName} ${singleReader.lastName}`,
+          DISPLAYED_LABEL_LENGTH,
+        )
       }
       const breadcrumb = {
         id: index,
@@ -45,9 +52,6 @@ const Breadcrumbs = () => {
 const StyledChip = styled(Chip)`
   font-weight: 500;
   opacity: 0.8;
-  .MuiChip-label::first-letter {
-    text-transform: capitalize;
-  }
 `
 const StyledBreadcrumps = styled(MuiBreadcrumbs)`
   .MuiBreadcrumbs-ol {

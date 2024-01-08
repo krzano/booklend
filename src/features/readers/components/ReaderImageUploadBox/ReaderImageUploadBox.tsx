@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/constants/api"
 import { Avatar, Divider, Stack, Typography } from "@mui/material"
 import { useTranslation } from "react-i18next"
 import styled from "styled-components"
@@ -17,7 +18,13 @@ const ReaderImageUploadBox = ({
     <StyledReaderImageUploadBox>
       <Avatar
         variant="rounded"
-        src={readerImage ? URL.createObjectURL(readerImage) : undefined}
+        src={
+          readerImage
+            ? URL.createObjectURL(readerImage)
+            : readerImgSrc
+            ? BASE_URL + readerImgSrc
+            : undefined
+        }
         sx={{ width: 100, height: 100 }}
       />
       <Stack

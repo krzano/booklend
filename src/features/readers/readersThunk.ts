@@ -141,17 +141,9 @@ export const editReader = createAsyncThunk(
           },
         )
         toast.success(photoResponse.data.message)
-        toast.success(data.message)
-        return {
-          firstName,
-          lastName,
-          phoneNumber,
-          address,
-          photo: `/uploads/${newFileName}`,
-        }
       }
       toast.success(data.message)
-      return { firstName, lastName, phoneNumber, address }
+      return thunkAPI.dispatch(getSingleReader(readerId))
     } catch (error) {
       thunkErrorHandler({ error, thunkAPI })
     }
@@ -159,13 +151,13 @@ export const editReader = createAsyncThunk(
 )
 export const deleteReaderPhoto = createAsyncThunk(
   "readers/deleteReaderPhoto",
-  async (bookId: string, thunkAPI) => {
+  async (readerId: string, thunkAPI) => {
     try {
       const { data } = await axiosProtectedInstance.delete(
-        `${READERS_DELETE_PHOTO_ENDPOINT}/${bookId}`,
+        `${READERS_DELETE_PHOTO_ENDPOINT}/${readerId}`,
       )
       toast.success(data.message)
-      return bookId
+      return thunkAPI.dispatch(getSingleReader(readerId))
     } catch (error) {
       thunkErrorHandler({ error, thunkAPI })
     }

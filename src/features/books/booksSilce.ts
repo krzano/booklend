@@ -112,16 +112,6 @@ const booksSlice = createSlice({
         state.isBooksError = true
         state.isBooksLoading = false
       })
-      .addCase(editBook.fulfilled, (state, { payload }) => {
-        if (payload && state.singleBook) {
-          return { ...state, singleBook: { ...state.singleBook, ...payload } }
-        }
-      })
-      .addCase(deleteBookPhoto.fulfilled, (state, { payload }) => {
-        if (payload && state.singleBook && state.singleBook._id === payload) {
-          state.singleBook.photo = null
-        }
-      })
   },
 })
 

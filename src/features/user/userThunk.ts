@@ -15,7 +15,6 @@ import { LogoutUserReason, logoutUser } from "../auth/authSlice"
 import { AvatarFormValues } from "@/libs/yup/schemas/avatar"
 import { RootState } from "@/app/store"
 import { ChangeUserDataBody, GetUserDataResponse } from "@/types/api"
-import { nanoid } from "nanoid"
 import generateUniqueFileName from "@/utils/generateUniqueFileName"
 
 export const getUserData = createAsyncThunk(

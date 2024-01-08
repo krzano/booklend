@@ -133,19 +133,9 @@ export const editBook = createAsyncThunk(
           },
         )
         toast.success(photoResponse.data.message)
-        toast.success(data.message)
-        return {
-          title,
-          description,
-          author,
-          rating,
-          genre,
-          numberOfPages,
-          photo: `/uploads/${newFileName}`,
-        }
       }
       toast.success(data.message)
-      return { title, description, author, rating, genre, numberOfPages }
+      return thunkAPI.dispatch(getSingleBook(bookId))
     } catch (error) {
       thunkErrorHandler({ error, thunkAPI })
     }
@@ -159,7 +149,7 @@ export const deleteBookPhoto = createAsyncThunk(
         `${BOOKS_DELETE_PHOTO_ENDPOINT}/${bookId}`,
       )
       toast.success(data.message)
-      return bookId
+      return thunkAPI.dispatch(getSingleBook(bookId))
     } catch (error) {
       thunkErrorHandler({ error, thunkAPI })
     }

@@ -84,23 +84,6 @@ const readersSlice = createSlice({
         state.isReadersError = true
         state.isReadersLoading = false
       })
-      .addCase(editReader.fulfilled, (state, { payload }) => {
-        if (payload && state.singleReader) {
-          return {
-            ...state,
-            singleReader: { ...state.singleReader, ...payload },
-          }
-        }
-      })
-      .addCase(deleteReaderPhoto.fulfilled, (state, { payload }) => {
-        if (
-          payload &&
-          state.singleReader &&
-          state.singleReader._id === payload
-        ) {
-          state.singleReader.photo = null
-        }
-      })
   },
 })
 

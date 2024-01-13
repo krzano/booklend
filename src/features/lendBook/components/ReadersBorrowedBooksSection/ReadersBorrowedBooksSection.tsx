@@ -45,7 +45,7 @@ const ReadersBorrowedBooksSection = ({
     dispatch(getReadersBorrowedBooks({ readerId, queryParams }))
   }, [dispatch, readerId, queryParams])
   if (status === "loading" && !singleReadersBorrowedBooks) return <Loader />
-  if (status === "failed" || !singleReadersBorrowedBooks)
+  if (status === "failed")
     return (
       <DataFetchingError
         refreshFunction={() => {
@@ -53,6 +53,7 @@ const ReadersBorrowedBooksSection = ({
         }}
       />
     )
+  if (!singleReadersBorrowedBooks) return null
   return (
     <div>
       <Table

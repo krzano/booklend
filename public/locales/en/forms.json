@@ -41,7 +41,8 @@
     "minRating": "the lowest possible rating is 1",
     "minDescription": "Description must be at least 10 characters",
     "phoneNumber": "Phone number must have 9 chracters",
-    "postalCode": "Postal code must have 6 chracters"
+    "postalCode": "Postal code must have 6 chracters",
+    "chooseReader": "You must select the reader borrowing this book"
   },
   "helperTexts": {
     "password": "Minimum 8 characters and at least one lowercase and uppercase letter, a number and symbol (!@#$%^&* etc.)",

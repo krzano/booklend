@@ -56,7 +56,10 @@ export const addReader = createAsyncThunk(
 )
 export const getReaders = createAsyncThunk(
   "readers/getReaders",
-  async (getRequestQueryParams: GetReadersQueryParams, thunkAPI) => {
+  async (
+    getRequestQueryParams: GetReadersQueryParams | undefined,
+    thunkAPI,
+  ) => {
     try {
       const { data } = await axiosProtectedInstance.get<GetReadersResponse>(
         READERS_ENDPOINT,

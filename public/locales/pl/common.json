@@ -50,5 +50,14 @@
   "actions": "akcje",
   "deletePhoto": "usuń zdjęcie",
   "phoneNumber": "numer telefonu",
-  "address": "adres"
+  "address": "adres",
+  "search": "Szukaj",
+  "from": "od",
+  "to": "do",
+  "start": "początek",
+  "end": "koniec",
+  "or": "lub",
+  "noDataToDisplay": "brak danych do wyświetlenia",
+  "pageNotFound": "Nie znaleziono strony...",
+  "returnToHomePage": "wróć do strony głównej"
 }

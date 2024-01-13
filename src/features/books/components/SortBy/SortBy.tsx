@@ -4,8 +4,8 @@ import sortOptions from "./sortOptions"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { useEffect, useState } from "react"
 import { setQueryParams } from "../../booksSilce"
-import firstLetterToUppercase from "@/utils/firstLetterToUppercase"
 import { useTranslation } from "react-i18next"
+import { Typography } from "@mui/material"
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -64,9 +64,9 @@ const SortBy = () => {
     >
       {sortOptions.map(({ optionTranslationKey, value }) => (
         <MenuItem key={optionTranslationKey} value={optionTranslationKey}>
-          {firstLetterToUppercase(
-            t(`books:sortOptions.${optionTranslationKey}`),
-          )}
+          <Typography>
+            {t(`books:sortOptions.${optionTranslationKey}`)}
+          </Typography>
         </MenuItem>
       ))}
     </TextField>

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { Avatar, Chip, Divider, Grid, Stack, Typography } from "@mui/material"
 import { BASE_URL } from "@/constants/api"
 import styled from "styled-components"
-import Section from "@/components/Section/Section"
+import ReadersBorrowedBooksSection from "@/features/lendBook/components/ReadersBorrowedBooksSection/ReadersBorrowedBooksSection"
 
 const READER_PHOTO_WIDTH = 210
 
@@ -92,9 +92,7 @@ const SingleReader = () => {
         <Divider />
       </Grid>
       <Grid item xs={12}>
-        <Section title="lended books">
-          <div></div>
-        </Section>
+        <ReadersBorrowedBooksSection readerId={readerId} />
       </Grid>
     </Grid>
   ) : (

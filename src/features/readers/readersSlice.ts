@@ -1,11 +1,6 @@
 import { GetReadersQueryParams, GetReadersResponse, Reader } from "@/types/api"
 import { createSlice } from "@reduxjs/toolkit"
-import {
-  deleteReaderPhoto,
-  editReader,
-  getReaders,
-  getSingleReader,
-} from "./readersThunk"
+import { getReaders, getSingleReader } from "./readersThunk"
 
 export interface ReadersDataValues {
   readersList: GetReadersResponse["data"]

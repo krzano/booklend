@@ -6,6 +6,7 @@ import {
   getAccessTokenFromLocalStorage,
   getRefreshTokenFromLocalStorage,
 } from "@/utils/localStorage"
+import dayjs from "dayjs"
 import { jwtDecode } from "jwt-decode"
 import { ReactElement, useCallback, useEffect } from "react"
 import { Navigate, useLocation } from "react-router-dom"
@@ -25,16 +26,13 @@ const ProtectedDashboardRoute = ({
 
   const checkAuth = useCallback(() => {
     if (accessToken && refreshToken) {
-      const currentUnixTime = Math.floor(Date.now() / 1000)
       const decodedAccessToken = jwtDecode(accessToken)
       const decodedRefreshToken = jwtDecode(refreshToken)
-      if (
-        decodedRefreshToken.exp &&
-        decodedRefreshToken.exp < currentUnixTime
-      ) {
+
+      if (decodedRefreshToken.exp && decodedRefreshToken.exp < dayjs().unix()) {
         return dispatch(logoutUser(LogoutUserReason.SESSION_EXPIRED))
       }
-      if (decodedAccessToken.exp && decodedAccessToken.exp < currentUnixTime) {
+      if (decodedAccessToken.exp && decodedAccessToken.exp < dayjs().unix()) {
         return getNewAccessToken(refreshToken)
       }
     } else {

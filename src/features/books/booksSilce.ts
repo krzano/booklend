@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import {
-  deleteBookPhoto,
-  editBook,
-  getBooks,
-  getSingleBook,
-} from "./booksThunk"
+import { getBooks, getSingleBook } from "./booksThunk"
 import { Book, GetBooksQueryParams, GetBooksResponse } from "@/types/api"
 
 export enum ViewVariants {

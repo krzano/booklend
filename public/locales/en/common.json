@@ -50,5 +50,14 @@
   "actions": "actions",
   "deletePhoto": "delete photo",
   "phoneNumber": "phone number",
-  "address": "address"
+  "address": "address",
+  "search": "Search",
+  "from": "from",
+  "to": "to",
+  "start": "start",
+  "end": "end",
+  "or": "or",
+  "noDataToDisplay": "no data to display",
+  "pageNotFound": "Page not found...",
+  "returnToHomePage": "return to home page"
 }

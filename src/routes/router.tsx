@@ -29,6 +29,7 @@ import AddReader from "@/features/readers/views/AddReader"
 import ReadersList from "@/features/readers/views/ReadersList"
 import EditReader from "@/features/readers/views/EditReader"
 import SingleReader from "@/features/readers/views/SingleReader"
+import ErrorElement from "./ErrorElement/ErrorElement"
 
 const router = createBrowserRouter([
   {
@@ -38,11 +39,7 @@ const router = createBrowserRouter([
         <BasePageLayout />
       </RedirectFromLoginWrapper>
     ),
-    errorElement: (
-      <div>
-        <h2>There was en error...</h2>
-      </div>
-    ),
+    errorElement: <ErrorElement />,
     children: [
       { index: true, element: <Navigate to={LOGIN_PATH} /> },
       { path: LOGIN_PATH, element: <Login /> },

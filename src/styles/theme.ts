@@ -104,6 +104,21 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiPickersDay: {
+      styleOverrides: {
+        root: {
+          borderRadius: theme.shape.borderRadius,
+          fontSize: 15,
+        },
+      },
+    },
+    MuiDayCalendar: {
+      styleOverrides: {
+        weekDayLabel: {
+          fontSize: 15,
+        },
+      },
+    },
   },
 })
 

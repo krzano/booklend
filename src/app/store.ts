@@ -4,6 +4,7 @@ import userReducer from "@/features/user/userSlice"
 import booksReducer from "@/features/books/booksSilce"
 import genresReducer from "@/features/genres/genresSilce"
 import readersReducer from "@/features/readers/readersSlice"
+import lendBookReducer from "@/features/lendBook/lendBookSlice"
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     books: booksReducer,
     genres: genresReducer,
     readers: readersReducer,
+    lendBook: lendBookReducer,
   },
 })
 

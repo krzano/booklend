@@ -8,7 +8,8 @@ import theme from "./styles/theme"
 import CustomToastContainer from "./components/CustomToastContainer/CustomToastContainer"
 import Loader from "./components/Loader/Loader"
 import Box from "@mui/material/Box/Box"
-import TranslatedThemeProvider from "./i18n/TranslatedThemeProvider"
+import MaterialUiLocalizationProvider from "./i18n/MaterialUiLocalizationProvider"
+import DayjsLocalizationProvider from "./i18n/DayjsLocalizationProvider"
 
 function App() {
   return (
@@ -30,9 +31,10 @@ function App() {
             </Box>
           }
         >
-          <TranslatedThemeProvider>
+          <DayjsLocalizationProvider />
+          <MaterialUiLocalizationProvider>
             <RouterProvider router={router} />
-          </TranslatedThemeProvider>
+          </MaterialUiLocalizationProvider>
         </Suspense>
       </ThemeProvider>
     </>

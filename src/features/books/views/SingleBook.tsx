@@ -20,10 +20,44 @@ import { BASE_URL } from "@/constants/api"
 import truncateString from "@/utils/truncateString"
 import Button from "@/components/Button/Button"
 import { useTranslation } from "react-i18next"
-import Section from "@/components/Section/Section"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+import LendBookSection from "@/features/lendBook/components/LendBookSection/LendBookSection"
 
 const DESCRIPTION_VISIBLE_LENGTH = 200
+const Description = ({ description }: { description: string }) => {
+  const { t } = useTranslation()
+
+  const [showFullDescription, setShowFullDescription] = useState<boolean>(false)
+  return (
+    <Typography>
+      <StyledSpan>{t("books:description")}:</StyledSpan>
+      <br />
+      {description.length > DESCRIPTION_VISIBLE_LENGTH ? (
+        <>
+          {showFullDescription
+            ? description
+            : truncateString(description, DESCRIPTION_VISIBLE_LENGTH)}
+          <span>
+            <Button
+              size="small"
+              variant="text"
+              color="secondary"
+              onClick={() => {
+                setShowFullDescription((prev) => !prev)
+              }}
+            >
+              {showFullDescription
+                ? t("common:showLess")
+                : t("common:showMore")}
+            </Button>
+          </span>
+        </>
+      ) : (
+        description
+      )}
+    </Typography>
+  )
+}
 
 const SingleBook = () => {
   const { t } = useTranslation(["books", "genres"])
@@ -33,7 +67,7 @@ const SingleBook = () => {
     (store) => store.books,
   )
   const [imgSrcToRender, setImgSrcToRender] = useState(defaultBookImg)
-  const [showFullDescription, setShowFullDescription] = useState<boolean>(false)
+
   useEffect(() => {
     if (bookId) {
       dispatch(getSingleBook(bookId))
@@ -114,46 +148,17 @@ const SingleBook = () => {
             justifyContent={"inherit"}
           >
             {singleBook.genre.map((genre) => (
-              <Chip label={t(`genres:${genre}`)} />
+              <Chip key={genre} label={t(`genres:${genre}`)} />
             ))}
           </Stack>
           <Box py={1}>
             <Typography>
-              <StyledText>{t("books:numberOfPages")}:</StyledText>{" "}
+              <StyledSpan>{t("books:numberOfPages")}:</StyledSpan>{" "}
               {singleBook.numberOfPages}
             </Typography>
           </Box>
           <Box py={1}>
-            <Typography>
-              <StyledText>{t("books:description")}:</StyledText>
-              <br />
-              {singleBook.description.length > DESCRIPTION_VISIBLE_LENGTH ? (
-                <>
-                  {showFullDescription
-                    ? singleBook.description
-                    : truncateString(
-                        singleBook.description,
-                        DESCRIPTION_VISIBLE_LENGTH,
-                      )}
-                  <span>
-                    <Button
-                      size="small"
-                      variant="text"
-                      color="secondary"
-                      onClick={() => {
-                        setShowFullDescription((prev) => !prev)
-                      }}
-                    >
-                      {showFullDescription
-                        ? t("common:showLess")
-                        : t("common:showMore")}
-                    </Button>
-                  </span>
-                </>
-              ) : (
-                singleBook.description
-              )}
-            </Typography>
+            <Description description={singleBook.description} />
           </Box>
         </Grid>
       </Grid>
@@ -161,9 +166,7 @@ const SingleBook = () => {
         <Divider />
       </Grid>
       <Grid item xs={12}>
-        <Section title="lend book form">
-          <div></div>
-        </Section>
+        <LendBookSection bookId={singleBook._id} />
       </Grid>
     </Grid>
   ) : (
@@ -192,7 +195,7 @@ const StyledCoverImageBox = styled.div`
   }
 `
 
-const StyledText = styled.p`
+const StyledSpan = styled.span`
   display: inline-block;
   font-weight: 500;
   &::first-letter {

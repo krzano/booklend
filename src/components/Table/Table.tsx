@@ -38,7 +38,7 @@ type TableProps<T> = {
   columns: Columns<T>
   filtersList?: JSX.Element[]
   refreshFunction: () => void
-  loading: boolean
+  loading?: boolean
   sortBy: string
   sortDirection: "asc" | "desc"
   pageSize: number
@@ -187,7 +187,7 @@ const Table = <T,>({
                   pointerEvents: "none",
                 }}
               >
-                <CustomBackdrop open={loading} />
+                <CustomBackdrop open={loading ? true : false} />
               </TableCell>
             </TableRow>
             {dataList.map((data, index) => (
@@ -202,6 +202,15 @@ const Table = <T,>({
                 ))}
               </TableRow>
             ))}
+            {dataList.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={columns.length}>
+                  <Typography py={3} color={(theme) => theme.palette.grey[500]}>
+                    {t("common:noDataToDisplay")}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </StyledTable>
       </TableContainer>

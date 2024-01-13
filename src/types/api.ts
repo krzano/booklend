@@ -1,4 +1,5 @@
 import { ChangeUserInfoFormValues } from "@/libs/yup/schemas/changeUserInfo"
+import { Dayjs } from "dayjs"
 
 export interface ApiErrorResponse {
   errors: string[]
@@ -6,7 +7,7 @@ export interface ApiErrorResponse {
   statusCode: number
 }
 export interface GetListResponse<T> {
-  data: T[] | []
+  data: T[]
   totalItems: number
   numOfPages: number
 }
@@ -43,6 +44,13 @@ export interface GetReadersQueryParams {
   sortBy: string
   search: string
 }
+export interface GetLendBookHistoryQueryParams {
+  currentPage: number
+  pageSize: number
+  sortDirection: "asc" | "desc"
+  sortBy: string
+  lendStatus: "available" | "borrowed" | "all"
+}
 export interface Book {
   _id: string
   adminId: string
@@ -71,7 +79,23 @@ export interface Reader {
   createdAt: string
   updatedAt: string
 }
+export interface LendBookBody {
+  bookId: string
+  readerId: string
+  lendFrom: string | Dayjs
+  lendTo: string | Dayjs
+  lendStatus: "borrowed" | "available"
+}
+export interface GetSingleLendBookResponse extends LendBookBody {
+  _id: string
+  createdAt: string
+  updatedAt: string
+  bookData: Book
+  readerData: Reader
+}
 
 export type GetGenresResponse = Genre[]
 export type GetBooksResponse = GetListResponse<Book>
 export type GetReadersResponse = GetListResponse<Reader>
+export type GetLendBookHistoryResponse =
+  GetListResponse<GetSingleLendBookResponse>

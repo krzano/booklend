@@ -6,7 +6,6 @@ import { deleteReader, getReaders } from "../readersThunk"
 import Table from "@/components/Table/Table"
 import Loader from "@/components/Loader/Loader"
 import { setQueryParams } from "../readersSlice"
-import { Reader } from "@/types/api"
 import DataFetchingError from "@/components/DataFetchingError/DataFetchingError"
 import Avatar from "@mui/material/Avatar/Avatar"
 import { BASE_URL } from "@/constants/api"
@@ -41,7 +40,7 @@ const ReadersList = () => {
             }}
           />
         ) : (
-          <Table<Reader>
+          <Table
             title={t("readers:readers")}
             filtersList={[
               <SearchField

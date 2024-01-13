@@ -8,11 +8,11 @@ import { createLendBook } from "../../lendBookThunk"
 import AutocompleteSearchField from "@/components/AutocompleteSearchField/AutocompleteSearchField"
 import dayjs from "dayjs"
 import "dayjs/locale/pl"
+import { DatePicker } from "@mui/x-date-pickers"
 import { Form, Formik } from "formik"
 import createLendBookSchema, {
   CreateLendBookValues,
 } from "@/libs/yup/schemas/createLendBook"
-import DatePicker from "@/components/DatePicker/DatePicker"
 import { useTranslation } from "react-i18next"
 
 interface LendBookFormProps {
@@ -26,7 +26,7 @@ const fetchReaders = async (search: string) => {
       {
         params: {
           currentPage: 1,
-          pageSize: 10 ** 10,
+          pageSize: 10 ** 2,
           sortBy: "firstName",
           sortDirection: "asc",
           search,
@@ -125,7 +125,6 @@ const LendBookForm = ({ bookId }: LendBookFormProps) => {
                 <Grid container spacing={1}>
                   <Grid item xs>
                     <DatePicker
-                      id="lend-from-datepicker"
                       label={t("lendBook:from")}
                       value={dayjs(values.lendFrom)}
                       onChange={(value) => {
@@ -134,12 +133,17 @@ const LendBookForm = ({ bookId }: LendBookFormProps) => {
                           value ? value.toISOString() : "",
                         )
                       }}
-                      textFieldProps={{
-                        error: Boolean(errors.lendFrom),
-                        helperText: errors.lendFrom ? t(errors.lendFrom) : "",
-                        disabled: isSubmitting,
+                      slotProps={{
+                        textField: {
+                          id: "lend-from-datepicker",
+                          fullWidth: true,
+                          error: Boolean(errors.lendFrom),
+                          helperText: errors.lendFrom ? t(errors.lendFrom) : "",
+                          disabled: isSubmitting,
+                        },
                       }}
                       disablePast
+                      formatDensity="spacious"
                     />
                   </Grid>
                   <Grid item xs="auto">
@@ -154,7 +158,6 @@ const LendBookForm = ({ bookId }: LendBookFormProps) => {
                   </Grid>
                   <Grid item xs>
                     <DatePicker
-                      id="lend-to-datepicker"
                       label={t("lendBook:to")}
                       value={dayjs(values.lendTo)}
                       onChange={(value) => {
@@ -163,13 +166,17 @@ const LendBookForm = ({ bookId }: LendBookFormProps) => {
                           value ? value.toISOString() : "",
                         )
                       }}
-                      textFieldProps={{
-                        error: Boolean(errors.lendTo),
-                        helperText: errors.lendTo ? t(errors.lendTo) : "",
-                        disabled: isSubmitting,
+                      slotProps={{
+                        textField: {
+                          id: "lend-to-datepicker",
+                          fullWidth: true,
+                          error: Boolean(errors.lendTo),
+                          helperText: errors.lendTo ? t(errors.lendTo) : "",
+                          disabled: isSubmitting,
+                        },
                       }}
-                      disablePast
                       minDate={dayjs(values.lendFrom).add(1, "day")}
+                      formatDensity="spacious"
                     />
                   </Grid>
                 </Grid>

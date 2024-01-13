@@ -131,7 +131,7 @@ const SingleBook = () => {
             spacing={1}
             marginTop={1}
           >
-            <Rating readOnly value={singleBook.rating} />
+            <Rating readOnly value={singleBook.rating} precision={0.5} />
             <Typography
               fontSize={24}
               fontWeight={500}

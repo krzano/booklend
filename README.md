@@ -2,9 +2,7 @@
 
 <hr/>
 
-# BookLend - book library management app
-
-BookLend is a web application that helps librarians to manage and access books and readers in an easy and efficient way. It provides librarians with dashboard where they can perform various tasks.
+**BookLend** is a web application that helps librarians to manage and access books and readers in an easy and efficient way. It provides librarians with dashboard where they can perform various tasks.
 
 **Live demo: &nbsp; [https://booklend.vercel.app/](https://booklend.vercel.app/)**
 
@@ -43,6 +41,10 @@ Project is built with:
 
 ![readers table book list](https://i.postimg.cc/6p0VXzQY/readersbooks-small-compressed.gif)
 
+### Edit book (mobile)
+
+![edit book mobile](https://i.postimg.cc/hPKPvn4K/edit-book-mobile-compressed.gif)
+
 ### Reader page
 
 ![reader page](https://i.postimg.cc/D0XZxpt5/reader-page.jpg)
@@ -50,6 +52,10 @@ Project is built with:
 ### Book page
 
 ![book page](https://i.postimg.cc/jSQcjtM6/bookpage.jpg)
+
+### Lending the book and managing the book status (mobile)
+
+![lending the book](https://i.postimg.cc/ryWfhXkX/lendbook-mobile-compress.gif)&nbsp;![managing the book status](https://i.postimg.cc/NF1bLT4f/extendlendbook-mobile-compress.gif)
 
 ## Setup
 

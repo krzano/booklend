@@ -1,16 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getAllGenres } from "./genresThunk"
-import { GetGenresResponse } from "@/types/api"
+import { GetGenresResponse, RequestStatus } from "@/types/api"
 
 interface GenresInitialState {
-  isGenresLoading: boolean
-  isGenresError: boolean
+  status: RequestStatus
   genres: GetGenresResponse | undefined
 }
 
 const initialState: GenresInitialState = {
-  isGenresLoading: false,
-  isGenresError: false,
+  status: "idle",
   genres: undefined,
 }
 
@@ -21,16 +19,14 @@ const genresSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllGenres.pending, (state) => {
-        state.isGenresLoading = true
-        state.isGenresError = false
+        state.status = "loading"
       })
       .addCase(getAllGenres.fulfilled, (state, { payload }) => {
-        state.isGenresLoading = false
+        state.status = "idle"
         state.genres = payload
       })
-      .addCase(getAllGenres.rejected, (state, { payload }) => {
-        state.isGenresLoading = false
-        state.isGenresError = true
+      .addCase(getAllGenres.rejected, (state) => {
+        state.status = "failed"
       })
   },
 })

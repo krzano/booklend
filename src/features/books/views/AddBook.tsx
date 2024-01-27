@@ -11,7 +11,7 @@ import { addBook } from "../booksThunk"
 const AddBook = () => {
   const { t } = useTranslation(["books"])
   const dispatch = useAppDispatch()
-  const { isGenresLoading, isGenresError, genres } = useAppSelector(
+  const { status: genresStatus, genres } = useAppSelector(
     (state) => state.genres,
   )
 
@@ -22,8 +22,8 @@ const AddBook = () => {
   return (
     <>
       <PageTitle>{t("common:addNewBook")}</PageTitle>
-      {isGenresLoading || !genres ? (
-        isGenresError ? (
+      {genresStatus === "loading" || !genres ? (
+        genresStatus === "failed" ? (
           <DataFetchingError
             refreshFunction={() => {
               dispatch(getAllGenres())

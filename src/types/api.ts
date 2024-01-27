@@ -94,6 +94,7 @@ export interface GetSingleLendBookResponse extends LendBookBody {
   readerData: Reader
 }
 
+export type RequestStatus = "idle" | "loading" | "failed"
 export type GetGenresResponse = Genre[]
 export type GetBooksResponse = GetListResponse<Book>
 export type GetReadersResponse = GetListResponse<Reader>

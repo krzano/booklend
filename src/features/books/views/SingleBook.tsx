@@ -63,9 +63,7 @@ const SingleBook = () => {
   const { t } = useTranslation(["books", "genres"])
   const { bookId } = useParams()
   const dispatch = useAppDispatch()
-  const { isBooksError, isBooksLoading, singleBook } = useAppSelector(
-    (store) => store.books,
-  )
+  const { status, singleBook } = useAppSelector((store) => store.books)
   const [imgSrcToRender, setImgSrcToRender] = useState(defaultBookImg)
 
   useEffect(() => {
@@ -80,9 +78,9 @@ const SingleBook = () => {
   }, [singleBook])
 
   if (!bookId) return <Navigate to={BOOKS_PATH} />
-  return isBooksLoading ? (
+  return status === "loading" ? (
     <Loader />
-  ) : isBooksError ? (
+  ) : status === "failed" ? (
     <DataFetchingError
       refreshFunction={() => {
         dispatch(getSingleBook(bookId))

@@ -45,7 +45,7 @@ const Topbar = ({
     setAnchorEl(null)
   }
   const {
-    isUserDataLoading,
+    status: userStatus,
     userData: { firstName, photo },
   } = useAppSelector((store) => store.user)
   const userName = `${firstName}`
@@ -65,7 +65,7 @@ const Topbar = ({
             fontFamily={(theme) => theme.otherFonts.serif}
             variant="h5"
           >
-            {isUserDataLoading ? (
+            {userStatus === "loading" ? (
               <Skeleton sx={{ bgcolor: "grey.600" }} width={"6rem"} />
             ) : (
               userName

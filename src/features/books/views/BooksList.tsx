@@ -20,8 +20,7 @@ import CustomBackdrop from "@/components/CustomBackdrop/CustomBackdrop"
 const BooksList = () => {
   const dispatch = useAppDispatch()
   const {
-    isBooksLoading,
-    isBooksError,
+    status,
     booksData,
     queryParams: {
       currentPage,
@@ -48,7 +47,7 @@ const BooksList = () => {
   }, [currentPage, pageSize, sortBy, sortDirection, genre, search, dispatch])
 
   if (!booksData)
-    return isBooksError ? (
+    return status === "failed" ? (
       <DataFetchingError
         refreshFunction={() => {
           dispatch(
@@ -74,7 +73,7 @@ const BooksList = () => {
         <Stack spacing={2} marginTop={3}>
           <ToggleViewSection />
           <Box position="relative">
-            <CustomBackdrop open={isBooksLoading} rounded />
+            <CustomBackdrop open={status === "loading"} rounded />
             {booksData.totalItems === 0 ? (
               <StyledNoBooksFoundBox>
                 <Typography variant="h4" textAlign={"center"}>
@@ -96,7 +95,7 @@ const BooksList = () => {
           <Box display="flex" justifyContent="center">
             {booksData.numOfPages > 0 && (
               <StyledPagination
-                disabled={isBooksLoading}
+                disabled={status === "loading"}
                 color="primary"
                 page={currentPage}
                 count={booksData.numOfPages}

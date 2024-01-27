@@ -1,4 +1,9 @@
-import { GetReadersQueryParams, GetReadersResponse, Reader } from "@/types/api"
+import {
+  GetReadersQueryParams,
+  GetReadersResponse,
+  Reader,
+  RequestStatus,
+} from "@/types/api"
 import { createSlice } from "@reduxjs/toolkit"
 import { getReaders, getSingleReader } from "./readersThunk"
 
@@ -8,8 +13,7 @@ export interface ReadersDataValues {
   numOfPages: GetReadersResponse["numOfPages"]
 }
 interface ReadersInitialState {
-  isReadersLoading: boolean
-  isReadersError: boolean
+  status: RequestStatus
   readersData: ReadersDataValues | undefined
   queryParams: GetReadersQueryParams
   singleReader: Reader | undefined
@@ -24,8 +28,7 @@ const defaultQueryParams: GetReadersQueryParams = {
 }
 
 const initialState: ReadersInitialState = {
-  isReadersLoading: false,
-  isReadersError: false,
+  status: "idle",
   readersData: undefined,
   queryParams: defaultQueryParams,
   singleReader: undefined,
@@ -50,11 +53,10 @@ const readersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getReaders.pending, (state) => {
-        state.isReadersLoading = true
-        state.isReadersError = false
+        state.status = "loading"
       })
       .addCase(getReaders.fulfilled, (state, { payload }) => {
-        state.isReadersLoading = false
+        state.status = "idle"
         if (payload) {
           state.readersData = {
             readersList: payload.data,
@@ -64,20 +66,17 @@ const readersSlice = createSlice({
         }
       })
       .addCase(getReaders.rejected, (state) => {
-        state.isReadersLoading = false
-        state.isReadersError = true
+        state.status = "failed"
       })
       .addCase(getSingleReader.pending, (state) => {
-        state.isReadersError = false
-        state.isReadersLoading = true
+        state.status = "loading"
       })
       .addCase(getSingleReader.fulfilled, (state, { payload }) => {
+        state.status = "idle"
         state.singleReader = payload
-        state.isReadersLoading = false
       })
       .addCase(getSingleReader.rejected, (state) => {
-        state.isReadersError = true
-        state.isReadersLoading = false
+        state.status = "failed"
       })
   },
 })

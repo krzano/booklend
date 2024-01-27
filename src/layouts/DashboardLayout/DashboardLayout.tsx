@@ -23,7 +23,7 @@ const DashboardLayout = ({
   sidebarListItems,
   topbarAccountMenuItems,
 }: DashboardLayoutProps) => {
-  const { isUserDataLoading } = useAppSelector((store) => store.user)
+  const { status: userStatus } = useAppSelector((store) => store.user)
   const theme = useTheme()
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(!isMobileScreen)
@@ -56,7 +56,7 @@ const DashboardLayout = ({
           </Container>
           <Container component="main">
             <Suspense fallback={<Loader />}>
-              {isUserDataLoading ? <Loader /> : <Outlet />}
+              {userStatus === "loading" ? <Loader /> : <Outlet />}
             </Suspense>
           </Container>
         </Box>

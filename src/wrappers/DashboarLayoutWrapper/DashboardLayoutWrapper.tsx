@@ -64,7 +64,7 @@ export type SidebarListItemsType = (
 const DashboardLayoutWrapper = () => {
   const { t } = useTranslation(["dashboard"])
   const dispatch = useAppDispatch()
-  const { isUserDataError } = useAppSelector((store) => store.user)
+  const { status: userStatus } = useAppSelector((store) => store.user)
 
   const topbarAccountMenuItems: TopbarAccountMenuItemsType = [
     {
@@ -146,7 +146,7 @@ const DashboardLayoutWrapper = () => {
     dispatch(getUserData())
   }, [dispatch])
 
-  if (isUserDataError) {
+  if (userStatus === "failed") {
     dispatch(logoutUser(LogoutUserReason.SERVER_ERROR))
   }
 

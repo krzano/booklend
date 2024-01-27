@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getBookLendHistory, getReadersBorrowedBooks } from "./lendBookThunk"
-import { GetLendBookHistoryResponse } from "@/types/api"
+import { GetLendBookHistoryResponse, RequestStatus } from "@/types/api"
 
 interface LendBookInitialState {
-  status: "idle" | "loading" | "failed"
+  status: RequestStatus
   singleBookLendHistory: GetLendBookHistoryResponse | undefined
   singleReadersBorrowedBooks: GetLendBookHistoryResponse | undefined
 }

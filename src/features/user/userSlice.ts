@@ -5,17 +5,15 @@ import {
   removeUserPhoto,
   uploadUserPhoto,
 } from "./userThunk"
-import { GetUserDataResponse } from "@/types/api"
+import { GetUserDataResponse, RequestStatus } from "@/types/api"
 
 export interface UserState {
-  isUserDataLoading: boolean
-  isUserDataError: boolean
+  status: RequestStatus
   userData: GetUserDataResponse
 }
 
 const initialState: UserState = {
-  isUserDataLoading: false,
-  isUserDataError: false,
+  status: "idle",
   userData: {
     _id: "",
     firstName: "",
@@ -34,17 +32,14 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getUserData.pending, (state) => {
-        state.isUserDataLoading = true
-        state.isUserDataError = false
+        state.status = "loading"
       })
       .addCase(getUserData.fulfilled, (state, { payload }) => {
-        state.isUserDataLoading = false
+        state.status = "idle"
         state.userData = payload
       })
       .addCase(getUserData.rejected, (state, { payload }) => {
-        state.isUserDataLoading = false
-        state.isUserDataError = true
-        console.log(payload)
+        state.status = "failed"
       })
       .addCase(
         changeUserData.fulfilled,

@@ -17,10 +17,10 @@ const EditBook = () => {
   const { t } = useTranslation(["books"])
   const { bookId } = useParams()
   const dispatch = useAppDispatch()
-  const { isBooksError, isBooksLoading, singleBook } = useAppSelector(
+  const { status: booksStatus, singleBook } = useAppSelector(
     (store) => store.books,
   )
-  const { isGenresError, isGenresLoading, genres } = useAppSelector(
+  const { status: genresStatus, genres } = useAppSelector(
     (store) => store.genres,
   )
 
@@ -32,9 +32,9 @@ const EditBook = () => {
   }, [bookId, dispatch])
 
   if (!bookId) return <Navigate to={BOOKS_PATH} />
-  return isBooksLoading ? (
+  return booksStatus === "loading" ? (
     <Loader />
-  ) : isBooksError ? (
+  ) : booksStatus === "failed" ? (
     <DataFetchingError
       refreshFunction={() => {
         dispatch(getSingleBook(bookId))
@@ -43,8 +43,8 @@ const EditBook = () => {
   ) : singleBook ? (
     <>
       <PageTitle>{t("common:editBook")}</PageTitle>
-      {isGenresLoading || !genres ? (
-        isGenresError ? (
+      {genresStatus === "loading" || !genres ? (
+        genresStatus === "failed" ? (
           <DataFetchingError
             refreshFunction={() => {
               dispatch(getAllGenres())

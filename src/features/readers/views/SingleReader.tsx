@@ -19,9 +19,7 @@ const SingleReader = () => {
   const { t } = useTranslation(["readers"])
   const { readerId } = useParams()
   const dispatch = useAppDispatch()
-  const { isReadersLoading, isReadersError, singleReader } = useAppSelector(
-    (store) => store.readers,
-  )
+  const { status, singleReader } = useAppSelector((store) => store.readers)
 
   useEffect(() => {
     if (readerId) {
@@ -29,9 +27,9 @@ const SingleReader = () => {
     }
   }, [readerId, dispatch])
   if (!readerId) return <Navigate to={READERS_PATH} />
-  return isReadersLoading ? (
+  return status === "loading" ? (
     <Loader />
-  ) : isReadersError ? (
+  ) : status === "failed" ? (
     <DataFetchingError />
   ) : singleReader ? (
     <Grid container spacing={4}>

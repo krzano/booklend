@@ -22,8 +22,9 @@ import { Link } from "react-router-dom"
 const ReadersList = () => {
   const { t } = useTranslation(["readers", "forms"])
   const dispatch = useAppDispatch()
-  const { isReadersError, isReadersLoading, queryParams, readersData } =
-    useAppSelector((store) => store.readers)
+  const { status, queryParams, readersData } = useAppSelector(
+    (store) => store.readers,
+  )
 
   useEffect(() => {
     dispatch(getReaders(queryParams))
@@ -33,7 +34,7 @@ const ReadersList = () => {
     <>
       <PageTitle>{t("readers:readersList")}</PageTitle>
       {readersData ? (
-        isReadersError ? (
+        status === "failed" ? (
           <DataFetchingError
             refreshFunction={() => {
               dispatch(getReaders(queryParams))
@@ -50,7 +51,7 @@ const ReadersList = () => {
                 }}
               />,
             ]}
-            loading={isReadersLoading}
+            loading={status === "loading"}
             currentPage={currentPage}
             pageSize={pageSize}
             refreshFunction={() => {

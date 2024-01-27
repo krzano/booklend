@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getBooks, getSingleBook } from "./booksThunk"
-import { Book, GetBooksQueryParams, GetBooksResponse } from "@/types/api"
+import {
+  Book,
+  GetBooksQueryParams,
+  GetBooksResponse,
+  RequestStatus,
+} from "@/types/api"
 
 export enum ViewVariants {
   list,
@@ -14,8 +19,7 @@ interface BooksDataValues {
 }
 
 interface BooksInitialState {
-  isBooksLoading: boolean
-  isBooksError: boolean
+  status: RequestStatus
   booksData: BooksDataValues | undefined
   view: ViewVariants
   queryParams: GetBooksQueryParams
@@ -32,8 +36,7 @@ const defaultQueryParams: GetBooksQueryParams = {
 }
 
 const initialState: BooksInitialState = {
-  isBooksLoading: false,
-  isBooksError: false,
+  status: "idle",
   booksData: undefined,
   view: ViewVariants.grid,
   queryParams: defaultQueryParams,
@@ -77,11 +80,10 @@ const booksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getBooks.pending, (state) => {
-        state.isBooksLoading = true
-        state.isBooksError = false
+        state.status = "loading"
       })
       .addCase(getBooks.fulfilled, (state, { payload }) => {
-        state.isBooksLoading = false
+        state.status = "idle"
         if (payload) {
           state.booksData = {
             booksList: payload.data,
@@ -91,21 +93,16 @@ const booksSlice = createSlice({
         }
       })
       .addCase(getBooks.rejected, (state) => {
-        state.isBooksLoading = false
-        state.isBooksError = true
+        state.status = "failed"
       })
       .addCase(getSingleBook.pending, (state) => {
-        state.isBooksError = false
-        state.isBooksLoading = true
-        // state.singleBook = undefined
+        state.status = "loading"
       })
       .addCase(getSingleBook.fulfilled, (state, { payload }) => {
-        state.singleBook = payload
-        state.isBooksLoading = false
+        state.status = "idle"
       })
       .addCase(getSingleBook.rejected, (state) => {
-        state.isBooksError = true
-        state.isBooksLoading = false
+        state.status = "failed"
       })
   },
 })

@@ -100,6 +100,7 @@ const booksSlice = createSlice({
       })
       .addCase(getSingleBook.fulfilled, (state, { payload }) => {
         state.status = "idle"
+        state.singleBook = payload
       })
       .addCase(getSingleBook.rejected, (state) => {
         state.status = "failed"

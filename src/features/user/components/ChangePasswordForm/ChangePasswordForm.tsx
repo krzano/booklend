@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/app/hooks"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import FormikTextField from "@/components/FormikTextField/FormikTextField"
 import changePasswordSchema, {
   ChangePasswordFormValues,
@@ -11,7 +11,8 @@ import Button from "@/components/Button/Button"
 
 const ChangePasswordForm = () => {
   const dispatch = useAppDispatch()
-  const { t } = useTranslation(["forms"])
+  const isDemoAccount = useAppSelector((state) => state.user.isDemoAccount)
+  const { t } = useTranslation(["forms", "settings"])
   const changePasswordInitialValues: ChangePasswordFormValues = {
     newPassword: "",
     confirmNewPassword: "",
@@ -34,8 +35,12 @@ const ChangePasswordForm = () => {
                 type="password"
                 name="newPassword"
                 label={t("forms:labels.newPassword")}
-                helperText={t("forms:helperTexts.password")}
-                disabled={isSubmitting}
+                helperText={
+                  isDemoAccount
+                    ? t("settings:demoCantChangePassword")
+                    : t("forms:helperTexts.password")
+                }
+                disabled={isDemoAccount || isSubmitting}
               />
             </Grid>
             <Grid item xs={12}>
@@ -43,7 +48,7 @@ const ChangePasswordForm = () => {
                 type="password"
                 name="confirmNewPassword"
                 label={t("forms:labels.confirmNewPassword")}
-                disabled={isSubmitting}
+                disabled={isDemoAccount || isSubmitting}
               />
             </Grid>
             <Grid item xs={6}>

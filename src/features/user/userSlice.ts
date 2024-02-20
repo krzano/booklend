@@ -7,13 +7,17 @@ import {
 } from "./userThunk"
 import { GetUserDataResponse, RequestStatus } from "@/types/api"
 
+const DEMO_ACCOUNT_EMAIL = import.meta.env.VITE_DEMO_ACCOUNT_EMAIL
+
 export interface UserState {
   status: RequestStatus
+  isDemoAccount: boolean
   userData: GetUserDataResponse
 }
 
 const initialState: UserState = {
   status: "idle",
+  isDemoAccount: false,
   userData: {
     _id: "",
     firstName: "",
@@ -37,8 +41,13 @@ export const userSlice = createSlice({
       .addCase(getUserData.fulfilled, (state, { payload }) => {
         state.status = "idle"
         state.userData = payload
+        if (payload.email === DEMO_ACCOUNT_EMAIL) {
+          state.isDemoAccount = true
+        } else {
+          state.isDemoAccount = false
+        }
       })
-      .addCase(getUserData.rejected, (state, { payload }) => {
+      .addCase(getUserData.rejected, (state) => {
         state.status = "failed"
       })
       .addCase(

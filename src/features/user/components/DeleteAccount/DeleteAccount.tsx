@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/app/hooks"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import Box from "@mui/material/Box/Box"
 import Button from "@/components/Button/Button"
 import { useEffect, useState } from "react"
@@ -7,10 +7,12 @@ import styled, { css } from "styled-components"
 import { deleteUserAccount } from "../../userThunk"
 import PaperModal from "@/components/PaperModal/PaperModal"
 import { useTranslation } from "react-i18next"
+import { toast } from "react-toastify"
 
 const DeleteAccount = () => {
   const { t } = useTranslation(["settings"])
   const dispatch = useAppDispatch()
+  const isDemoAccount = useAppSelector((state) => state.user.isDemoAccount)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [timeLeft, setTimeLeft] = useState<number | null>(null)
   const handleOpenModal = () => {
@@ -34,7 +36,13 @@ const DeleteAccount = () => {
   }, [isModalOpen, timeLeft])
 
   const handleDeleteAccount = async () => {
-    await dispatch(deleteUserAccount())
+    if (isDemoAccount) {
+      toast.error(t("settings:demoCantDeleteAccount"), {
+        autoClose: 4000,
+      })
+    } else {
+      await dispatch(deleteUserAccount())
+    }
     handleCloseModal()
   }
 

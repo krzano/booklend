@@ -5,5 +5,8 @@
   "changePassword": "zmień hasło",
   "deleteAccount": "usuń konto",
   "areYouSure": "Jesteś pewien?",
-  "deleteAccountWarningMessage": "Gdy usuniesz swoje konto, stracisz dostęp do konta i do wszystkich zapisanych danych. Po usunięciu nie będziesz mógł odwrócić tego procesu."
+  "deleteAccountWarningMessage": "Gdy usuniesz swoje konto, stracisz dostęp do konta i do wszystkich zapisanych danych. Po usunięciu nie będziesz mógł odwrócić tego procesu.",
+  "demoCantChangeEmail": "Nie możesz zmienić adresu e-mail na koncie demo",
+  "demoCantChangePassword": "Nie możesz zmienić hasła na koncie demo",
+  "demoCantDeleteAccount": "Nie możesz usunąć konta demo"
 }

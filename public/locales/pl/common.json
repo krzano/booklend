@@ -59,5 +59,7 @@
   "or": "lub",
   "noDataToDisplay": "brak danych do wyświetlenia",
   "pageNotFound": "Nie znaleziono strony...",
-  "returnToHomePage": "wróć do strony głównej"
+  "returnToHomePage": "wróć do strony głównej",
+  "orContinueWith": "lub kontynuuj jako",
+  "demoAccount": "konto demo"
 }

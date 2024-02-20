@@ -5,5 +5,8 @@
   "changePassword": "change password",
   "deleteAccount": "delete account",
   "areYouSure": "Are you sure?",
-  "deleteAccountWarningMessage": "Once you delete your account, you will lose access to your account and to all related data. Once you've deleted your account, you can't stop or reverse the process."
+  "deleteAccountWarningMessage": "Once you delete your account, you will lose access to your account and to all related data. Once you've deleted your account, you can't stop or reverse the process.",
+  "demoCantChangeEmail": "You can not change the email address of the demo account",
+  "demoCantChangePassword": "You can not change the password of the demo account",
+  "demoCantDeleteAccount": "You can not delete the demo account"
 }

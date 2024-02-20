@@ -11,10 +11,11 @@ import Button from "@/components/Button/Button"
 
 const ChangeInfoForm = () => {
   const dispatch = useAppDispatch()
-  const { t } = useTranslation(["forms"])
-  const {
-    userData: { firstName, lastName, email },
-  } = useAppSelector((store) => store.user)
+  const { t } = useTranslation(["forms", "settings"])
+  const isDemoAccount = useAppSelector((state) => state.user.isDemoAccount)
+  const { firstName, lastName, email } = useAppSelector(
+    (store) => store.user.userData,
+  )
   const initialValues: ChangeUserInfoFormValues = {
     firstName,
     lastName,
@@ -52,7 +53,10 @@ const ChangeInfoForm = () => {
                   type="email"
                   name="email"
                   label={t("forms:labels.email")}
-                  disabled={isSubmitting}
+                  helperText={
+                    isDemoAccount ? t("settings:demoCantChangeEmail") : ""
+                  }
+                  disabled={isDemoAccount || isSubmitting}
                 />
               </Grid>
               <Grid item xs={6} sm={6}>

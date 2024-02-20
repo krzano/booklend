@@ -59,5 +59,7 @@
   "or": "or",
   "noDataToDisplay": "no data to display",
   "pageNotFound": "Page not found...",
-  "returnToHomePage": "return to home page"
+  "returnToHomePage": "return to home page",
+  "orContinueWith": "or continue with",
+  "demoAccount": "demo account"
 }

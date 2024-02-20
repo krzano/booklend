@@ -80,7 +80,7 @@ const SignupForm = () => {
                 required
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} mt={{ xs: 1, sm: 0 }}>
               <Button
                 color="secondary"
                 type="submit"

@@ -1,0 +1,12 @@
+{
+  "welcome": "$t(common:welcome)",
+  "lendBookToSeeThis": "pożycz przynajmniej jedną ksiażkę, aby zobaczyć ten wykres",
+  "totalNumberOfReaders": "całkowita liczba czytelników",
+  "booksInTheLibrary": "ilość książek w bibliotece",
+  "currentlyBorrowedBooks": "książki aktualnie wypożyczone",
+  "genresRecentlyPicked": "gatunki literackie wybierane przez twoich czytelników",
+  "percentageDistributionOfGenres": "procentowy podział gatunków na podstawie ostatnio wypożyczonych książek",
+  "recentlyBorrowedBooks": "ostatnio pożyczone książki",
+  "from": "$t(common:from)",
+  "to": "$t(common:to)"
+}

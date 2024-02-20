@@ -2,9 +2,10 @@ import { useTranslation } from "react-i18next"
 import styled from "styled-components"
 import Chip from "@mui/material/Chip/Chip"
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord"
+import { LendBookStatus } from "@/types/api"
 
 interface BookStatusBoxProps {
-  status: "borrowed" | "available"
+  status: LendBookStatus
 }
 const BookStatusBox = ({ status }: BookStatusBoxProps) => {
   const { t } = useTranslation(["lendBook"])

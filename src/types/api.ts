@@ -29,6 +29,8 @@ export interface Genre {
   createdAt: string
   updatedAt: string
 }
+export type LendBookStatus = "available" | "borrowed"
+
 export interface GetBooksQueryParams {
   currentPage: number
   pageSize: number
@@ -49,7 +51,7 @@ export interface GetLendBookHistoryQueryParams {
   pageSize: number
   sortDirection: "asc" | "desc"
   sortBy: string
-  lendStatus: "available" | "borrowed" | "all"
+  lendStatus: LendBookStatus | "all"
 }
 export interface Book {
   _id: string
@@ -84,7 +86,7 @@ export interface LendBookBody {
   readerId: string
   lendFrom: string | Dayjs
   lendTo: string | Dayjs
-  lendStatus: "borrowed" | "available"
+  lendStatus: LendBookStatus
 }
 export interface GetSingleLendBookResponse extends LendBookBody {
   _id: string

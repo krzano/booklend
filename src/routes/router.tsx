@@ -1,7 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom"
 import BasePageLayout from "@/layouts/BasePageLayout/BasePageLayout"
 import DashboardLayoutWrapper from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
-import Overview from "@/features/views/Overview"
+import Overview from "@/features/overview/views/Overview"
 import Login from "@/features/auth/views/Login"
 import Signup from "@/features/auth/views/Signup"
 import RedirectFromLoginWrapper from "@/wrappers/RedirectFromLoginWrapper/RedirectFromLoginWrapper"

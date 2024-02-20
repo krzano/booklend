@@ -8,17 +8,10 @@ import dayjs from "dayjs"
 import { useTranslation } from "react-i18next"
 import { GetLendBookHistoryQueryParams } from "@/types/api"
 import truncateString from "@/utils/truncateString"
-import {
-  Chip,
-  Link as MuiLink,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material"
-import styled from "styled-components"
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord"
+import { Link as MuiLink, MenuItem, TextField, Typography } from "@mui/material"
 import { Link as RouterLink } from "react-router-dom"
 import { BOOKS_PATH } from "@/constants/paths"
+import BookStatusChip from "@/components/BookStatusChip/BookStatusChip"
 
 interface ReadersBorrowedBooksSectionProps {
   readerId: string
@@ -57,6 +50,7 @@ const ReadersBorrowedBooksSection = ({
   return (
     <div>
       <Table
+        variant="advanced"
         title={t("lendBook:borrowedBooks")}
         refreshFunction={() => {
           dispatch(getReadersBorrowedBooks({ readerId, queryParams }))
@@ -160,21 +154,7 @@ const ReadersBorrowedBooksSection = ({
             key: "lendStatus",
             isSortable: true,
             render: ({ lendStatus, bookId }) => (
-              <StyledChip
-                variant="outlined"
-                label={
-                  lendStatus === "borrowed"
-                    ? t("lendBook:borrowed")
-                    : t("lendBook:returned")
-                }
-                color={lendStatus === "borrowed" ? "warning" : "success"}
-                disabled={lendStatus === "available"}
-                clickable
-                size="small"
-                icon={<FiberManualRecordIcon fontSize="small" />}
-                component={RouterLink}
-                to={`${BOOKS_PATH}/${bookId}`}
-              />
+              <BookStatusChip bookId={bookId} lendStatus={lendStatus} />
             ),
             align: "center",
           },
@@ -214,10 +194,5 @@ const ReadersBorrowedBooksSection = ({
     </div>
   )
 }
-
-const StyledChip = styled(Chip)`
-  text-transform: uppercase;
-  font-weight: 500;
-`
 
 export default ReadersBorrowedBooksSection

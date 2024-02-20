@@ -42,6 +42,7 @@ const ReadersList = () => {
           />
         ) : (
           <Table
+            variant="advanced"
             title={t("readers:readers")}
             filtersList={[
               <SearchField

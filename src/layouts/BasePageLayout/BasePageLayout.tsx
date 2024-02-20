@@ -20,7 +20,7 @@ const BasePageLayout = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          paddingBottom: 3,
+          paddingBottom: 6,
         }}
       >
         <Outlet />

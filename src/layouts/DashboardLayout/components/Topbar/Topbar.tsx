@@ -51,7 +51,7 @@ const Topbar = ({
   const userName = `${firstName}`
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="sticky" color="primary">
       <Toolbar sx={{ py: 1 }}>
         <IconButton size="large" onClick={toggleSidebar} color="inherit">
           {$isDesktopSidebarOpen ? (

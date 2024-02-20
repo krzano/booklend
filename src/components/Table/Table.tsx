@@ -26,19 +26,25 @@ import styled, { css } from "styled-components"
 import { useTranslation } from "react-i18next"
 
 export type Columns<T> = {
-  label: string
-  key: string
-  isSortable: boolean
-  render: (data: T) => React.ReactNode
   align?: TableCellProps["align"]
+  isSortable?: boolean
+  key: string
+  label: string
+  render: (data: T) => React.ReactNode
 }[]
-type TableProps<T> = {
+export type CommonTableProps<T> = {
   title: string
   dataList: T[]
   columns: Columns<T>
-  filtersList?: JSX.Element[]
-  refreshFunction: () => void
+  refreshFunction?: () => void
   loading?: boolean
+}
+export type BasicTableProps = {
+  variant: "basic"
+}
+export type AdvancedTableProps = {
+  variant: "advanced"
+  filtersList?: JSX.Element[]
   sortBy: string
   sortDirection: "asc" | "desc"
   pageSize: number
@@ -49,47 +55,20 @@ type TableProps<T> = {
   onPageSizeChange: (newPageSize: number) => void
   onPageChange: (newPage: number) => void
 }
+export type TableProps<T> = CommonTableProps<T> &
+  (BasicTableProps | AdvancedTableProps)
+
 const Table = <T,>({
   title,
   dataList,
   columns,
-  filtersList,
   refreshFunction,
   loading,
-  sortBy,
-  sortDirection,
-  pageSize,
-  currentPage,
-  totalItems,
-  onSortByChange,
-  onSortDirectionChange,
-  onPageSizeChange,
-  onPageChange,
+  ...restProps
 }: TableProps<T>) => {
   const { t } = useTranslation()
   const [showFilters, setShowFilters] = useState(true)
 
-  const handleChangePage = (
-    _event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    onPageChange(newPage + 1)
-  }
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    onPageSizeChange(parseInt(event.target.value, 10))
-  }
-  const handleSortClick = (sortByValue: string) => {
-    onSortByChange(sortByValue)
-    onSortDirectionChange(
-      sortBy === sortByValue
-        ? sortDirection === "asc"
-          ? "desc"
-          : "asc"
-        : "asc",
-    )
-  }
   return (
     <Paper>
       <StyledToolbar>
@@ -97,7 +76,7 @@ const Table = <T,>({
           {title}
         </Typography>
         <Box width={1}>
-          {filtersList && (
+          {restProps.variant === "advanced" && restProps.filtersList && (
             <Stack
               direction={"row"}
               alignItems={"flex-end"}
@@ -106,18 +85,14 @@ const Table = <T,>({
               flexWrap={"wrap"}
               display={showFilters ? "flex" : "none"}
             >
-              {filtersList.map((filter, index) => {
-                return (
-                  <Box key={index} display={showFilters ? "block" : "none"}>
-                    {filter}
-                  </Box>
-                )
+              {restProps.filtersList.map((filter, index) => {
+                return <Box key={index}>{filter}</Box>
               })}
             </Stack>
           )}
         </Box>
         <Box marginLeft={"auto"} display={"flex"}>
-          {filtersList && (
+          {restProps.variant === "advanced" && restProps.filtersList && (
             <Tooltip
               arrow
               title={
@@ -135,18 +110,20 @@ const Table = <T,>({
               </span>
             </Tooltip>
           )}
-          <Tooltip arrow title={t("common:refresh")}>
-            <span>
-              <IconButton
-                disabled={loading}
-                onClick={() => {
-                  refreshFunction()
-                }}
-              >
-                <RefreshRoundedIcon />
-              </IconButton>
-            </span>
-          </Tooltip>
+          {refreshFunction && (
+            <Tooltip arrow title={t("common:refresh")}>
+              <span>
+                <IconButton
+                  disabled={loading}
+                  onClick={() => {
+                    refreshFunction()
+                  }}
+                >
+                  <RefreshRoundedIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+          )}
         </Box>
       </StyledToolbar>
       <TableContainer>
@@ -154,14 +131,25 @@ const Table = <T,>({
           <TableHead>
             <TableRow>
               {columns.map(({ isSortable, label, key, align }) => {
-                return isSortable ? (
+                return restProps.variant === "advanced" && isSortable ? (
                   <TableCell key={key} align={align}>
                     <TableSortLabel
                       disabled={loading}
-                      active={sortBy === key}
-                      direction={sortBy === key ? sortDirection : "asc"}
+                      active={restProps.sortBy === key}
+                      direction={
+                        restProps.sortBy === key
+                          ? restProps.sortDirection
+                          : "asc"
+                      }
                       onClick={() => {
-                        handleSortClick(key)
+                        restProps.onSortByChange(key)
+                        restProps.onSortDirectionChange(
+                          restProps.sortBy === key
+                            ? restProps.sortDirection === "asc"
+                              ? "desc"
+                              : "asc"
+                            : "asc",
+                        )
                       }}
                     >
                       <span>{label}</span>
@@ -215,37 +203,45 @@ const Table = <T,>({
         </StyledTable>
       </TableContainer>
       <Box px={2}>
-        <TablePagination
-          component="div"
-          rowsPerPageOptions={[5, 10, 15]}
-          rowsPerPage={pageSize}
-          page={currentPage - 1}
-          count={totalItems}
-          SelectProps={{
-            inputProps: {
-              "aria-label": "rows per page",
-            },
-            native: true,
-            disabled: loading,
-          }}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          ActionsComponent={TablePaginationActions}
-          backIconButtonProps={
-            loading
-              ? {
-                  disabled: true,
-                }
-              : undefined
-          }
-          nextIconButtonProps={
-            loading
-              ? {
-                  disabled: true,
-                }
-              : undefined
-          }
-        />
+        {restProps.variant === "advanced" ? (
+          <TablePagination
+            component="div"
+            rowsPerPageOptions={[5, 10, 15]}
+            rowsPerPage={restProps.pageSize}
+            page={restProps.currentPage - 1}
+            count={restProps.totalItems}
+            SelectProps={{
+              inputProps: {
+                "aria-label": "rows per page",
+              },
+              native: true,
+              disabled: loading,
+            }}
+            onPageChange={(_event, newPage) => {
+              restProps.onPageChange(newPage + 1)
+            }}
+            onRowsPerPageChange={(event) => {
+              restProps.onPageSizeChange(parseInt(event.target.value, 10))
+            }}
+            ActionsComponent={TablePaginationActions}
+            backIconButtonProps={
+              loading
+                ? {
+                    disabled: true,
+                  }
+                : undefined
+            }
+            nextIconButtonProps={
+              loading
+                ? {
+                    disabled: true,
+                  }
+                : undefined
+            }
+          />
+        ) : (
+          <Box py={1} />
+        )}
       </Box>
     </Paper>
   )

@@ -5,6 +5,7 @@ import booksReducer from "@/features/books/booksSilce"
 import genresReducer from "@/features/genres/genresSilce"
 import readersReducer from "@/features/readers/readersSlice"
 import lendBookReducer from "@/features/lendBook/lendBookSlice"
+import overviewReducer from "@/features/overview/overviewSlice"
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     genres: genresReducer,
     readers: readersReducer,
     lendBook: lendBookReducer,
+    overview: overviewReducer,
   },
 })
 

@@ -119,6 +119,14 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiChartsTooltip: {
+      styleOverrides: {
+        root: {
+          textTransform: "capitalize",
+          fontSize: 14,
+        },
+      },
+    },
   },
 })
 

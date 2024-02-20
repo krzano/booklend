@@ -1,0 +1,12 @@
+{
+  "welcome": "$t(common:welcome)",
+  "lendBookToSeeThis": "lend at least one book to see this chart",
+  "totalNumberOfReaders": "total number of readers",
+  "booksInTheLibrary": "books in the library",
+  "currentlyBorrowedBooks": "currently borrowed books",
+  "genresRecentlyPicked": "genres recently picked by your readers",
+  "percentageDistributionOfGenres": "percentage distribution of genres based on recently borrowed books",
+  "recentlyBorrowedBooks": "recently borrowed books",
+  "from": "$t(common:from)",
+  "to": "$t(common:to)"
+}

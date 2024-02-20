@@ -1,7 +1,7 @@
 import { Box, Container, useMediaQuery, useTheme } from "@mui/material"
 import Sidebar from "./components/Sidebar/Sidebar"
 import Topbar from "./components/Topbar/Topbar"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import styled, { css } from "styled-components"
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs"
 import {
@@ -10,7 +10,7 @@ import {
 } from "@/wrappers/DashboarLayoutWrapper/DashboardLayoutWrapper"
 import { useAppSelector } from "@/app/hooks"
 import Loader from "@/components/Loader/Loader"
-import { Suspense, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 
 export interface DashboardLayoutProps {
   sidebarListItems: SidebarListItemsType
@@ -23,6 +23,7 @@ const DashboardLayout = ({
   sidebarListItems,
   topbarAccountMenuItems,
 }: DashboardLayoutProps) => {
+  const { pathname } = useLocation()
   const { status: userStatus } = useAppSelector((store) => store.user)
   const theme = useTheme()
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
@@ -31,6 +32,10 @@ const DashboardLayout = ({
     setIsSidebarOpen((prev) => !prev)
   }
   const $isDesktopSidebarOpen = !isMobileScreen && isSidebarOpen
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" })
+  }, [pathname])
 
   return (
     <>

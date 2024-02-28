@@ -16,6 +16,7 @@ import { AvatarFormValues } from "@/libs/yup/schemas/avatar"
 import { RootState } from "@/app/store"
 import { ChangeUserDataBody, GetUserDataResponse } from "@/types/api"
 import generateUniqueFileName from "@/utils/generateUniqueFileName"
+import { isCancel } from "axios"
 
 export const getUserData = createAsyncThunk(
   "user/getUserData",
@@ -26,7 +27,11 @@ export const getUserData = createAsyncThunk(
       )
       return data
     } catch (error) {
-      return thunkErrorHandler({ error, thunkAPI })
+      if (isCancel(error)) {
+        return thunkAPI.rejectWithValue(error.message)
+      }
+      thunkAPI.dispatch(logoutUser(LogoutUserReason.SERVER_ERROR))
+      return thunkAPI.rejectWithValue(error)
     }
   },
 )
@@ -79,11 +84,8 @@ export const deleteUserAccount = createAsyncThunk(
   "user/deleteUserAccount",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axiosProtectedInstance.delete(
-        AUTH_REMOVE_ACCOUNT_ENDPOINT,
-      )
+      await axiosProtectedInstance.delete(AUTH_REMOVE_ACCOUNT_ENDPOINT)
       thunkAPI.dispatch(logoutUser(LogoutUserReason.ACCOUNT_REMOVED))
-      console.log(data)
     } catch (error) {
       thunkErrorHandler({ error, thunkAPI })
     }

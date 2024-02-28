@@ -11,11 +11,15 @@ const axiosProtectedInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
 })
 
-axiosProtectedInstance.interceptors.request.use(async (config) => {
+axiosProtectedInstance.interceptors.request.use((config) => {
   config.headers["Accept-language"] = i18next.language
   const accessToken = getAccessTokenFromLocalStorage()
-  config.headers.Authorization = `Bearer ${accessToken}`
-  return config
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`
+    return config
+  } else {
+    throw new axios.Cancel("Request canceled: access token not found...")
+  }
 })
 
 axiosProtectedInstance.interceptors.response.use(

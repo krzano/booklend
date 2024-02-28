@@ -19,7 +19,7 @@ import {
   READERS_PATH,
   SETTINGS_PATH,
 } from "@/constants/paths"
-import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import { useAppDispatch } from "@/app/hooks"
 import { getUserData } from "@/features/user/userThunk"
 import { LogoutUserReason, logoutUser } from "@/features/auth/authSlice"
 
@@ -64,7 +64,6 @@ export type SidebarListItemsType = (
 const DashboardLayoutWrapper = () => {
   const { t } = useTranslation(["dashboard"])
   const dispatch = useAppDispatch()
-  const { status: userStatus } = useAppSelector((store) => store.user)
 
   const topbarAccountMenuItems: TopbarAccountMenuItemsType = [
     {
@@ -145,10 +144,6 @@ const DashboardLayoutWrapper = () => {
   useEffect(() => {
     dispatch(getUserData())
   }, [dispatch])
-
-  if (userStatus === "failed") {
-    dispatch(logoutUser(LogoutUserReason.SERVER_ERROR))
-  }
 
   return (
     <DashboardLayout

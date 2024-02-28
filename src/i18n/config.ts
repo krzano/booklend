@@ -8,7 +8,7 @@ i18n
   .use(LanguageDetector)
   .use(HttpBackend)
   .init({
-    ns: ["common", "forms", "dashboard"],
+    ns: ["common", "dashboard", "forms", "genres"],
     fallbackLng: "en",
     detection: {
       order: ["localStorage", "cookie", "htmlTag", "navigator", "path"],

@@ -7,8 +7,8 @@ import { useAppSelector } from "@/app/hooks"
 import truncateString from "@/utils/truncateString"
 const DISPLAYED_LABEL_LENGTH = 20
 const Breadcrumbs = () => {
-  const { singleBook } = useAppSelector((store) => store.books)
-  const { singleReader } = useAppSelector((store) => store.readers)
+  const singleBook = useAppSelector((store) => store.books.singleBook)
+  const singleReader = useAppSelector((store) => store.readers.singleReader)
   const { bookId, readerId } = useParams()
   const location = useLocation()
   const { t } = useTranslation(["breadcrumbs"])

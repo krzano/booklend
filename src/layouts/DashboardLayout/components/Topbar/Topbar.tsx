@@ -44,10 +44,10 @@ const Topbar = ({
   const handleClose = () => {
     setAnchorEl(null)
   }
-  const {
-    status: userStatus,
-    userData: { firstName, photo },
-  } = useAppSelector((store) => store.user)
+  const userStatus = useAppSelector((store) => store.user.status)
+  const firstName = useAppSelector((store) => store.user.userData.firstName)
+  const photo = useAppSelector((store) => store.user.userData.photo)
+
   const userName = `${firstName}`
 
   return (

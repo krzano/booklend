@@ -39,7 +39,7 @@ const GridView = ({ booksList }: ViewProps) => {
 }
 
 const BooksListView = ({ booksList }: BooksListViewProps) => {
-  const { view } = useAppSelector((store) => store.books)
+  const view = useAppSelector((store) => store.books.view)
 
   return view === ViewVariants.grid ? (
     <GridView booksList={booksList} />

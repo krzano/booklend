@@ -10,9 +10,7 @@ import SearchField from "@/components/SearchField/SearchField"
 const BooksFilters = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const {
-    queryParams: { search },
-  } = useAppSelector((store) => store.books)
+  const search = useAppSelector((store) => store.books.queryParams.search)
   return (
     <Grid container spacing={2} alignItems={"center"}>
       <Grid item xs={6} md={4} lg={3}>

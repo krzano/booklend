@@ -11,7 +11,9 @@ const Signup = () => {
   const { t } = useTranslation(["forms"])
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { isRegistrationCompleted } = useAppSelector((store) => store.auth)
+  const isRegistrationCompleted = useAppSelector(
+    (store) => store.auth.isRegistrationCompleted,
+  )
 
   if (isRegistrationCompleted) {
     navigate(LOGIN_PATH)

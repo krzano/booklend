@@ -11,9 +11,8 @@ import { addBook } from "../booksThunk"
 const AddBook = () => {
   const { t } = useTranslation(["books"])
   const dispatch = useAppDispatch()
-  const { status: genresStatus, genres } = useAppSelector(
-    (state) => state.genres,
-  )
+  const genresStatus = useAppSelector((state) => state.genres.status)
+  const genres = useAppSelector((state) => state.genres.genres)
 
   useEffect(() => {
     dispatch(getAllGenres())

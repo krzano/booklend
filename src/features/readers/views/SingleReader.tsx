@@ -19,7 +19,8 @@ const SingleReader = () => {
   const { t } = useTranslation(["readers"])
   const { readerId } = useParams()
   const dispatch = useAppDispatch()
-  const { status, singleReader } = useAppSelector((store) => store.readers)
+  const status = useAppSelector((store) => store.readers.status)
+  const singleReader = useAppSelector((store) => store.readers.singleReader)
 
   useEffect(() => {
     if (readerId) {

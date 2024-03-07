@@ -10,9 +10,12 @@ import { useTranslation } from "react-i18next"
 
 const LibraryStats = () => {
   const { t } = useTranslation(["overview"])
-  const { totalBooks, totalCurrentlyBorrowed, totalReaders } = useAppSelector(
-    (store) => store.overview,
+  const totalBooks = useAppSelector((store) => store.overview.totalBooks)
+  const totalCurrentlyBorrowed = useAppSelector(
+    (store) => store.overview.totalCurrentlyBorrowed,
   )
+  const totalReaders = useAppSelector((store) => store.overview.totalReaders)
+
   return (
     <StyledPaper>
       <StatisticCard

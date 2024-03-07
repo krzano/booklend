@@ -11,7 +11,10 @@ import { useTranslation } from "react-i18next"
 const ToggleViewSection = () => {
   const { t } = useTranslation(["books"])
   const dispatch = useAppDispatch()
-  const { booksData, view } = useAppSelector((store) => store.books)
+  const totalItems = useAppSelector(
+    (store) => store.books.booksData?.totalItems,
+  )
+  const view = useAppSelector((store) => store.books.view)
 
   return (
     <StyledToggleViewSection>
@@ -34,7 +37,7 @@ const ToggleViewSection = () => {
       </ToggleButtonGroup>
       <Divider />
       <Typography>
-        {t("books:foundBooksNumber", { count: booksData?.totalItems })}
+        {t("books:foundBooksNumber", { count: totalItems })}
       </Typography>
     </StyledToggleViewSection>
   )

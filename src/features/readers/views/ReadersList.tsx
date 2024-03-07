@@ -22,9 +22,9 @@ import { Link } from "react-router-dom"
 const ReadersList = () => {
   const { t } = useTranslation(["readers", "forms"])
   const dispatch = useAppDispatch()
-  const { status, queryParams, readersData } = useAppSelector(
-    (store) => store.readers,
-  )
+  const status = useAppSelector((store) => store.readers.status)
+  const queryParams = useAppSelector((store) => store.readers.queryParams)
+  const readersData = useAppSelector((store) => store.readers.readersData)
 
   useEffect(() => {
     dispatch(getReaders(queryParams))

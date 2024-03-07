@@ -14,8 +14,9 @@ interface LendBookSectionProps {
 
 const LendBookSection = ({ bookId }: LendBookSectionProps) => {
   const dispatch = useAppDispatch()
-  const { status, singleBookLendHistory } = useAppSelector(
-    (store) => store.lendBook,
+  const status = useAppSelector((store) => store.lendBook.status)
+  const singleBookLendHistory = useAppSelector(
+    (store) => store.lendBook.singleBookLendHistory,
   )
   useEffect(() => {
     dispatch(getBookLendHistory(bookId))

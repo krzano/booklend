@@ -9,9 +9,7 @@ interface AvatarUploadBoxProps {
 
 const AvatarUploadBox = ({ avatarImage }: AvatarUploadBoxProps) => {
   const { t } = useTranslation(["settings"])
-  const {
-    userData: { photo },
-  } = useAppSelector((state) => state.user)
+  const photo = useAppSelector((state) => state.user.userData.photo)
 
   return (
     <Box py={1} color={(theme) => theme.palette.grey[600]}>

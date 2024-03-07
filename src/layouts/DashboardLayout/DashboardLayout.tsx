@@ -24,7 +24,7 @@ const DashboardLayout = ({
   topbarAccountMenuItems,
 }: DashboardLayoutProps) => {
   const { pathname } = useLocation()
-  const { status: userStatus } = useAppSelector((store) => store.user)
+  const userStatus = useAppSelector((store) => store.user.status)
   const theme = useTheme()
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"))
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(!isMobileScreen)

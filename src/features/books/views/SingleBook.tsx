@@ -63,7 +63,8 @@ const SingleBook = () => {
   const { t } = useTranslation(["books", "genres"])
   const { bookId } = useParams()
   const dispatch = useAppDispatch()
-  const { status, singleBook } = useAppSelector((store) => store.books)
+  const status = useAppSelector((store) => store.books.status)
+  const singleBook = useAppSelector((store) => store.books.singleBook)
   const [imgSrcToRender, setImgSrcToRender] = useState(defaultBookImg)
 
   useEffect(() => {

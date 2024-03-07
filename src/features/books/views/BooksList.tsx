@@ -19,18 +19,10 @@ import CustomBackdrop from "@/components/CustomBackdrop/CustomBackdrop"
 
 const BooksList = () => {
   const dispatch = useAppDispatch()
-  const {
-    status,
-    booksData,
-    queryParams: {
-      currentPage,
-      pageSize,
-      sortBy,
-      sortDirection,
-      genre,
-      search,
-    },
-  } = useAppSelector((store) => store.books)
+  const status = useAppSelector((store) => store.books.status)
+  const booksData = useAppSelector((store) => store.books.booksData)
+  const { currentPage, pageSize, sortBy, sortDirection, genre, search } =
+    useAppSelector((store) => store.books.queryParams)
   const { t } = useTranslation(["books"])
 
   const handlePaginationChange = (

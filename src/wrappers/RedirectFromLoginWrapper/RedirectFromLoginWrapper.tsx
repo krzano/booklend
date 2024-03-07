@@ -10,7 +10,7 @@ interface RedirectFromLoginWrapperProps {
 const RedirectFromLoginWrapper = ({
   children,
 }: RedirectFromLoginWrapperProps) => {
-  const { isAuthenticated } = useAppSelector((store) => store.auth)
+  const isAuthenticated = useAppSelector((store) => store.auth.isAuthenticated)
   const location = useLocation()
   const from = location?.state?.from
 

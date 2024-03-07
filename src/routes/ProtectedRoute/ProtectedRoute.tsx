@@ -18,7 +18,7 @@ interface ProtectedDashboardRouteProps {
 const ProtectedDashboardRoute = ({
   children,
 }: ProtectedDashboardRouteProps) => {
-  const { isAuthenticated } = useAppSelector((store) => store.auth)
+  const isAuthenticated = useAppSelector((store) => store.auth.isAuthenticated)
   const dispatch = useAppDispatch()
   const { pathname } = useLocation()
   const accessToken = getAccessTokenFromLocalStorage()

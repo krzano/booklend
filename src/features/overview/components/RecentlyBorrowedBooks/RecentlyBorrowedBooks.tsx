@@ -13,8 +13,9 @@ import { BASE_URL } from "@/constants/api"
 export interface RecentlyBorrowedBooksProps {}
 const RecentlyBorrowedBooks = () => {
   const { t } = useTranslation(["overview"])
-  const { status, recentlyBorrowedBooksList } = useAppSelector(
-    (state) => state.overview,
+  const status = useAppSelector((state) => state.overview.status)
+  const recentlyBorrowedBooksList = useAppSelector(
+    (state) => state.overview.recentlyBorrowedBooksList,
   )
   return recentlyBorrowedBooksList ? (
     <Table

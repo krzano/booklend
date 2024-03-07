@@ -10,10 +10,8 @@ import MultiSelectField from "@/components/MultiSelectField/MultiSelectField"
 const GenresFilter = () => {
   const { t } = useTranslation(["genres", "forms"])
   const dispatch = useAppDispatch()
-  const { genres } = useAppSelector((store) => store.genres)
-  const {
-    queryParams: { genre },
-  } = useAppSelector((store) => store.books)
+  const genres = useAppSelector((store) => store.genres.genres)
+  const genre = useAppSelector((store) => store.books.queryParams.genre)
   const [selectedGenres, setSelectedGenres] = useState<string[]>(
     genre && typeof genre === "string" ? genre.split("_") : [],
   )

@@ -17,12 +17,10 @@ const EditBook = () => {
   const { t } = useTranslation(["books"])
   const { bookId } = useParams()
   const dispatch = useAppDispatch()
-  const { status: booksStatus, singleBook } = useAppSelector(
-    (store) => store.books,
-  )
-  const { status: genresStatus, genres } = useAppSelector(
-    (store) => store.genres,
-  )
+  const booksStatus = useAppSelector((store) => store.books.status)
+  const singleBook = useAppSelector((store) => store.books.singleBook)
+  const genresStatus = useAppSelector((store) => store.genres.status)
+  const genres = useAppSelector((store) => store.genres.genres)
 
   useEffect(() => {
     if (bookId) {

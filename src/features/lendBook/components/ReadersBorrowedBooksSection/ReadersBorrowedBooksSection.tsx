@@ -30,8 +30,9 @@ const ReadersBorrowedBooksSection = ({
     },
   )
   const dispatch = useAppDispatch()
-  const { status, singleReadersBorrowedBooks } = useAppSelector(
-    (store) => store.lendBook,
+  const status = useAppSelector((store) => store.lendBook.status)
+  const singleReadersBorrowedBooks = useAppSelector(
+    (store) => store.lendBook.singleReadersBorrowedBooks,
   )
 
   useEffect(() => {

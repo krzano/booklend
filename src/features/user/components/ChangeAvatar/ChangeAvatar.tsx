@@ -15,9 +15,7 @@ const ChangeAvatar = () => {
   const { t } = useTranslation(["settings"])
   const dispatch = useAppDispatch()
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const {
-    userData: { photo },
-  } = useAppSelector((store) => store.user)
+  const photo = useAppSelector((store) => store.user.userData.photo)
 
   const handleOpenModal = () => {
     setIsModalOpen(true)

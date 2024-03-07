@@ -20,9 +20,10 @@ const MenuProps = {
 const SortBy = () => {
   const { t } = useTranslation(["books", "forms"])
   const dispatch = useAppDispatch()
-  const {
-    queryParams: { sortBy, sortDirection },
-  } = useAppSelector((store) => store.books)
+  const sortBy = useAppSelector((store) => store.books.queryParams.sortBy)
+  const sortDirection = useAppSelector(
+    (store) => store.books.queryParams.sortDirection,
+  )
   const [selectedSortOptionText, setSelectedSortOptionText] = useState<string>(
     sortOptions.find(
       (item) =>

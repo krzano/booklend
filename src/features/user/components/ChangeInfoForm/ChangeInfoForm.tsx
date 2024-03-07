@@ -13,9 +13,10 @@ const ChangeInfoForm = () => {
   const dispatch = useAppDispatch()
   const { t } = useTranslation(["forms", "settings"])
   const isDemoAccount = useAppSelector((state) => state.user.isDemoAccount)
-  const { firstName, lastName, email } = useAppSelector(
-    (store) => store.user.userData,
-  )
+  const firstName = useAppSelector((store) => store.user.userData.firstName)
+  const lastName = useAppSelector((store) => store.user.userData.lastName)
+  const email = useAppSelector((store) => store.user.userData.email)
+
   const initialValues: ChangeUserInfoFormValues = {
     firstName,
     lastName,
